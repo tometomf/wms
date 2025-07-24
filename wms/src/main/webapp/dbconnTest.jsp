@@ -17,6 +17,5 @@
 			application.log("커넥션 연결 실패", ex);
 		}
 	%>
-	----rrrrrsssgggggdfdfdfklklkl
 </body>
 </html>
