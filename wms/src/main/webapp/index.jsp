@@ -10,6 +10,7 @@
 
 </head>
 <body>
-	<%@ include file="nav.jsp" %> 
+	<%@ include file="nav.jsp" %>
+
 </body>
 </html>
