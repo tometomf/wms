@@ -95,23 +95,23 @@ body {
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">倉庫</div> <!-- 품목 -->
+			<div id="mid_title">品目</div> <!-- 품목 -->
 			<ul id = "mid_ui">
 				<li><a href="${ctxPath}/item/write.do">品目登録</a></li> <!-- 품목 등록 -->
 				<li><a href="${ctxPath}/item/list.do">品目現況</a></li> <!-- 품목 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">在庫</div> <!-- 창고 -->
+			<div id="mid_title">倉庫</div> <!-- 창고 -->
 			<ul>
-				<li><a href="${ctxPath}/ware/write.do">在庫登録</a></li> <!-- 창고 등록 -->
-				<li><a href="${ctxPath}/ware/list.do">在庫現況</a></li> <!-- 창고별 재고 현황 -->
+				<li><a href="${ctxPath}/ware/write.do">倉庫登録</a></li> <!-- 창고 등록 -->
+				<li><a href="${ctxPath}/ware/list.do">倉庫別在庫現況</a></li> <!-- 창고별 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">入庫</div> <!-- 재고 -->
+			<div id="mid_title">在庫</div> <!-- 재고 -->
 			<ul>
-				<li><a href="${ctxPath}/stock/write.do">入庫登録</a></li> <!-- 재고 등록 -->
+				<li><a href="${ctxPath}/stock/write.do">在庫登録</a></li> <!-- 재고 등록 -->
 				<li><a href="${ctxPath}/stock/list.do">入庫現況</a></li> <!-- 재고 현황 -->
 			</ul>
 		</div>
