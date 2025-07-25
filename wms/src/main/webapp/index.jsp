@@ -11,6 +11,5 @@
 </head>
 <body>
 	<%@ include file="nav.jsp" %>
-	//test123456
 </body>
 </html>
