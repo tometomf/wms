@@ -84,54 +84,62 @@ body {
 }
 </style>
 <body>
+	${ctxPath = pageContext.request.contextPath ; ''}
 	<div id="sidebar">
-		<div id="title">물류관리</div>
+		<div id="title">物流管理</div>		<!-- 물류관리 -->
 		<div id="menu-section">
-			<div id="mid_title">품목</div>
+			<div id="mid_title">ユーザー管理</div> <!-- 사용자 관리 -->
 			<ul id = "mid_ui">
-				<li><a href="#">품목 등록</a></li>
-				<li><a href="#">품목 현황</a></li>
+				<li><a href="${ctxPath}/user/write.do">ユーザー登録</a></li> <!-- 사용자 등록 -->
+				<li><a href="${ctxPath}/user/list.do">ユーザー現況</a></li> <!-- 사용자 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">창고</div>
-			<ul>
-				<li><a href="#">창고 등록</a></li>
-				<li><a href="#">창고별 재고 현황</a></li>
+			<div id="mid_title">倉庫</div> <!-- 품목 -->
+			<ul id = "mid_ui">
+				<li><a href="${ctxPath}/item/write.do">品目登録</a></li> <!-- 품목 등록 -->
+				<li><a href="${ctxPath}/item/list.do">品目現況</a></li> <!-- 품목 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">재고</div>
+			<div id="mid_title">在庫</div> <!-- 창고 -->
 			<ul>
-				<li><a href="#">재고 등록</a></li>
-				<li><a href="#">재고 현황</a></li>
+				<li><a href="${ctxPath}/ware/write.do">在庫登録</a></li> <!-- 창고 등록 -->
+				<li><a href="${ctxPath}/ware/list.do">在庫現況</a></li> <!-- 창고별 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">입고</div>
+			<div id="mid_title">入庫</div> <!-- 재고 -->
 			<ul>
-				<li><a href="#">입고 등록</a></li>
-				<li><a href="#">입고 현황</a></li>
+				<li><a href="${ctxPath}/stock/write.do">入庫登録</a></li> <!-- 재고 등록 -->
+				<li><a href="${ctxPath}/stock/list.do">入庫現況</a></li> <!-- 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">수주</div>
+			<div id="mid_title">入庫</div> <!-- 입고 -->
 			<ul>
-				<li><a href="#">수주 등록</a></li>
-				<li><a href="#">수주 현황</a></li>
+				<li><a href="${ctxPath}/store/write.do">入庫登録</a></li> <!-- 입고 등록 -->
+				<li><a href="${ctxPath}/store/list.do">入庫現況</a></li> <!-- 입고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">출고</div>
+			<div id="mid_title">受注</div> <!-- 수주 -->
 			<ul>
-				<li><a href="#">출고 등록</a></li>
-				<li><a href="#">출고 현황</a></li>
+				<li><a href="${ctxPath}/order/write.do">受注登録</a></li> <!-- 수주 등록 -->
+				<li><a href="${ctxPath}/order/llist.do">受注現況</a></li> <!-- 수주 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">물류</div>
+			<div id="mid_title">出庫</div> <!-- 출고 -->
 			<ul>
-				<li><a href="#">물류 현황</a></li>
+				<li><a href="${ctxPath}/ship/write.do">出庫登録</a></li> <!-- 출고 등록 -->
+				<li><a href="${ctxPath}/ship/list.do">出庫現況</a></li> <!-- 출고 현황 -->
+			</ul>
+		</div>
+		<div id="menu-section">
+			<div id="mid_title">物流</div> <!-- 물류 -->
+			<ul>
+				<li><a href="#">物流現況</a></li> <!-- 물류 현황 -->
 			</ul>
 		</div>
 	</div>
