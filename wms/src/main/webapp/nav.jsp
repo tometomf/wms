@@ -126,7 +126,7 @@ body {
 			<div id="mid_title">受注</div> <!-- 수주 -->
 			<ul>
 				<li><a href="${ctxPath}/order/write.do">受注登録</a></li> <!-- 수주 등록 -->
-				<li><a href="${ctxPath}/order/llist.do">受注現況</a></li> <!-- 수주 현황 -->
+				<li><a href="${ctxPath}/order/list.do">受注現況</a></li> <!-- 수주 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
