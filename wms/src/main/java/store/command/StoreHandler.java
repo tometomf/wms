@@ -11,6 +11,7 @@ public class StoreHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+		//test2
 	}
 
 }
