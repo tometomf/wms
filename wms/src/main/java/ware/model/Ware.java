@@ -2,7 +2,7 @@ package ware.model;
 
 public class Ware {
 	private String wareCd;
-	private String wareBubun;
+	private String wareGubun;
 	private String useYn;
 	private String wareNm;
 	/**
@@ -14,14 +14,14 @@ public class Ware {
 	}
 	/**
 	 * @param wareCd
-	 * @param wareBubun
+	 * @param wareGubun
 	 * @param useYn
 	 * @param wareNm
 	 */
-	public Ware(String wareCd, String wareBubun, String useYn, String wareNm) {
+	public Ware(String wareCd, String wareGubun, String useYn, String wareNm) {
 		super();
 		this.wareCd = wareCd;
-		this.wareBubun = wareBubun;
+		this.wareGubun = wareGubun;
 		this.useYn = useYn;
 		this.wareNm = wareNm;
 	}
@@ -32,10 +32,10 @@ public class Ware {
 		this.wareCd = wareCd;
 	}
 	public String getWareBubun() {
-		return wareBubun;
+		return wareGubun;
 	}
 	public void setWareBubun(String wareBubun) {
-		this.wareBubun = wareBubun;
+		this.wareGubun = wareBubun;
 	}
 	public String getUseYn() {
 		return useYn;

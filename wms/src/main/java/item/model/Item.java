@@ -1,7 +1,7 @@
 package item.model;
 
 public class Item {
-	private int storeNumber;
+	private int storePrice;
 	private int shipmentPrice;
 	private String itemCd;
 	private String useYn;
@@ -18,7 +18,7 @@ public class Item {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @param storeNumber
+	 * @param storePice
 	 * @param shipmentPrice
 	 * @param itemCd
 	 * @param useYn
@@ -28,10 +28,9 @@ public class Item {
 	 * @param itemNm
 	 * @param unit
 	 */
-	public Item(int storeNumber, int shipmentPrice, String itemCd, String useYn, String manufacturer, String itemGubun,
+	public Item(int storePrice, int shipmentPrice, String itemCd, String useYn, String manufacturer, String itemGubun,
 			String spec, String itemNm, String unit) {
 		super();
-		this.storeNumber = storeNumber;
 		this.shipmentPrice = shipmentPrice;
 		this.itemCd = itemCd;
 		this.useYn = useYn;
@@ -40,12 +39,6 @@ public class Item {
 		this.spec = spec;
 		this.itemNm = itemNm;
 		this.unit = unit;
-	}
-	public int getStoreNumber() {
-		return storeNumber;
-	}
-	public void setStoreNumber(int storeNumber) {
-		this.storeNumber = storeNumber;
 	}
 	public int getShipmentPrice() {
 		return shipmentPrice;
@@ -94,5 +87,11 @@ public class Item {
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	public int getStorePrice() {
+		return storePrice;
+	}
+	public void setStorePrice(int storePrice) {
+		this.storePrice = storePrice;
 	}
 }
