@@ -7,81 +7,84 @@
 <title>Insert title here</title>
 </head>
 <style>
-body {
-	margin: 0;
-	font-family: Arial, sans-serif;
-}
 
-/* 왼쪽 고정 사이드바 */
+/* 사이드바 스타일 */
 #sidebar {
-	width: 230px;
-	height: 100vh;
-	background-color: #2c3e50;
-	color: white;
-	padding: 15px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	overflow-y: auto;
+  width: 230px;
+  height: 100vh;
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
-/* 상단 제목 */
+/* 타이틀 (상단) */
 #title {
-	font-size: 25px;
-	font-weight: bold;
-	margin-bottom: 15px;
-	text-align: center;
-	color: #ecf0f1;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: #ecf0f1;
+  margin-bottom: 20px;
 }
 
-/* 중간 섹션 타이틀 (품목, 창고 등) */
-#mid_title {
-	font-size: 20px;
-	font-weight: bold;
-	margin-bottom: 5px;
-	color: #ecf0f1;
-}
-
-/* 각 메뉴 섹션 */
+/* 메뉴 섹션 */
 #menu-section {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 10px;
+  margin-bottom: 15px;
 }
 
-/* 메뉴 리스트 */
+/* 메뉴 그룹 타이틀 */
+#menu-section > .menu-title {
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+#menu-section > .menu-title::before {
+  content: "📁";
+  position: absolute;
+  left: 0;
+}
+
+/* 하위 메뉴 */
 #menu-section ul {
-	list-style: none;
-	padding-left: 12px;
-	margin: 0;
+  list-style: none;
+  margin: 0;
+  padding-left: 25px;
 }
 
-/* 메뉴 항목 */
 #menu-section li {
-	margin-bottom: 3px;
+  font-size: 14px;
+  margin: 4px 0;
+  position: relative;
+  padding-left: 15px;
 }
 
-/* 링크 스타일 */
+#menu-section li::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  color: #bdc3c7;
+}
+
+/* 링크 */
 #menu-section a {
-	color: #bdc3c7;
-	text-decoration: none;
-	font-size: 15px;
+  color: #bdc3c7;
+  text-decoration: none;
 }
 
 #menu-section a:hover {
-	color: #ffffff;
-	text-decoration: underline;
+  color: #1abc9c;
+  text-decoration: underline;
 }
 
-#menu-section #mid_ui {
-	margin-top: 10px;
-}
-
-/* 본문 내용 공간 확보 */
-.content {
-	margin-left: 250px;
-	padding: 20px;
-}
 </style>
 <body>
 	${ctxPath = pageContext.request.contextPath ; ''}
