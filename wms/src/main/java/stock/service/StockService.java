@@ -12,13 +12,12 @@ public class StockService {
 
 	private StockDao stockDao = new StockDao();
 
-	public StockList getSelectAll() {
+	public List<Stock> getSelectAll() {
 
 		List<Stock> content = null;
 		
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			content = stockDao.selectAll(conn);
-			return new StockList(content);
+			return stockDao.selectAll(conn);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

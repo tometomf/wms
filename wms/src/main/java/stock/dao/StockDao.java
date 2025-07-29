@@ -17,14 +17,11 @@ public class StockDao {
 	public List<Stock> selectAll(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		
 		try {
-			pstmt = conn.prepareStatement("SELECT stock_no, item_cd, qty, ware_cd, reg_ymd from wms_stock");
+			pstmt = conn.prepareStatement(
+					"SELECT stock_no, item_cd, qty, ware_cd, reg_ymd from wms_stock");
 			rs = pstmt.executeQuery();
-
 			List<Stock> result = new ArrayList<>();
-
 			while (rs.next()) {
 				result.add(convertStock(rs));
 			}
@@ -38,7 +35,10 @@ public class StockDao {
 
 	private Stock convertStock(ResultSet rs) throws SQLException {
 
-		return new Stock(rs.getInt("stock_no"), rs.getString("item_cd"), rs.getInt("qty"), rs.getString("ware_cd"),
+		return new Stock(rs.getInt("stock_no"), 
+				rs.getString("item_cd"), 
+				rs.getInt("qty"), 
+				rs.getString("ware_cd"),
 				toDate(rs.getTimestamp("reg_ymd")));
 	}
 
