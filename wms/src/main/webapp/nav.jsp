@@ -115,7 +115,7 @@
 			<div id="mid_title">在庫</div> <!-- 재고 -->
 			<ul>
 				<li><a href="${ctxPath}/stock/write.do">在庫登録</a></li> <!-- 재고 등록 -->
-				<li><a href="${ctxPath}/stock/list.do">入庫現況</a></li> <!-- 재고 현황 -->
+				<li><a href="${ctxPath}/stock/list.do">在庫現況</a></li> <!-- 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
