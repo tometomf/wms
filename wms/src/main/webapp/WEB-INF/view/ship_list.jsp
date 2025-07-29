@@ -17,18 +17,18 @@
 <table>
   <thead>
     <tr>
-      <th>出荷番号</th>
-      <th>出荷名</th>
-      <th>部署</th>
+      <th>出庫番号</th>
+      <th>出庫名</th>
+      <th>出庫部署</th>
       <th>担当者</th>
-      <th>説明</th>
+      <th>備考</th>
       <th>登録日</th>
       <th>修正日</th>
       <th>出庫可否</th>
       <th>品目コード</th>
-      <th>単価</th>
-      <th>数量</th>
-      <th>区分</th>
+      <th>出庫単価</th>
+      <th>出庫数量</th>
+      <th>出庫区分</th>
     </tr>
   </thead>
   <tbody>

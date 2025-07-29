@@ -3,6 +3,7 @@ package ship.model;
 import java.util.Date;
 
 public class ShipViewModel {
+
     // 마스터 정보
     private int shipNo;
     private String shipNm;
@@ -19,40 +20,121 @@ public class ShipViewModel {
     private int shipQty;
     private String shipGubun;
 
-    // --- getter/setter 전체 ---
-    public int getShipNo() { return shipNo; }
-    public void setShipNo(int shipNo) { this.shipNo = shipNo; }
+    // 기본 생성자
+    public ShipViewModel() {
+    }
 
-    public String getShipNm() { return shipNm; }
-    public void setShipNm(String shipNm) { this.shipNm = shipNm; }
+    // 전체 필드 초기화 생성자
+    public ShipViewModel(int shipNo, String shipNm, String shipDept, String shipUser, String descr,
+                         Date regYmd, Date updYmd, String shipYn,
+                         String itemCd, int shipPrice, int shipQty, String shipGubun) {
+        this.shipNo = shipNo;
+        this.shipNm = shipNm;
+        this.shipDept = shipDept;
+        this.shipUser = shipUser;
+        this.descr = descr;
+        this.regYmd = regYmd;
+        this.updYmd = updYmd;
+        this.shipYn = shipYn;
+        this.itemCd = itemCd;
+        this.shipPrice = shipPrice;
+        this.shipQty = shipQty;
+        this.shipGubun = shipGubun;
+    }
 
-    public String getShipDept() { return shipDept; }
-    public void setShipDept(String shipDept) { this.shipDept = shipDept; }
+    public int getShipNo() {
+        return shipNo;
+    }
 
-    public String getShipUser() { return shipUser; }
-    public void setShipUser(String shipUser) { this.shipUser = shipUser; }
+    public void setShipNo(int shipNo) {
+        this.shipNo = shipNo;
+    }
 
-    public String getDescr() { return descr; }
-    public void setDescr(String descr) { this.descr = descr; }
+    public String getShipNm() {
+        return shipNm;
+    }
 
-    public Date getRegYmd() { return regYmd; }
-    public void setRegYmd(Date regYmd) { this.regYmd = regYmd; }
+    public void setShipNm(String shipNm) {
+        this.shipNm = shipNm;
+    }
 
-    public Date getUpdYmd() { return updYmd; }
-    public void setUpdYmd(Date updYmd) { this.updYmd = updYmd; }
+    public String getShipDept() {
+        return shipDept;
+    }
 
-    public String getShipYn() { return shipYn; }
-    public void setShipYn(String shipYn) { this.shipYn = shipYn; }
+    public void setShipDept(String shipDept) {
+        this.shipDept = shipDept;
+    }
 
-    public String getItemCd() { return itemCd; }
-    public void setItemCd(String itemCd) { this.itemCd = itemCd; }
+    public String getShipUser() {
+        return shipUser;
+    }
 
-    public int getShipPrice() { return shipPrice; }
-    public void setShipPrice(int shipPrice) { this.shipPrice = shipPrice; }
+    public void setShipUser(String shipUser) {
+        this.shipUser = shipUser;
+    }
 
-    public int getShipQty() { return shipQty; }
-    public void setShipQty(int shipQty) { this.shipQty = shipQty; }
+    public String getDescr() {
+        return descr;
+    }
 
-    public String getShipGubun() { return shipGubun; }
-    public void setShipGubun(String shipGubun) { this.shipGubun = shipGubun; }
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
+    public Date getRegYmd() {
+        return regYmd;
+    }
+
+    public void setRegYmd(Date regYmd) {
+        this.regYmd = regYmd;
+    }
+
+    public Date getUpdYmd() {
+        return updYmd;
+    }
+
+    public void setUpdYmd(Date updYmd) {
+        this.updYmd = updYmd;
+    }
+
+    public String getShipYn() {
+        return shipYn;
+    }
+
+    public void setShipYn(String shipYn) {
+        this.shipYn = shipYn;
+    }
+
+    public String getItemCd() {
+        return itemCd;
+    }
+
+    public void setItemCd(String itemCd) {
+        this.itemCd = itemCd;
+    }
+
+    public int getShipPrice() {
+        return shipPrice;
+    }
+
+    public void setShipPrice(int shipPrice) {
+        this.shipPrice = shipPrice;
+    }
+
+    public int getShipQty() {
+        return shipQty;
+    }
+
+    public void setShipQty(int shipQty) {
+        this.shipQty = shipQty;
+    }
+
+    public String getShipGubun() {
+        return shipGubun;
+    }
+
+    public void setShipGubun(String shipGubun) {
+        this.shipGubun = shipGubun;
+    }
 }

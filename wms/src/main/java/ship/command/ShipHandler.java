@@ -1,8 +1,9 @@
 package ship.command;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 import mvc.command.CommandHandler;
 import ship.model.ShipViewModel;
@@ -10,15 +11,15 @@ import ship.service.ShipService;
 
 public class ShipHandler implements CommandHandler {
 
-    private ShipService shipService = new ShipService();
-
     @Override
-    public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        // ship_master + ship_detail 조인 결과 조회
-        List<ShipViewModel> shipList = shipService.getShipList();
+    public String process(HttpServletRequest request, HttpServletResponse response) {
+        // 서비스 호출
+        List<ShipViewModel> shipList = new ShipService().getShipList();
 
-        req.setAttribute("shipList", shipList);
+        // request scope에 저장
+        request.setAttribute("shipList", shipList);
 
-        return "/WEB-INF/view/ship.jsp";
+        // 뷰 리턴
+        return "/WEB-INF/view/ship_list.jsp";
     }
 }
