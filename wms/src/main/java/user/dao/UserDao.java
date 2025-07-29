@@ -16,12 +16,12 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"insert into wms_user (user_cd, phone, user_nm, email, dept_nm) values(?,?,?,?,?)");
+					"insert into wms_user (user_cd, user_nm, dept_nm, phone,  email) values(?,?,?,?,?)");
 			pstmt.setString(1, user.getUserCd());
-			pstmt.setString(2, user.getPhone());
-			pstmt.setString(3, user.getUserNm());
-			pstmt.setString(4, user.getEmail());
-			pstmt.setString(5, user.getDeptNm());
+			pstmt.setString(2, user.getUserNm());
+			pstmt.setString(3, user.getDeptNm());
+			pstmt.setString(4, user.getPhone());
+			pstmt.setString(5, user.getEmail());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -36,7 +36,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			List<User> userList = new ArrayList<>();
 			while (rs.next()) {
-				userList.add(makeUserFromResultSet(rs)); // 서비스 외부 메서드로 분리 가능
+				userList.add(makeUserFromResultSet(rs)); 
 			}
 			return userList;
 
@@ -49,12 +49,12 @@ public class UserDao {
 	public int update(Connection conn, User user) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("update wms_user set user_cd=?, phone=?, user_nm=?, email=?, dept_nm=?");
+			pstmt = conn.prepareStatement("update wms_user set user_cd=?, user_nm=?, dept_nm=?, phone=?,  email=?");
 			pstmt.setString(1, user.getUserCd());
-			pstmt.setString(2, user.getPhone());
-			pstmt.setString(3, user.getUserNm());
-			pstmt.setString(4, user.getEmail());
-			pstmt.setString(5, user.getDeptNm());
+			pstmt.setString(2, user.getUserNm());
+			pstmt.setString(3, user.getDeptNm());
+			pstmt.setString(4, user.getPhone());
+			pstmt.setString(5, user.getEmail());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -64,7 +64,7 @@ public class UserDao {
 	public int delete(Connection conn, String userCd) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("update wms_user set user_cd=?, phone=?, user_nm=?, email=?, dept_nm=?");
+			pstmt = conn.prepareStatement("delete wms_user where user_cd=?");
 			pstmt.setString(1, userCd);
 			return pstmt.executeUpdate();
 		} finally {
@@ -73,6 +73,6 @@ public class UserDao {
 	}
 	
 	private User makeUserFromResultSet(ResultSet rs) throws SQLException {
-		return new User(rs.getString("user_cd"), rs.getString("phone"), rs.getString("user_nm"), rs.getString("email"), rs.getString("dept_nm"));
+		return new User(rs.getString("user_cd"), rs.getString("user_nm"), rs.getString("dept_nm"), rs.getString("phone"), rs.getString("email"));
 	}
 }
