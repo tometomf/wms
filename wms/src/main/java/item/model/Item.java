@@ -1,15 +1,15 @@
 package item.model;
 
 public class Item {
-	private int storePrice;
-	private int shipmentPrice;
 	private String itemCd;
+	private String itemNm;
+	private String spec;
+	private String itemGubun;
+	private String unit;
 	private String useYn;
 	private String manufacturer;
-	private String itemGubun;
-	private String spec;
-	private String itemNm;
-	private String unit;
+	private int storePrice;
+	private int shipmentPrice;
 	/**
 	 * 
 	 */
@@ -18,32 +18,27 @@ public class Item {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @param storePice
-	 * @param shipmentPrice
 	 * @param itemCd
+	 * @param itemNm
+	 * @param spec
+	 * @param itemGubun
+	 * @param unit
 	 * @param useYn
 	 * @param manufacturer
-	 * @param itemGubun
-	 * @param spec
-	 * @param itemNm
-	 * @param unit
+	 * @param storePrice
+	 * @param shipmentPrice
 	 */
-	public Item(int storePrice, int shipmentPrice, String itemCd, String useYn, String manufacturer, String itemGubun,
-			String spec, String itemNm, String unit) {
+	public Item(String itemCd, String itemNm, String spec, String itemGubun, String unit, String useYn,
+			String manufacturer, int storePrice, int shipmentPrice) {
 		super();
-		this.shipmentPrice = shipmentPrice;
 		this.itemCd = itemCd;
+		this.itemNm = itemNm;
+		this.spec = spec;
+		this.itemGubun = itemGubun;
+		this.unit = unit;
 		this.useYn = useYn;
 		this.manufacturer = manufacturer;
-		this.itemGubun = itemGubun;
-		this.spec = spec;
-		this.itemNm = itemNm;
-		this.unit = unit;
-	}
-	public int getShipmentPrice() {
-		return shipmentPrice;
-	}
-	public void setShipmentPrice(int shipmentPrice) {
+		this.storePrice = storePrice;
 		this.shipmentPrice = shipmentPrice;
 	}
 	public String getItemCd() {
@@ -51,6 +46,30 @@ public class Item {
 	}
 	public void setItemCd(String itemCd) {
 		this.itemCd = itemCd;
+	}
+	public String getItemNm() {
+		return itemNm;
+	}
+	public void setItemNm(String itemNm) {
+		this.itemNm = itemNm;
+	}
+	public String getSpec() {
+		return spec;
+	}
+	public void setSpec(String spec) {
+		this.spec = spec;
+	}
+	public String getItemGubun() {
+		return itemGubun;
+	}
+	public void setItemGubun(String itemGubun) {
+		this.itemGubun = itemGubun;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	public String getUseYn() {
 		return useYn;
@@ -64,34 +83,17 @@ public class Item {
 	public void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
 	}
-	public String getItemGubun() {
-		return itemGubun;
-	}
-	public void setItemGubun(String itemGubun) {
-		this.itemGubun = itemGubun;
-	}
-	public String getSpec() {
-		return spec;
-	}
-	public void setSpec(String spec) {
-		this.spec = spec;
-	}
-	public String getItemNm() {
-		return itemNm;
-	}
-	public void setItemNm(String itemNm) {
-		this.itemNm = itemNm;
-	}
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
 	public int getStorePrice() {
 		return storePrice;
 	}
 	public void setStorePrice(int storePrice) {
 		this.storePrice = storePrice;
 	}
+	public int getShipmentPrice() {
+		return shipmentPrice;
+	}
+	public void setShipmentPrice(int shipmentPrice) {
+		this.shipmentPrice = shipmentPrice;
+	}
+	
 }
