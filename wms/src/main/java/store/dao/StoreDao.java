@@ -47,3 +47,4 @@ public class StoreDao {
 }
 
 //주석만 AI돌려서 참고했고, 코드 짜는건 혼자 했습니다.
+//.
