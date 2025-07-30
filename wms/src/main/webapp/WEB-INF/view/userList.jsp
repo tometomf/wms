@@ -10,6 +10,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/wms.css">
 </head>
+
 <body>
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
