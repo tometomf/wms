@@ -49,43 +49,51 @@
 				</tbody>
 			</table>
 		</div>
-		<div id = "regist-menu">
-			<div id = "regist-text">
-				정기권번호(자동발생) : 
+		<div id = "regist">
+			<div id = "regist-menu">
+				<div id = "regist-text">정기권번호(자동발생)</div>
+				<div id = "regist-value">
+					<input readonly type = "text" name = "tno" value = "${parkingJoin.tno}">
+				</div>
+				<div id = "regist-text">차량번호</div>
+				<div id = "regist-value">
+					<input type = "text" name = "carno">
+				</div>
+				<div id = "regist-text">차주전화</div>
+				<div id = "regist-value">
+					<input type = "text" name = "phone">
+				</div>
+				<div id = "regist-text">주차등급(M/Y)</div>
+				<div id = "regist-value">
+					<select	name = "grade">
+						<option value = ""></option>
+						<option value = "M">월회원</option>
+						<option value = "Y">연회원</option>
+					</select>
+				</div>
+				<div id = "regist-text">정기권상태 (Y/N)</div>
+				<div id = "regist-value">
+					<select name = "tstat">
+						<option value = "Y">Y</option>
+						<option value = "N">N</option>
+					</select>
+				</div>
+				<div id = "regist-text">시작일</div>
+				<div id = "regist-value">
+					<input type = "date" name = "startDate">
+				</div>
+				<div id = "regist-text">종료일 : </div>
+				<div id = "regist-value">
+					<input type = "date" name = "endDate">
+				</div>
 			</div>
-			<div id = "regist-value">
-				<input readonly type = "text" name = "tno" value = "${parkingJoin.tno}">
+			<div id = "regist-button">
+				<div>
+					${ctxPath = pageContext.request.contextPath; ''}
+					<input type = "submit" value = "저장">
+					<input type = "submit" formaction="${ctxPath }/list.do" value = "삭제">
+				</div>
 			</div>
-			<div>
-				차량번호 : <input type = "text" name = "carno">
-			</div>
-			<div>
-				차주전화 : <input type = "text" name = "phone">
-			</div>
-			<div>
-				주차등급(M/Y) : 
-				<select	name = "grade">
-					<option value = ""></option>
-					<option value = "M">월회원</option>
-					<option value = "Y">연회원</option>
-				</select>
-			</div>
-			<div>
-				정기권상태 (Y/N) : 
-				<select name = "tstat">
-					<option value = "Y">Y</option>
-					<option value = "N">N</option>
-				</select>
-			</div>
-			<div>
-				시작일 : <input type = "date" name = "startDate">
-			</div>
-			<div>
-				종료일 : <input type = "date" name = "endDate">
-			</div>
-			<input type = "submit" value = "가입">
-			${ctxPath = pageContext.request.contextPath; ''}
-			<input type = "submit" formaction="${ctxPath }/list.do" value = "조회">
 		</div>
 	</div>
 </body>
