@@ -10,7 +10,7 @@
 
 /* 사이드바 스타일 */
 #sidebar {
-  width: 230px;
+  width: 270px;
   height: 100vh;
   background-color: #2c3e50;
   color: white;
@@ -37,7 +37,7 @@
 }
 
 /* 메뉴 그룹 타이틀 */
-#menu-section > .menu-title {
+#menu-section > #menu-title {
   font-size: 15px;
   font-weight: bold;
   color: #ffffff;
@@ -47,7 +47,7 @@
   cursor: pointer;
 }
 
-#menu-section > .menu-title::before {
+#menu-section > #menu-title::before {
   content: "📁";
   position: absolute;
   left: 0;
@@ -68,7 +68,7 @@
 }
 
 #menu-section li::before {
-  content: "○";
+  content: "●";
   position: absolute;
   left: 0;
   color: #bdc3c7;
@@ -91,56 +91,56 @@
 	<div id="sidebar">
 		<div id="title">物流管理</div>		<!-- 물류관리 -->
 		<div id="menu-section">
-			<div id="mid_title">ユーザー管理</div> <!-- 사용자 관리 -->
-			<ul id = "mid_ui">
+			<div id="menu-title">&nbsp;ユーザー管理</div> <!-- 사용자 관리 -->
+			<ul>
 				<li><a href="${ctxPath}/user/write.do">ユーザー登録</a></li> <!-- 사용자 등록 -->
 				<li><a href="${ctxPath}/user/list.do">ユーザー現況</a></li> <!-- 사용자 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">品目</div> <!-- 품목 -->
-			<ul id = "mid_ui">
+			<div id="menu-title">&nbsp;品目</div> <!-- 품목 -->
+			<ul>
 				<li><a href="${ctxPath}/item/write.do">品目登録</a></li> <!-- 품목 등록 -->
 				<li><a href="${ctxPath}/item/list.do">品目現況</a></li> <!-- 품목 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">倉庫</div> <!-- 창고 -->
+			<div id="menu-title">&nbsp;倉庫</div> <!-- 창고 -->
 			<ul>
 				<li><a href="${ctxPath}/ware/write.do">倉庫登録</a></li> <!-- 창고 등록 -->
 				<li><a href="${ctxPath}/ware/list.do">倉庫別在庫現況</a></li> <!-- 창고별 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">在庫</div> <!-- 재고 -->
+			<div id="menu-title">&nbsp;在庫</div> <!-- 재고 -->
 			<ul>
 				<li><a href="${ctxPath}/stock/write.do">在庫登録</a></li> <!-- 재고 등록 -->
 				<li><a href="${ctxPath}/stock/list.do">在庫現況</a></li> <!-- 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">入庫</div> <!-- 입고 -->
+			<div id="menu-title">&nbsp;入庫</div> <!-- 입고 -->
 			<ul>
 				<li><a href="${ctxPath}/store/write.do">入庫登録</a></li> <!-- 입고 등록 -->
 				<li><a href="${ctxPath}/store/list.do">入庫現況</a></li> <!-- 입고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">受注</div> <!-- 수주 -->
+			<div id="menu-title">&nbsp;受注</div> <!-- 수주 -->
 			<ul>
 				<li><a href="${ctxPath}/order/write.do">受注登録</a></li> <!-- 수주 등록 -->
 				<li><a href="${ctxPath}/order/list.do">受注現況</a></li> <!-- 수주 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">出庫</div> <!-- 출고 -->
+			<div id="menu-title">&nbsp;出庫</div> <!-- 출고 -->
 			<ul>
 				<li><a href="${ctxPath}/ship/write.do">出庫登録</a></li> <!-- 출고 등록 -->
 				<li><a href="${ctxPath}/ship/list.do">出庫現況</a></li> <!-- 출고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="mid_title">物流</div> <!-- 물류 -->
+			<div id="menu-title">&nbsp;物流</div> <!-- 물류 -->
 			<ul>
 				<li><a href="#">物流現況</a></li> <!-- 물류 현황 -->
 			</ul>

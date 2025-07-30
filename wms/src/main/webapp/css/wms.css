@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
-body {	
+body {
 	margin: 0;
-  	font-family: 'Segoe UI', Arial, sans-serif;
+	font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 /* 본문이 사이드바에 가리지 않게 왼쪽 여백 */
 #main-content {
-	margin-left: 230px; /* 사이드바 너비와 일치 */
+	margin-left: 270px; /* 사이드바 너비와 일치 */
 	padding: 10px;
 }
 
@@ -34,6 +34,9 @@ body {
 	gap: 10px;
 	align-items: center;
 	border-bottom: 1px solid #ccc;
+	display: flex;
+	justify-content: space-between;
+	height: 30px;
 }
 
 #search-bar label {
@@ -48,35 +51,113 @@ body {
 	border-radius: 3px;
 }
 
-#result-table table{
+#search-bar #search-button {
+	height: 32px; /* 날짜 input과 높이 맞춤 */
+	background-color: white;
+	border: 1px solid #ccc;
+	padding: 0 13px;
+	font-size: 14px;
+	cursor: pointer;
+	vertical-align: middle;
+	border-radius: 3px;
+}
+
+#search-bar #search-button:hover {
+	background-color: #f2f2f2;
+}
+
+#result-table table {
 	width: 100%;
 	margin-top: 5px;
+	border-collapse: collapse; /* 간격 제거 */
+	table-layout: fixed;
 }
 
-#result-table thead {
-	background-color: #849fB6;
+#result-table thead th {
+	background-color: #4a84b5;
 	color: white;
 	text-align: center;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: bold;
-}
-
-#result-table tbody {
-	background-color: white;
-	font-size: 16px;
+	padding: 4px;
+	border: 1px solid #ccc;
 }
 
 #result-table tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    word-break: break-word;
+	background-color: white;
+	font-size: 15px;
+	padding: 4px;
+	border: 1px solid #ccc;
+	text-align: center;
+	word-break: break-word;
+	color: #333;
 }
 
 #result-table tbody tr:hover {
-    background-color: #f1f7fa;
-    cursor: pointer;
+	background-color: #f1f7fa;
+	cursor: default;
 }
 
-#result-table tbody tr:last-child td {
-    border-bottom: none;
+#regist {
+	width: 40%;
+	margin: auto;
+	padding: 20px;
+}
+
+#regist-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#regist-menu > div {
+  display: flex;
+  align-items: center;
+}
+
+#regist-text {
+  flex: 0 0 27%; /* 고정 비율로 35% */	
+  font-weight: bold;
+  color: #333;
+  padding-right: 10px;
+  text-align: right;
+}
+
+#regist-value {
+  flex: 0 0 68%; /* 고정 비율로 65% */
+}
+
+#regist-value input, #regist-value select {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #1f4e78;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+input[type="submit"]:hover {
+  background-color: #163b5a;
+}
+
+#regist-button {
+	display: flex;
+	justify-content: end;
+	gap: 5px;
 }
