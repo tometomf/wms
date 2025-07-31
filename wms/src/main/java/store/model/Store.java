@@ -5,14 +5,14 @@ import java.util.Date;
 	
 	public class Store { 
 
-		private int store_no;
+		private Integer store_no;
 	    private String store_nm;
 	    private String store_dept;
 	    private String store_user; 
 	    private String descr;
 	    private Date reg_ymd;
 
-	    public Store(int store_no, String store_nm, String store_dept, String store_user, String descr,
+	    public Store(Integer store_no, String store_nm, String store_dept, String store_user, String descr,
                 Date reg_ymd) {
 
 		this.store_no = store_no;
@@ -27,7 +27,7 @@ import java.util.Date;
 		return store_no;
 	}
 
-	public void setStore_no(int store_no) {
+	public void setStore_no(Integer store_no) {
 		this.store_no = store_no;
 	}
 
