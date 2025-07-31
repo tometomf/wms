@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
-		<div id="wms-title">ユーザー登録</div>
+		<div id="wms-title">ユーザー現況</div>
 		<div id="search-bar" style="display: flex;">
 			<div>
 				<button id="search-button">조회</button>
