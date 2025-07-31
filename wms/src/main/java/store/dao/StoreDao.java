@@ -1,10 +1,10 @@
 package store.dao;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +15,22 @@ import store.model.Store;
 
 public class StoreDao {
 
+	public int selectCount(Connection conn, Store store) throws SQLException{
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select*from wms_store_master");
+		if(rs.next()) {
+			return rs.getInt(1);
+		}
+		return 0;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+		} 
+	}
+	
 	public List<Store> selectAll(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;		//ResultSet,Pre... 객체 초기화
@@ -36,6 +52,35 @@ public class StoreDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	public Store selectById(Connection conn, int no) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select*from wms_store_master where store_no =?");
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			Store store = null;
+			if (rs.next()) {
+				store = convertStore(rs);
+			}
+			return store;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public int delete(Connection conn, String store_nm) throws SQLException {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("delete wms_store_master where store_nm=?");
+			pstmt.setString(1, store_nm);
+			return pstmt.executeUpdate();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
 
 	private Store convertStore(ResultSet rs) throws SQLException {
 		return new Store(rs.getInt("store_no"),rs.getString("store_nm"), rs.getString("store_dept"), rs.getString("store_user"),
@@ -47,8 +92,3 @@ public class StoreDao {
 	}
 	
 }
-
-
-
-//주석만 AI돌려서 참고했고, 코드 짜는건 혼자 했습니다.
-//.

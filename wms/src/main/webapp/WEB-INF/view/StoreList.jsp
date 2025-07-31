@@ -1,6 +1,6 @@
 <%@page import"java.util.List" %>
 <%@page import"store.model.Store %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
