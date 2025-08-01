@@ -108,7 +108,7 @@
 			<div id="menu-title">&nbsp;倉庫</div> <!-- 창고 -->
 			<ul>
 				<li><a href="${ctxPath}/ware/write.do">倉庫登録</a></li> <!-- 창고 등록 -->
-				<li><a href="${ctxPath}/ware/list.do">倉庫別在庫現況</a></li> <!-- 창고별 재고 현황 -->
+				<li><a href="${ctxPath}/ware/list.do">倉庫現況</a></li> <!-- 창고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">

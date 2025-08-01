@@ -2,9 +2,9 @@ package ware.model;
 
 public class Ware {
 	private String wareCd;
+	private String wareNm;
 	private String wareGubun;
 	private String useYn;
-	private String wareNm;
 	/**
 	 * 
 	 */
@@ -14,16 +14,16 @@ public class Ware {
 	}
 	/**
 	 * @param wareCd
+	 * @param wareNm
 	 * @param wareGubun
 	 * @param useYn
-	 * @param wareNm
 	 */
-	public Ware(String wareCd, String wareGubun, String useYn, String wareNm) {
+	public Ware(String wareCd, String wareNm, String wareGubun, String useYn) {
 		super();
 		this.wareCd = wareCd;
+		this.wareNm = wareNm;
 		this.wareGubun = wareGubun;
 		this.useYn = useYn;
-		this.wareNm = wareNm;
 	}
 	public String getWareCd() {
 		return wareCd;
@@ -31,11 +31,17 @@ public class Ware {
 	public void setWareCd(String wareCd) {
 		this.wareCd = wareCd;
 	}
-	public String getWareBubun() {
+	public String getWareNm() {
+		return wareNm;
+	}
+	public void setWareNm(String wareNm) {
+		this.wareNm = wareNm;
+	}
+	public String getWareGubun() {
 		return wareGubun;
 	}
-	public void setWareBubun(String wareBubun) {
-		this.wareGubun = wareBubun;
+	public void setWareGubun(String wareGubun) {
+		this.wareGubun = wareGubun;
 	}
 	public String getUseYn() {
 		return useYn;
@@ -43,12 +49,5 @@ public class Ware {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
-	public String getWareNm() {
-		return wareNm;
-	}
-	public void setWareNm(String wareNm) {
-		this.wareNm = wareNm;
-	}
-	
-	
+
 }
