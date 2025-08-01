@@ -6,26 +6,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>入庫現況</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 30px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    h1 { margin-bottom: 20px; }
+  </style>
 </head>
 <body>
+
+<h1>入庫現況</h1>
+
 	<table border="1">
 		<thead>
 			<tr>
-				<th>입고번호</th>
-				<th>입고명</th>
-				<th>입고담당부서</th>
-				<th>입고담당사원</th>
-				<th>비고</th>
-				<th>입고일</th>
+				<th>入庫番号</th>
+				<th>入庫名</th>
+				<th>入庫担当部署</th>
+				<th>入庫担当者</th>
+				<th>備考</th>
+				<th>入庫日</th>
 			</tr>
 	</thead>		
 	<tbody>
 		<%
 			List<Store> storeList = (List<Store>) request.getAttribute("storeList");
-			//storeList 객체를 만들고, 값 가져오기를 storeList(StoreHandler)에서 가져온다.
+			//storeListインスタンスを作って、StoreHandlerの中にあるstoreListから結果を持ってくる
 			if (storeList != null && !storeList.isEmpty()) {
-			//storeList의 값이 null이거나 비어있지 않다면
+			//storeListがnullか相手なければ
 				for (Store store : storeList) {
 		%>
 			<tr>
@@ -36,7 +45,7 @@
 				<td><%= store.getDescr()	%></td>
 				<td><%= store.getReg_ymd()	%></td>
 			</tr>
-		<%		//이것들의 값을 가져온다.
+		<%		//データを持ってくる
 				}
 			} else {
 		%>	
@@ -44,7 +53,7 @@
 				<td colspan="7">No data retrieved.</td>
 			</tr>
 		<% 
-				} //아니면 데이터 없음을 표시한다.
+				} //それともデータなしを見せる
 		%>	
 		</tbody>	
 		</table>
