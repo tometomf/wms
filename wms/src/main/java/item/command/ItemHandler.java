@@ -15,8 +15,8 @@ public class ItemHandler implements CommandHandler{
 	public String process (HttpServletRequest request, HttpServletResponse response) {
 		ItemListService itemListService = new ItemListService();
 		
-		List<Item> userList = itemListService.getItemList();
-        request.setAttribute("itemList", userList);
+		List<Item> itemList = itemListService.getItemList();
+        request.setAttribute("itemList", itemList);
         return "/WEB-INF/view/itemList.jsp";
 	}
 }

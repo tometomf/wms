@@ -1,5 +1,6 @@
 package store.dao;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,37 +15,93 @@ import store.model.Store;
 
 public class StoreDao {
 
+	public int selectCount(Connection conn, Store store) throws SQLException{
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select*from wms_store_master");
+		if(rs.next()) {
+			return rs.getInt(1);
+		}
+		return 0;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+		} 
+	}
+	
 	public List<Store> selectAll(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;		//ResultSet,Pre... 객체 초기화
+		ResultSet rs = null;		
+		//ResultSet,Pre... インスタンス初期化
 		try {
 			pstmt = conn.prepareStatement("select*from wms_store_master");
-			//wms_store_master에 있는 컬럼을 전부 조회하는 쿼리 준비
+			//wms_store_masterに存在するコラムを全て紹介するQueryを用意
 			
 			rs = pstmt.executeQuery();
 			List<Store> result = new ArrayList<>();
-			//store 객체 담을 리스트 생성
-			//ResultSet에서 다음 행이 있는동안 반복
+			//storeインスタンスを入れるリストを作る
+			//ResultSetから次の行がある限り繰り返す
 			while (rs.next()) {				
-				//현재 행의 데이터를 store 객체로 변환하여 리스트에 추가
+				//現在行のデータをstoreインスタンスに変化し、リストに追加
 				result.add(convertStore(rs));
 			}
-			return result;	//조회된 Store 리스트 반환
+			return result;	
+			//紹介したStoreリストを返還
 			} finally {
-			JdbcUtil.close(conn);
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	public Store findStoreByNo(Connection conn, int no) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select*from wms_store_master where store_no =?");
+			//テーブルからストアナンバーで照会する
+			pstmt.setInt(1, no);
+			//クオリーの初めての媒介変数にno変数の結果をintとして設定。
+			rs = pstmt.executeQuery();
+			//クオリー実行、その結果をResultSetに入れる
+			Store store = null;
+			//ストアーインスタンスを宣言し、nullに初期化
+			if (rs.next()) {
+				//結果があれば、convertStoreメソッドを呼び出してrsのデータをstoreインスタンスにて変換する。
+				store = convertStore(rs);
+			}
+			return store;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		//エラーやコードが終了される場合、リソースを解除する。
+		}
+	}
+	
+	public int delete(Connection conn, String store_nm) throws SQLException {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("delete wms_store_master where store_nm=?");
+			pstmt.setString(1, store_nm);
+			return pstmt.executeUpdate();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		//store_nmからそのデータを削除する。
+	}
 
 	private Store convertStore(ResultSet rs) throws SQLException {
-		return new Store(rs.getInt("store_no"),rs.getString("store_nm"), rs.getString("store_dept"), rs.getString("store_user"),
-				rs.getString("store_descr"), toDate(rs.getTimestamp("store_reg_ymd")));
+		return new Store(
+				rs.getInt("STORE_NO"), 
+				rs.getString("STORE_NM"), 
+				rs.getString("STORE_DEPT"), 
+				rs.getString("STORE_USER"),
+	            rs.getString("DESCR"), 
+	            toDate(rs.getTimestamp("REG_YMD")));
 	}
 	
 	private Date toDate(Timestamp date) {
 		return date == null ? null : new Date(date.getTime());
 	}
+	
 }
-
-//주석만 AI돌려서 참고했고, 코드 짜는건 혼자 했습니다.
-//.

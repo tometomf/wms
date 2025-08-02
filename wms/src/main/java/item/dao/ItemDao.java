@@ -38,7 +38,7 @@ public class ItemDao {
 			rs = pstmt.executeQuery();
 			List<Item> itemList = new ArrayList<>();
 			while (rs.next()) {
-				itemList.add(makeUserFromResultSet(rs)); 
+				itemList.add(makeItemFromResultSet(rs)); 
 			}
 			return itemList;
 
@@ -77,7 +77,7 @@ public class ItemDao {
 		}
 	}
 	
-	private Item makeUserFromResultSet(ResultSet rs) throws SQLException {
+	private Item makeItemFromResultSet(ResultSet rs) throws SQLException {
 		return new Item(rs.getString("item_cd"),rs.getString("item_nm"),rs.getString("spec"),rs.getString("item_gubun"),rs.getString("unit"),rs.getString("use_yn"),rs.getString("manufacturer"),rs.getInt("store_price"),rs.getInt("shipment_price"));
 	}
 }

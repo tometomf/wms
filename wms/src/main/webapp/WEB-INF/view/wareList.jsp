@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="user.model.User"%>
+<%@page import="ware.model.Ware"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
-		<div id="wms-title">ユーザー現況</div>
+		<div id="wms-title">倉庫現況</div>
 		<div id="search-bar" style="display: flex;">
 			<div>
 				<button id="search-button">조회</button>
@@ -24,25 +24,24 @@
 			<table>
 				<thead>
 					<tr>
-						<th>사원번호</th>
-						<th>사원이름</th>
-						<th>부서명</th>
-						<th>휴대전화</th>
-						<th>이메일</th>
+						<th>창고코드</th>
+						<th>창고명</th>
+						<th>창고구분</th>
+						<th>사용여부</th>
 					</tr>
 				</thead>
 				<tbody>
 					<%
-					List<User> userList = (List<User>) request.getAttribute("userList");
-					if (userList != null && !userList.isEmpty()) {
-						for (User user : userList) {
+					List<Ware> wareList = (List<Ware>) request.getAttribute("wareList");
+					if (wareList != null && !wareList.isEmpty()) {
+						for (Ware ware : wareList) {
 					%>
 					<tr>
-						<td><%=user.getUserCd()%></td>
-						<td><%=user.getUserNm()%></td>
-						<td><%=user.getDeptNm()%></td>
-						<td><%=user.getPhone()%></td>
-						<td><%=user.getEmail()%></td>
+						<td><%=ware.getWareCd()%></td>
+						<td><%=ware.getWareNm()%></td>
+						<td><%=ware.getWareGubun()%></td>
+						<td><%=ware.getUseYn()%></td>
+
 					</tr>
 					<%
 					}

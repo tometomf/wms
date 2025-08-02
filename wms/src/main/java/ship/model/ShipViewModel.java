@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ShipViewModel {
 
-    // 마스터 정보
+    // master 情報
     private int shipNo;
     private String shipNm;
     private String shipDept;
@@ -14,17 +14,17 @@ public class ShipViewModel {
     private Date updYmd;
     private String shipYn;
 
-    // 상세 정보
+    // details 情報
     private String itemCd;
     private int shipPrice;
     private int shipQty;
     private String shipGubun;
 
-    // 기본 생성자
+    // デフォルトコンストラクタ
     public ShipViewModel() {
     }
 
-    // 전체 필드 초기화 생성자
+    // すべてのフィールドを初期化するコンストラクタ
     public ShipViewModel(int shipNo, String shipNm, String shipDept, String shipUser, String descr,
                          Date regYmd, Date updYmd, String shipYn,
                          String itemCd, int shipPrice, int shipQty, String shipGubun) {
