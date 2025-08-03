@@ -31,23 +31,24 @@ public class OrderDao{
 		JdbcUtil.close(stmt);
 	} 
 }
+	
 
-public List<Order> selectAll(Connection conn) throws SQLException {
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	try {
-		pstmt = conn.prepareStatement("select*from wms_order_master");
-		
-		rs = pstmt.executeQuery();
-		List<Order> result = new ArrayList<>();
-		while (rs.next()) {
-			result.add((Order) (rs));
-		}
-		return result;
+	public List<Order> selectAll(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select * from wms_order_master");
+			rs = pstmt.executeQuery();
+			List<Order> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertOrder(rs)); // 수정: 변환 함수 사용
+			}
+			return result;
 		} finally {
-		JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs); // 누락된 close 추가
+			JdbcUtil.close(pstmt);
+		}
 	}
-}
 
 public Order findStoreByNo(Connection conn, int no) throws SQLException {
 	PreparedStatement pstmt = null;
@@ -68,10 +69,6 @@ public Order findStoreByNo(Connection conn, int no) throws SQLException {
 	}
 }
 
-private Order convertOrder(ResultSet rs) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 public int delete(Connection conn, String order_nm) throws SQLException {
 	PreparedStatement pstmt = null;
@@ -84,14 +81,15 @@ public int delete(Connection conn, String order_nm) throws SQLException {
 	}
 }
 
-private Order convertOrder1(ResultSet rs) throws SQLException {
+private Order convertOrder(ResultSet rs) throws SQLException {
 	return new Order(
-			rs.getInt("ORDER_NO"), 
-			rs.getString("ORDER_NM"), 
-			rs.getString("ORDER_DEPT"), 
+			rs.getInt("ORDER_NO"),
+			rs.getString("ORDER_NM"),
+			rs.getString("ORDER_DEPT"),
 			rs.getString("ORDER_USER"),
-            rs.getString("DESCR"), 
-            toDate(rs.getTimestamp("REG_YMD")));
+			rs.getString("DESCR"),
+			toDate(rs.getTimestamp("REG_YMD"))
+	);
 }
 
 private Date toDate(Timestamp date) {
