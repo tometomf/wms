@@ -1,56 +1,99 @@
 package order.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.ArrayList;
 
-public class OrderDao {
+import order.model.Order;
+import jdbc.JdbcUtil;
 
-    /**
-     * 지정된 10개 상품의 총 주문 수량을 'orders' 테이블에서 조회합니다.
-     * @param conn DB Connection 객체
-     * @return 상품명을 Key, 총 수량을 Value로 갖는 Map
-     * @throws SQLException
-     */
-    public Map<String, Integer> getOrderQuantities(Connection conn) throws SQLException {
-        // 'orders' 테이블에서 상품명으로 그룹화하여 주문 수량의 합계를 구하는 SQL
-        String sql = "SELECT product_name, SUM(quantity) AS total_quantity " +
-                     "FROM orders " +
-                     "WHERE product_name IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
-                     "GROUP BY product_name";
+public class OrderDao{
+	
+	public int insert(Connection conn, String order_nm) throws SQLException {
+	PreparedStatement pstmt = null;
+	Statement stmt = null;
+	ResultSet rs = null;
+	try {
+		stmt = conn.createStatement();
+		rs = stmt.executeQuery("select*from wms_order_master");
+	if(rs.next()) {
+		return rs.getInt(1);
+	}
+	return 0;
+	}finally {
+		JdbcUtil.close(rs);
+		JdbcUtil.close(stmt);
+	} 
+}
+	
 
-        // wms_item 데이터 기준의 상품명 배열
-        String[] products = {
-                "볼트 M8", "육각렌치", "산업용 장갑", "포장박스", "에폭시 본드",
-                "포장테이프", "전동드릴", "포장완충재", "목장갑", "절연테이프"
-        };
+	public List<Order> selectAll(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select * from wms_order_master");
+			rs = pstmt.executeQuery();
+			List<Order> result = new ArrayList<>();
+			while (rs.next()) {
+				result.add(convertOrder(rs)); // 수정: 변환 함수 사용
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs); // 누락된 close 추가
+			JdbcUtil.close(pstmt);
+		}
+	}
 
-        Map<String, Integer> resultMap = new HashMap<>();
+public Order findStoreByNo(Connection conn, int no) throws SQLException {
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	try {
+		pstmt = conn.prepareStatement("select*from wms_order_master where order_no =?");
+		pstmt.setInt(1, no);
+		rs = pstmt.executeQuery();
+		Order order = null;
+		if (rs.next()) {
+			//結果があれば、convertStoreメソッドを呼び出してrsのデータをstoreインスタンスにて変換する。
+			order = convertOrder(rs);
+		}
+		return order;
+	}finally {
+		JdbcUtil.close(rs);
+		JdbcUtil.close(pstmt);
+	}
+}
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            // 10개의 상품명을 PreparedStatement에 바인딩
-            for (int i = 0; i < products.length; i++) {
-                pstmt.setString(i + 1, products[i]);
-            }
 
-            // 쿼리 실행 후 결과(상품명, 수량)를 Map에 저장
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    String productName = rs.getString("product_name");
-                    int quantity = rs.getInt("total_quantity");
-                    resultMap.put(productName, quantity);
-                }
-            }
-        }
-        
-        // 주문이 없는 상품은 수량을 0으로 설정
-        for (String product : products) {
-            resultMap.putIfAbsent(product, 0);
-        }
+public int delete(Connection conn, String order_nm) throws SQLException {
+	PreparedStatement pstmt = null;
+	try {
+		pstmt = conn.prepareStatement("delete wms_orer_master where order_nm=?");
+		pstmt.setString(1, order_nm);
+		return pstmt.executeUpdate();
+	} finally {
+		JdbcUtil.close(pstmt);
+	}
+}
 
-        return resultMap;
-    }
+private Order convertOrder(ResultSet rs) throws SQLException {
+	return new Order(
+			rs.getInt("ORDER_NO"),
+			rs.getString("ORDER_NM"),
+			rs.getString("ORDER_DEPT"),
+			rs.getString("ORDER_USER"),
+			rs.getString("DESCR"),
+			toDate(rs.getTimestamp("REG_YMD"))
+	);
+}
+
+private Date toDate(Timestamp date) {
+	return date == null ? null : new Date(date.getTime());
+}
+
 }
