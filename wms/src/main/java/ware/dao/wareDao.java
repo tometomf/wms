@@ -12,20 +12,21 @@ import ware.model.WareStockDTO;
 import jdbc.JdbcUtil;
 
 public class wareDao {
-	public int insert(Connection conn, Ware ware) throws SQLException {
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn
-					.prepareStatement("insert into wms_ware (ware_cd, ware_nm, ware_gubun, use_yn) values(?,?,?,?)");
-			pstmt.setString(1, ware.getWareCd());
-			pstmt.setString(2, ware.getWareNm());
-			pstmt.setString(3, ware.getWareGubun());
-			pstmt.setString(4, ware.getUseYn());
-			return pstmt.executeUpdate();
-		} finally {
-			JdbcUtil.close(pstmt);
-		}
-	}
+	
+//	public int insert(Connection conn, Ware ware) throws SQLException {
+//		PreparedStatement pstmt = null;
+//		try {
+//			pstmt = conn
+//					.prepareStatement("insert into wms_ware (ware_cd, ware_nm, ware_gubun, use_yn) values(?,?,?,?)");
+//			pstmt.setString(1, ware.getWareCd());
+//			pstmt.setString(2, ware.getWareNm());
+//			pstmt.setString(3, ware.getWareGubun());
+//			pstmt.setString(4, ware.getUseYn());
+//			return pstmt.executeUpdate();
+//		} finally {
+//			JdbcUtil.close(pstmt);
+//		}
+//	}
 
 	public List<Ware> selectAll(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
@@ -68,6 +69,39 @@ public class wareDao {
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public Ware selectWareCd(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select 'W' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ware_cd, 2))), 0) + 1), 3, '0') AS next_ware_cd from wms_ware");
+			rs = pstmt.executeQuery();
+			Ware ware = null;
+			
+			if (rs.next()) {
+				ware = new Ware(
+						rs.getString("next_ware_cd")
+					  , null
+					  , null
+					  , null);
+			}
+			return ware;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	// 창고 신규 등록
+	public void insert(Connection conn, Ware ware) throws SQLException {
+		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_ware values(?, ?, ?, ?)")) {
+			pstmt.setString(1, ware.getWareCd());
+			pstmt.setString(2, ware.getWareNm());
+			pstmt.setString(3, ware.getWareGubun());
+			pstmt.setString(4, ware.getUseYn());
+			pstmt.executeUpdate();
 		}
 	}
 

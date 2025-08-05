@@ -93,49 +93,49 @@
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;ユーザー管理</div> <!-- 사용자 관리 -->
 			<ul>
-				<li><a href="${ctxPath}/user/write.do">ユーザー登録</a></li> <!-- 사용자 등록 -->
+				<li><a href="${ctxPath}/user/regist.do">ユーザー登録</a></li> <!-- 사용자 등록 -->
 				<li><a href="${ctxPath}/user/list.do">ユーザー現況</a></li> <!-- 사용자 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;品目</div> <!-- 품목 -->
 			<ul>
-				<li><a href="${ctxPath}/item/write.do">品目登録</a></li> <!-- 품목 등록 -->
+				<li><a href="${ctxPath}/item/regist.do">品目登録</a></li> <!-- 품목 등록 -->
 				<li><a href="${ctxPath}/item/list.do">品目現況</a></li> <!-- 품목 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;倉庫</div> <!-- 창고 -->
 			<ul>
-				<li><a href="${ctxPath}/ware/write.do">倉庫登録</a></li> <!-- 창고 등록 -->
+				<li><a href="${ctxPath}/ware/regist.do">倉庫登録</a></li> <!-- 창고 등록 -->
 				<li><a href="${ctxPath}/ware/list.do">倉庫現況</a></li> <!-- 창고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;在庫</div> <!-- 재고 -->
 			<ul>
-				<li><a href="${ctxPath}/stock/write.do">在庫登録</a></li> <!-- 재고 등록 -->
+				<li><a href="${ctxPath}/stock/regist.do">在庫登録</a></li> <!-- 재고 등록 -->
 				<li><a href="${ctxPath}/stock/list.do">在庫現況</a></li> <!-- 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;入庫</div> <!-- 입고 -->
 			<ul>
-				<li><a href="${ctxPath}/store/write.do">入庫登録</a></li> <!-- 입고 등록 -->
+				<li><a href="${ctxPath}/store/regist.do">入庫登録</a></li> <!-- 입고 등록 -->
 				<li><a href="${ctxPath}/store/list.do">入庫現況</a></li> <!-- 입고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;受注</div> <!-- 수주 -->
 			<ul>
-				<li><a href="${ctxPath}/order/write.do">受注登録</a></li> <!-- 수주 등록 -->
+				<li><a href="${ctxPath}/order/regist.do">受注登録</a></li> <!-- 수주 등록 -->
 				<li><a href="${ctxPath}/order/list.do">受注現況</a></li> <!-- 수주 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;出庫</div> <!-- 출고 -->
 			<ul>
-				<li><a href="${ctxPath}/ship/write.do">出庫登録</a></li> <!-- 출고 등록 -->
+				<li><a href="${ctxPath}/ship/regist.do">出庫登録</a></li> <!-- 출고 등록 -->
 				<li><a href="${ctxPath}/ship/list.do">出庫現況</a></li> <!-- 출고 현황 -->
 			</ul>
 		</div>

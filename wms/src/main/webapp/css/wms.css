@@ -91,6 +91,7 @@ body {
 	text-align: center;
 	word-break: break-word;
 	color: #333;
+	height: 30px;
 }
 
 #result-table tbody tr:hover {

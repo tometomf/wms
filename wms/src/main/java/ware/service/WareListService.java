@@ -37,4 +37,40 @@ public class WareListService {
 	            JdbcUtil.close(conn);
 	        }
 	}
+	
+	// 창고코드 조회
+	public Ware getWareCd() {
+		Connection conn = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+            
+            return wareDao.selectWareCd(conn);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtil.close(conn);
+        }
+	}
+	
+	// 창고 신규 등록
+	public void insert(Ware ware) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			conn.setAutoCommit(false);
+			
+			wareDao.insert(conn, new Ware(
+								ware.getWareCd()
+							  ,	ware.getWareNm()
+							  ,	ware.getWareGubun()
+							  ,	ware.getUseYn())
+			);
+			conn.commit();
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
 }
