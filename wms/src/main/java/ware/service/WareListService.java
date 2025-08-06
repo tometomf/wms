@@ -52,6 +52,20 @@ public class WareListService {
         }
 	}
 	
+	// 창고 마스터 조회
+	public Ware selectByWareCd(String wareCd) {
+		Connection conn = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+            
+            return wareDao.selectByWareCd(conn, wareCd);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtil.close(conn);
+        }
+	}
+	
 	// 창고 신규 등록
 	public void insert(Ware ware) {
 		Connection conn = null;
@@ -72,5 +86,40 @@ public class WareListService {
 		} finally {
 			JdbcUtil.close(conn);
 		}
+	}
+	
+	// 창고 수정
+	public void update(Ware ware) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			conn.setAutoCommit(false);
+			
+			wareDao.update(conn, new Ware(
+								ware.getWareCd()
+							  ,	ware.getWareNm()
+							  ,	ware.getWareGubun()
+							  ,	ware.getUseYn())
+			);
+			conn.commit();
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+	// 창고 마스터 삭제
+	public void delete(String wareCd) {
+		Connection conn = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+        	wareDao.delete(conn, wareCd);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtil.close(conn);
+        }
 	}
 }

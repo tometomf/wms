@@ -94,6 +94,29 @@ public class wareDao {
 		}
 	}
 	
+	public Ware selectByWareCd(Connection conn, String wareCd) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("SELECT WARE_CD, WARE_NM, ware_gubun, USE_YN FROM WMS_WARE WHERE WARE_CD = ?");
+			pstmt.setString(1, wareCd);
+			rs = pstmt.executeQuery();
+			Ware ware = null;
+			
+			if (rs.next()) {
+				ware = new Ware(
+						rs.getString("ware_cd")
+					  , rs.getString("ware_nm")
+					  , rs.getString("ware_gubun")
+					  , rs.getString("use_yn"));
+			}
+			return ware;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 	// 창고 신규 등록
 	public void insert(Connection conn, Ware ware) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_ware values(?, ?, ?, ?)")) {
@@ -108,11 +131,11 @@ public class wareDao {
 	public int update(Connection conn, Ware ware) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("update wms_ware set ware_cd=?, ware_nm=?, ware_gubun=?, use_yn=?");
-			pstmt.setString(1, ware.getWareCd());
-			pstmt.setString(2, ware.getWareNm());
-			pstmt.setString(3, ware.getWareGubun());
-			pstmt.setString(4, ware.getUseYn());
+			pstmt = conn.prepareStatement("update wms_ware set ware_nm=?, ware_gubun=?, use_yn=? where ware_cd = ?");
+			pstmt.setString(1, ware.getWareNm());
+			pstmt.setString(2, ware.getWareGubun());
+			pstmt.setString(3, ware.getUseYn());
+			pstmt.setString(4, ware.getWareCd());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -120,6 +143,9 @@ public class wareDao {
 	}
 
 	public int delete(Connection conn, String wareCd) throws SQLException {
+		
+		System.out.println(wareCd);
+		
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("delete wms_ware where ware_cd=?");

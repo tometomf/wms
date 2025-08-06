@@ -1,5 +1,11 @@
 package ware.command;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.DuplicateFormatFlagsException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +15,7 @@ import ware.service.WareListService;
 
 public class WareUpdateHandler implements CommandHandler {
 
+	private static final String FORM_VIEW = "/WEB-INF/view/wareUpdate.jsp";
 	private WareListService wareListService = new WareListService();
 	
 	@Override
@@ -16,8 +23,7 @@ public class WareUpdateHandler implements CommandHandler {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
-			return "";
-			// return processSubmit(req, res);
+			return processSubmit(req, res);
 		} else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 			return null;
@@ -31,5 +37,41 @@ public class WareUpdateHandler implements CommandHandler {
 		req.setAttribute("ware", ware);
 		
 		return "/WEB-INF/view/wareUpdate.jsp";
+	}
+	
+	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
+
+		Ware ware = new Ware();
+		
+		ware.setWareCd(req.getParameter("warecd"));
+		ware.setWareNm(req.getParameter("warenm"));
+		ware.setWareGubun(req.getParameter("waregb"));
+		ware.setUseYn(req.getParameter("useyn"));
+		
+		Map<String, Boolean> errors = new HashMap<>();
+		req.setAttribute("errors", errors);
+		
+		// ware.validate(errors);
+		
+//		if (!errors.isEmpty()) {
+//			Ware ware1 = wareListService.getWareCd();
+//			req.setAttribute("wareCd", ware1);
+//			
+//			return FORM_VIEW;
+//		}
+		try {
+			wareListService.update(ware);
+			res.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = res.getWriter();
+			out.println("<script>");
+			out.println("alert('수정이 완료되었습니다.');");
+			out.println("location.href='list.do';");
+			out.println("</script>");
+			out.close();
+			return null;
+		} catch (DuplicateFormatFlagsException e) {
+			errors.put("duplicateId", Boolean.TRUE);
+			return FORM_VIEW;
+		}
 	}
 }
