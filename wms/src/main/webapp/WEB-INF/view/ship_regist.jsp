@@ -6,7 +6,7 @@
 <body>
     <h2>출고 등록</h2>
 
-    <form action="regist.do" method="post">
+    <form action="insert.do" method="post">
         <table border="1" cellpadding="5" cellspacing="0">
             <tr>
                 <th>출고번호</th>
