@@ -18,9 +18,10 @@ public class ItemDao {
 					"insert into wms_item (item_cd, item_nm, spec, item_gubun, unit, use_yn, manufacturer, store_price, shipment_price) values(?,?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, item.getItemCd());
 			pstmt.setString(2, item.getItemNm());
-			pstmt.setString(4, item.getSpec());
-			pstmt.setString(5, item.getItemGubun());
-			pstmt.setString(6, item.getUnit());
+			pstmt.setString(3, item.getSpec());
+			pstmt.setString(4, item.getItemGubun());
+			pstmt.setString(5, item.getUnit());
+			pstmt.setString(6, item.getUseYn());			
 			pstmt.setString(7, item.getManufacturer());
 			pstmt.setInt(8, item.getStorePrice());
 			pstmt.setInt(9, item.getShipmentPrice());
@@ -42,6 +43,33 @@ public class ItemDao {
 			}
 			return itemList;
 
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public Item selectItemCd(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select 'W' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(item_cd, 2))), 0) + 1), 3, '0') AS next_item_cd from wms_item");
+			rs = pstmt.executeQuery();
+			Item item = null;
+			
+			if (rs.next()) {
+				item = new Item(
+						rs.getString("next_item_cd")
+					  , null
+					  , null
+					  , null
+					  , null
+					  , null
+					  , null
+					  , 0
+					  , 0);
+			}
+			return item;
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);

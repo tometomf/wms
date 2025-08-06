@@ -50,5 +50,24 @@ public class StockDao {
 		return date == null ? null : new Date(date.getTime());
 	}
 	
+	// ... (기존 import와 클래스 선언 생략)
+
+    // 재고 등록(INSERT) 기능 / 在庫登録（INSERT）機能
+    public int insert(Connection conn, Stock stock) throws SQLException {
+        String sql = "INSERT INTO wms_stock (item_cd, qty, ware_cd, reg_ymd) VALUES (?, ?, ?, ?)";
+
+        // DB에 INSERT 쿼리 준비 / DBにINSERTクエリを準備
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // ?에 값 채워 넣기 / プレースホルダに値をセット
+            pstmt.setString(1, stock.getItem_Cd());  // 품목코드 / 品目コード
+            pstmt.setInt(2, stock.getQty());         // 수량 / 数量
+            pstmt.setString(3, stock.getWare_Cd());  // 창고코드 / 倉庫コード
+            pstmt.setDate(4, new java.sql.Date(stock.getReg_Ymd().getTime())); // 등록일 / 登録日
+
+            // 실행 후, 영향받은 행 수(보통 1) 반환 / 実行して影響を受けた行数を返す
+            return pstmt.executeUpdate();
+        }
+    }
+
 	
 }

@@ -13,11 +13,11 @@ import mvc.command.CommandHandler;
 import ware.model.Ware;
 import ware.service.WareListService;
 
-public class WareRegistHandler implements CommandHandler {
-	
-	private static final String FORM_VIEW = "/WEB-INF/view/wareRegist.jsp";
-	private WareListService wareListService = new WareListService();
+public class WareUpdateHandler implements CommandHandler {
 
+	private static final String FORM_VIEW = "/WEB-INF/view/wareUpdate.jsp";
+	private WareListService wareListService = new WareListService();
+	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
@@ -29,12 +29,14 @@ public class WareRegistHandler implements CommandHandler {
 			return null;
 		}
 	}
-	
+
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		Ware ware = wareListService.getWareCd();
-		req.setAttribute("wareCd", ware);
+		String wareCd = req.getParameter("wareCd");  // 여기서 파라미터 읽음
 		
-		return "/WEB-INF/view/wareRegist.jsp";
+		Ware ware = wareListService.selectByWareCd(wareCd);
+		req.setAttribute("ware", ware);
+		
+		return "/WEB-INF/view/wareUpdate.jsp";
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -58,11 +60,11 @@ public class WareRegistHandler implements CommandHandler {
 //			return FORM_VIEW;
 //		}
 		try {
-			wareListService.insert(ware);
+			wareListService.update(ware);
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('등록이 완료되었습니다.');");
+			out.println("alert('수정이 완료되었습니다.');");
 			out.println("location.href='list.do';");
 			out.println("</script>");
 			out.close();
@@ -72,5 +74,4 @@ public class WareRegistHandler implements CommandHandler {
 			return FORM_VIEW;
 		}
 	}
-
 }

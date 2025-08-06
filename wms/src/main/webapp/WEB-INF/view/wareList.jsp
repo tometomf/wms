@@ -36,7 +36,7 @@
 					if (wareList != null && !wareList.isEmpty()) {
 						for (Ware ware : wareList) {
 					%>
-					<tr>
+					<tr ondblclick="rowClicked(this)">
 						<td><%=ware.getWareCd()%></td>
 						<td><%=ware.getWareNm()%></td>
 						<td><%=ware.getWareGubun()%></td>
@@ -59,3 +59,12 @@
 	</div>
 </body>
 </html>
+
+<script>
+	// OnRowDblClick Event
+  	function rowClicked(row) {
+		var cellValue = row.cells[0].innerText; // 첫 번째 셀 값
+		location.href = "update.do?wareCd=" + cellValue;
+    	// alert("더블클릭한 행의 첫 번째 셀: " + cellValue);
+  	}
+</script>
