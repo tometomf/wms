@@ -1,4 +1,4 @@
-package item.command;
+package user.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,14 +9,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import item.model.Item;
-import item.service.ItemListService;
 import mvc.command.CommandHandler;
+import user.model.User;
+import user.service.UserListService;
 
-public class ItemInsertHandler implements CommandHandler {
+public class UserInsertHandler implements CommandHandler {
 
-	private static final String FORM_VIEW = "/WEB-INF/view/itemInsert.jsp";
-	private ItemListService itemListService = new ItemListService();
+	private static final String FORM_VIEW = "/WEB-INF/view/userInsert.jsp";
+	private UserListService userListService = new UserListService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -31,32 +31,27 @@ public class ItemInsertHandler implements CommandHandler {
 	}
 	
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		Item item = itemListService.getItemCd();
-		req.setAttribute("itemCd", item);
+		User user = userListService.getUserCd();
+		req.setAttribute("userCd", user);
 		
 		return FORM_VIEW;
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
-		Item item = new Item();
+		User user = new User();
 		
-		item.setItemCd(req.getParameter("itemCd"));
-		item.setItemNm(req.getParameter("itemNm"));
-		item.setSpec(req.getParameter("spec"));
-		item.setItemGubun(req.getParameter("itemGubun"));
-		item.setUnit(req.getParameter("unit"));
-		item.setUseYn(req.getParameter("useYn"));
-		item.setManufacturer(req.getParameter("manufacturer"));
-		item.setStorePrice(Integer.parseInt(req.getParameter("storePrice")));
-		item.setShipmentPrice(Integer.parseInt(req.getParameter("shipmentPrice")));
-
+		user.setUserCd(req.getParameter("userCd"));
+		user.setUserNm(req.getParameter("userNm"));
+		user.setDeptNm(req.getParameter("deptNm"));
+		user.setPhone(req.getParameter("phone"));
+		user.setEmail(req.getParameter("email"));
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 
 		try {
-			itemListService.insert(item);
+			userListService.insert(user);
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
