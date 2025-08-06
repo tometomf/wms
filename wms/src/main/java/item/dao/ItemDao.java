@@ -53,7 +53,7 @@ public class ItemDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select 'W' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(item_cd, 2))), 0) + 1), 3, '0') AS next_item_cd from wms_item");
+			pstmt = conn.prepareStatement("select 'i' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(item_cd, 2))), 0) + 1), 3, '0') AS next_item_cd from wms_item");
 			rs = pstmt.executeQuery();
 			Item item = null;
 			
