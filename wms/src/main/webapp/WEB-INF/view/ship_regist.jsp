@@ -29,6 +29,13 @@
 				<th>비고</th>
 				<td><textarea name="descr" rows="4" cols="40"></textarea></td>
 			</tr>
+			<tr>
+				<th>사용여부</th>
+				<td><select name="shipYn">
+						<option value="Y">利用あり</option>
+						<option value="N">利用なし</option>
+				</select></td>
+			</tr>
 		</table>
 
 		<br /> <input type="submit" value="登録" />

@@ -56,6 +56,7 @@ public class ShipRegiHandler implements CommandHandler {
         ship.setShipUser(req.getParameter("shipUser"));
         ship.setDescr(req.getParameter("descr"));
         ship.setItemCd(req.getParameter("itemCd"));
+        ship.setShipYn(req.getParameter("shipYn"));
 
         // 숫자 파싱은 try-catch로 안전하게
         try {
