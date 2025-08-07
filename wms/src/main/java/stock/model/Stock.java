@@ -10,6 +10,11 @@ public class Stock {
 	private String ware_Cd;			// 창고코드 / 倉庫コード
 	private Date reg_Ymd;			// 등록일 / 登録日
 	
+	public Stock() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	// 생성자 / コンストラクタ
 	public Stock(int stock_No, String item_Cd, int qty, String ware_Cd, Date reg_Ymd) {
 		super();

@@ -14,8 +14,12 @@
 
 	<div id="main-content">
 		<h2>재고 등록</h2>
-		<form action="${pageContext.request.contextPath}/stock/write.do" method="post">
+		<form action="insert.do" method="post">
 			<table>
+				<tr>
+					<td>재고번호</td>
+					<td><input readonly type="text" name="stockNo"  required value = " ${stockNo.stock_No}"></td>
+				</tr>
 				<tr>
 					<td>품목코드</td>
 					<td><input type="text" name="itemCd" required></td>
@@ -40,3 +44,5 @@
 
 </body>
 </html>
+
+

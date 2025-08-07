@@ -39,7 +39,7 @@
 					if (stockList != null && !stockList.isEmpty()) {
 						for (Stock stock : stockList) {
 					%>
-					<tr>
+				<tr ondblclick="rowClicked(this)">
 						<td><%=stock.getStock_No()%></td>
 						<td><%=stock.getItem_Cd()%></td>
 						<td><%=stock.getQty()%></td>
@@ -58,3 +58,12 @@
 	</div>
 </body>
 </html>
+
+<script>
+	// OnRowDblClick Event
+  	function rowClicked(row) {
+		var cellValue = row.cells[0].innerText; // 첫 번째 셀 값
+		location.href = "update.do?stockNo=" + cellValue;
+    	// alert("더블클릭한 행의 첫 번째 셀: " + cellValue);
+  	}
+</script>
