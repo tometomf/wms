@@ -50,6 +50,34 @@ public class ShipDAO {
 		dto.setShipGubun(rs.getString("ship_gubun"));
 		return dto;
 	}
+	
+	public ShipViewModel selectShipNo(Connection conn) throws SQLException {
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+
+	    try {
+	        pstmt = conn.prepareStatement(
+	            "SELECT MAX(ship_no) + 1 AS next_ship_no FROM wms_ship_master"
+	        );
+	        rs = pstmt.executeQuery();
+
+	        ShipViewModel ship = null;
+
+	        if (rs.next()) {
+	            ship = new ShipViewModel(
+	                rs.getInt("next_ship_no"), // ship_no만 설정
+	                null, null, null, null, null, null, null,  // 마스터 나머지
+	                null, 0, 0, null                            // 상세 나머지
+	            );
+	        }
+
+	        return ship;
+
+	    } finally {
+	        JdbcUtil.close(rs);
+	        JdbcUtil.close(pstmt);
+	    }
+	}
 
 	public int insert(Connection conn, ShipViewModel ship) throws SQLException {
 		PreparedStatement pstmt = null;

@@ -28,6 +28,8 @@ public class ShipRegiHandler implements CommandHandler {
     }
 
     private String processForm(HttpServletRequest req, HttpServletResponse res) {
+        ShipViewModel ship = shipRegiService.getShipNo(); // 출고번호 포함 객체
+        req.setAttribute("shipNo", ship);                 // JSP로 넘김
         return FORM_VIEW;
     }
 

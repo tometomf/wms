@@ -36,4 +36,17 @@ public class ShipRegiService {
             JdbcUtil.close(conn);
         }
     }
+    
+    
+    public ShipViewModel getShipNo() {
+        Connection conn = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+            return shipDao.selectShipNo(conn);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtil.close(conn);
+        }
+    }
 }
