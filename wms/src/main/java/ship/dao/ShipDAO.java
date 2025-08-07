@@ -98,16 +98,14 @@ public class ShipDAO {
 			JdbcUtil.close(pstmt);
 
 			// 2. 마스터 테이블 등록
-			String masterSql = "INSERT INTO wms_ship_master "
-					+ "(ship_no, ship_nm, ship_dept, ship_user, descr, reg_ymd, upd_ymd, ship_yn) "
-					+ "VALUES (?, ?, ?, ?, ?, SYSDATE, SYSDATE, ?)";
+			String masterSql = "INSERT INTO wms_ship_master VALUES (?, ?, ?, ?, ?, SYSDATE, SYSDATE, ?)";
 			pstmt = conn.prepareStatement(masterSql);
-			pstmt.setInt(1, newShipNo);
-			pstmt.setString(2, ship.getShipNm());
-			pstmt.setString(3, ship.getShipDept());
-			pstmt.setString(4, ship.getShipUser());
-			pstmt.setString(5, ship.getDescr());
-			pstmt.setString(6, ship.getShipYn());
+			pstmt.setInt(1, newShipNo);                         // ship_no
+			pstmt.setString(2, ship.getShipNm());              // ship_nm
+			pstmt.setString(3, ship.getShipDept());            // ship_dept
+			pstmt.setString(4, ship.getShipUser());            // ship_user
+			pstmt.setString(5, ship.getDescr());               // descr
+			pstmt.setString(6, ship.getShipYn());              // ship_yn
 			int masterResult = pstmt.executeUpdate();
 			JdbcUtil.close(pstmt);
 
