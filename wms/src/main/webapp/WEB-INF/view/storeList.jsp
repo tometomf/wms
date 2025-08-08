@@ -31,7 +31,7 @@
 	</thead>		
 	<tbody>
 		<%
-			List<Store> storeList = (List<Store>) request.getAttribute("storeList");
+			List<Store> storeList = (List<Store>) request.getAttribute("StoreList");
 			//storeListインスタンスを作って、StoreHandlerの中にあるstoreListから結果を持ってくる
 			if (storeList != null && !storeList.isEmpty()) {
 			//storeListがnullか相手なければ
