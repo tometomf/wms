@@ -16,6 +16,8 @@ import store.model.storeStockDTO;
 
 public class StoreDao {
 
+	
+	//テーブルの全体データの数を数えるメソッド
 	public int selectCount(Connection conn, Store store) throws SQLException {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -55,6 +57,7 @@ public class StoreDao {
 		}
 	}
 
+	//リストサービスに使うセレクトバイストアーナンバーメソッド
 	public static Store selectByStoreNo(Connection conn, String storeNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -145,12 +148,12 @@ public class StoreDao {
 		// store_nmからそのデータを削除する。
 	}
 
-		//教科書を参考にしたコード。selectByStoreNoと同じ機能であるため周釈処理。
-	  private static Store convertStore(ResultSet rs) throws SQLException { return
-	  new Store(rs.getString("STORE_NO"), rs.getString("STORE_NM"),
-	  rs.getString("STORE_DEPT"), rs.getString("STORE_USER"),
-	  rs.getString("DESCR"), toDate(rs.getTimestamp("REG_YMD"))); }
-	 
+		//教科書を参考にしたコード。selectByStoreNoを使うために作ったが、selectAllから必要とされているため残す。
+	private static Store convertStore(ResultSet rs) throws SQLException { return
+			  new Store(rs.getString("STORE_NO"), rs.getString("STORE_NM"),
+			  rs.getString("STORE_DEPT"), rs.getString("STORE_USER"),
+			  rs.getString("DESCR"), toDate(rs.getTimestamp("REG_YMD"))); }
+			 
 
 	private static Date toDate(Timestamp date) {
 		return date == null ? null : new Date(date.getTime());

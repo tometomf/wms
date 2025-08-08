@@ -44,6 +44,7 @@ public class StoreInsertHandler implements CommandHandler {
 		return "/WEB-INF/view/storeInsert.jsp";
 	}
 	
+	//WebリクエストからのデータをStoreに変換してセーブする。
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
 		Store store = new Store(null, null, null, null, null, null);
@@ -64,10 +65,10 @@ public class StoreInsertHandler implements CommandHandler {
 				e.printStackTrace();
 			}
 		}
-			
+		
+		//データが登録されたかどうかを確認するメソッド
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
-		
 		try {
 			storeListService.insert(store);
 			res.setContentType("text/html; charset=UTF-8");
@@ -83,8 +84,8 @@ public class StoreInsertHandler implements CommandHandler {
 			return FORM_VIEW;
 		}
 	}
-	
-	
+}	
+
 		
 		
 		
@@ -111,4 +112,3 @@ public class StoreInsertHandler implements CommandHandler {
 		return"/WEB-INF/view/newStoreSuccess.jsp";
 	}*/
 	
-}

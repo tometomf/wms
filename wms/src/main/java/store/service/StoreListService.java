@@ -13,6 +13,8 @@ import store.model.storeStockDTO;
 public class StoreListService {
 	private StoreDao storeDao = new StoreDao();
 
+	
+	//StoreモデルのデータをListとして持ってくる
 	public List<Store> getStoreList() {
 		Connection conn = null;
 		try {
@@ -25,6 +27,7 @@ public class StoreListService {
 		}
 	}
 
+	//ストアーナンバーからストアーの全ての在庫情報を検索し、その結果をリストの形で返還する。
 	public List<storeStockDTO> getselectByStoreNo(String storeNo) {
 		Connection conn = null;
 		try {
@@ -37,7 +40,7 @@ public class StoreListService {
 		}
 	}
 
-	// 입고코드 조회
+	//入庫コード照会
 	public Store getStore_no(String storeNo) {
 		Connection conn = null;
 		try {
@@ -51,7 +54,7 @@ public class StoreListService {
 		}
 	}
 
-	// 입고 마스터 조회
+	//入庫マスター照会 
 	public Store findStoreByNo(String storeNo) {
 		Connection conn = null;
 		try {
@@ -64,7 +67,7 @@ public class StoreListService {
 		}
 	}
 
-	// 입고 신규 등록
+	// 新規入庫登録
 	public void insert(Store store) {
 		Connection conn = null;
 		try {
@@ -81,7 +84,7 @@ public class StoreListService {
 		}
 	}
 
-	// 입고내역 수정
+	// 入庫の内訳修正
 	public void update(Store store) {
 		Connection conn = null;
 		try {
@@ -98,7 +101,7 @@ public class StoreListService {
 		}
 	}
 
-	// 입고 마스터 삭제
+	// 入庫マスター削除
 	public void delete(String storeNo) {
 		Connection conn = null;
 		try {
