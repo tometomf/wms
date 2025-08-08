@@ -1,5 +1,7 @@
 package ship.command;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +18,7 @@ public class ShipRegiHandler implements CommandHandler {
     private ShipRegiService shipRegiService = new ShipRegiService();
 
     @Override
-    public String process(HttpServletRequest req, HttpServletResponse res) {
+    public String process(HttpServletRequest req, HttpServletResponse res) throws IOException {
         if (req.getMethod().equalsIgnoreCase("GET")) {
             return processForm(req, res);
         } else if (req.getMethod().equalsIgnoreCase("POST")) {
@@ -27,27 +29,42 @@ public class ShipRegiHandler implements CommandHandler {
         }
     }
 
+    // GET: 등록 화면 요청
     private String processForm(HttpServletRequest req, HttpServletResponse res) {
-        ShipViewModel ship = shipRegiService.getShipNo(); // 출고번호 포함 객체
-        req.setAttribute("shipNo", ship);                 // JSP로 넘김
+        ShipViewModel ship = shipRegiService.getShipNo(); // 다음 출고번호 받아오기
+        req.setAttribute("shipNo", ship); // JSP에 넘겨서 <input> value로 사용
         return FORM_VIEW;
     }
 
-    private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
+    // POST: 등록 처리
+    private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
         Map<String, Boolean> errors = new HashMap<>();
         req.setAttribute("errors", errors);
 
-        // 사용자가 입력한 값들 받아서 ShipViewModel에 담기
+        // 사용자 입력값을 모델로 변환
         ShipViewModel ship = createShipFromRequest(req);
 
+        try {
+            // 등록 서비스 실행
+            shipRegiService.register(ship);
 
-        // 등록 처리
-        int newShipNo = shipRegiService.register(ship);
-        req.setAttribute("newShipNo", newShipNo);
+            // 등록 성공 후 alert 띄우고 list.do로 이동
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>");
+            out.println("alert('등록이 완료되었습니다.');");
+            out.println("location.href='list.do';");
+            out.println("</script>");
+            out.close();
+            return null;
 
-        return "/WEB-INF/view/ship_regist_success.jsp";
+        } catch (Exception e) {
+            errors.put("registerFailed", Boolean.TRUE);
+            return FORM_VIEW;
+        }
     }
 
+    // 사용자 입력 → DTO 변환
     private ShipViewModel createShipFromRequest(HttpServletRequest req) {
         ShipViewModel ship = new ShipViewModel();
 
@@ -58,7 +75,6 @@ public class ShipRegiHandler implements CommandHandler {
         ship.setItemCd(req.getParameter("itemCd"));
         ship.setShipYn(req.getParameter("shipYn"));
 
-        // 숫자 파싱은 try-catch로 안전하게
         try {
             ship.setShipPrice(Integer.parseInt(req.getParameter("shipPrice")));
         } catch (NumberFormatException e) {
@@ -71,9 +87,6 @@ public class ShipRegiHandler implements CommandHandler {
             ship.setShipQty(0);
         }
 
-        ship.setShipGubun(req.getParameter("shipGubun"));
-
-        // 나머지 값들 (SHIP_NO, REG_YMD 등)은 DB에서 자동 처리
         return ship;
     }
 }

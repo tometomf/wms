@@ -19,16 +19,15 @@
     <tr>
       <th>出庫番号</th>
       <th>出庫名</th>
+      <th>品目コード</th>
+      <th>出庫単価</th>
+      <th>出庫数量</th>
       <th>出庫部署</th>
       <th>担当者</th>
       <th>備考</th>
       <th>登録日</th>
       <th>修正日</th>
       <th>出庫可否</th>
-      <th>品目コード</th>
-      <th>出庫単価</th>
-      <th>出庫数量</th>
-      <th>出庫区分</th>
     </tr>
   </thead>
   <tbody>
@@ -36,16 +35,15 @@
       <tr>
         <td>${row.shipNo}</td>
         <td>${row.shipNm}</td>
+        <td>${row.itemCd}</td>
+        <td>${row.shipPrice}</td>
+        <td>${row.shipQty}</td>
         <td>${row.shipDept}</td>
         <td>${row.shipUser}</td>
         <td>${row.descr}</td>
         <td>${row.regYmd}</td>
         <td>${row.updYmd}</td>
         <td>${row.shipYn}</td>
-        <td>${row.itemCd}</td>
-        <td>${row.shipPrice}</td>
-        <td>${row.shipQty}</td>
-        <td>${row.shipGubun}</td>
       </tr>
     </c:forEach>
   </tbody>

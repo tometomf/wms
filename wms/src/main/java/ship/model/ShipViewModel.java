@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ShipViewModel {
 
-    // master 情報
+    // 출고 정보
     private int shipNo;
     private String shipNm;
     private String shipDept;
@@ -14,20 +14,17 @@ public class ShipViewModel {
     private Date updYmd;
     private String shipYn;
 
-    // details 情報
+    // 품목 정보
     private String itemCd;
     private int shipPrice;
     private int shipQty;
-    private String shipGubun;
 
-    // デフォルトコンストラクタ
     public ShipViewModel() {
     }
 
-    // すべてのフィールドを初期化するコンストラクタ
     public ShipViewModel(int shipNo, String shipNm, String shipDept, String shipUser, String descr,
                          Date regYmd, Date updYmd, String shipYn,
-                         String itemCd, int shipPrice, int shipQty, String shipGubun) {
+                         String itemCd, int shipPrice, int shipQty) {
         this.shipNo = shipNo;
         this.shipNm = shipNm;
         this.shipDept = shipDept;
@@ -39,7 +36,6 @@ public class ShipViewModel {
         this.itemCd = itemCd;
         this.shipPrice = shipPrice;
         this.shipQty = shipQty;
-        this.shipGubun = shipGubun;
     }
 
     public int getShipNo() {
@@ -128,13 +124,5 @@ public class ShipViewModel {
 
     public void setShipQty(int shipQty) {
         this.shipQty = shipQty;
-    }
-
-    public String getShipGubun() {
-        return shipGubun;
-    }
-
-    public void setShipGubun(String shipGubun) {
-        this.shipGubun = shipGubun;
     }
 }
