@@ -30,6 +30,7 @@ public class WareInsertHandler implements CommandHandler {
 		}
 	}
 	
+	// 등록 전 창고 pk 조회
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 		Ware ware = wareListService.getWareCd();
 		req.setAttribute("wareCd", ware);
@@ -37,6 +38,7 @@ public class WareInsertHandler implements CommandHandler {
 		return "/WEB-INF/view/wareInsert.jsp";
 	}
 	
+	// 등록 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 		Ware ware = new Ware();
@@ -45,6 +47,7 @@ public class WareInsertHandler implements CommandHandler {
 		ware.setWareNm(req.getParameter("warenm"));
 		ware.setWareGubun(req.getParameter("waregb"));
 		ware.setUseYn(req.getParameter("useyn"));
+		ware.setDescr(req.getParameter("descr"));
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);

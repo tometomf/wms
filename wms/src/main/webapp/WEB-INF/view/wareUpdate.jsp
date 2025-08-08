@@ -31,9 +31,13 @@
 					<div id = "regist-text">사용여부</div>
 					<div id = "regist-value">
 						<select	name = "useyn">
-							<option value="Y" ${ware.useYn == 'Y' ? 'selected' : ''}>예</option>
-    						<option value="N" ${ware.useYn == 'N' ? 'selected' : ''}>아니요</option>
+							<option value="Y" ${ware.useYn == 'Y' ? 'selected' : ''}>利用あり</option>
+    						<option value="N" ${ware.useYn == 'N' ? 'selected' : ''}>利用なし</option>
 						</select>
+					</div>
+					<div id = "regist-text">비고</div>
+					<div id = "regist-value">
+						<textarea name="descr" rows="4" cols="56">${ware.descr}</textarea>
 					</div>
 				</div>
 				<div id = "regist-button">

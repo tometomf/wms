@@ -5,6 +5,7 @@ public class Ware {
 	private String wareNm;
 	private String wareGubun;
 	private String useYn;
+	private String descr;
 	/**
 	 * 
 	 */
@@ -18,12 +19,13 @@ public class Ware {
 	 * @param wareGubun
 	 * @param useYn
 	 */
-	public Ware(String wareCd, String wareNm, String wareGubun, String useYn) {
+	public Ware(String wareCd, String wareNm, String wareGubun, String useYn, String descr) {
 		super();
 		this.wareCd = wareCd;
 		this.wareNm = wareNm;
 		this.wareGubun = wareGubun;
 		this.useYn = useYn;
+		this.descr = descr;
 	}
 	public String getWareCd() {
 		return wareCd;
@@ -48,6 +50,12 @@ public class Ware {
 	}
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
+	}
+	public String getDescr() {
+		return descr;
+	}
+	public void setDescr(String descr) {
+		this.descr = descr;
 	}
 
 }

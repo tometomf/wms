@@ -28,6 +28,7 @@
 						<th>창고명</th>
 						<th>창고구분</th>
 						<th>사용여부</th>
+						<th>비고</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -36,20 +37,17 @@
 					if (wareList != null && !wareList.isEmpty()) {
 						for (Ware ware : wareList) {
 					%>
-					<tr ondblclick="rowClicked(this)">
-						<td><%=ware.getWareCd()%></td>
-						<td><%=ware.getWareNm()%></td>
-						<td><%=ware.getWareGubun()%></td>
-						<td><%=ware.getUseYn()%></td>
-
-					</tr>
-					<%
-					}
-					} else {
-					%>
-					<tr>
-						<td colspan="7">조회된 데이터가 없습니다.</td>
-					</tr>
+							<tr ondblclick="rowClicked(this)">
+								<td><%=ware.getWareCd()%></td>
+								<td><%=ware.getWareNm()%></td>
+								<td><%=ware.getWareGubun()%></td>
+								<td><%=ware.getUseYn()%></td>
+								<td><%=ware.getDescr()%></td>
+		
+							</tr>
+						<%
+						}
+						%>	
 					<%
 					}
 					%>

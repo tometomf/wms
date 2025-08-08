@@ -47,6 +47,7 @@ public class WareUpdateHandler implements CommandHandler {
 		ware.setWareNm(req.getParameter("warenm"));
 		ware.setWareGubun(req.getParameter("waregb"));
 		ware.setUseYn(req.getParameter("useyn"));
+		ware.setDescr(req.getParameter("descr"));
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);

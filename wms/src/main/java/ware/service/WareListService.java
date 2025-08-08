@@ -77,7 +77,8 @@ public class WareListService {
 								ware.getWareCd()
 							  ,	ware.getWareNm()
 							  ,	ware.getWareGubun()
-							  ,	ware.getUseYn())
+							  ,	ware.getUseYn()
+							  ,	ware.getDescr())
 			);
 			conn.commit();
 		} catch (SQLException e) {
@@ -99,7 +100,8 @@ public class WareListService {
 								ware.getWareCd()
 							  ,	ware.getWareNm()
 							  ,	ware.getWareGubun()
-							  ,	ware.getUseYn())
+							  ,	ware.getUseYn()
+							  ,	ware.getDescr())
 			);
 			conn.commit();
 		} catch (SQLException e) {

@@ -32,7 +32,7 @@ public class wareDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select*from wms_ware");
+			pstmt = conn.prepareStatement("select ware_cd, ware_nm, ware_gubun, descr, case when use_yn = 'Y' then '利用あり' else '利用なし' end as use_yn from wms_ware");
 			rs = pstmt.executeQuery();
 			List<Ware> wareList = new ArrayList<>();
 			while (rs.next()) {
@@ -76,13 +76,14 @@ public class wareDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select 'W' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ware_cd, 2))), 0) + 1), 3, '0') AS next_ware_cd from wms_ware");
+			pstmt = conn.prepareStatement("select NVL('W' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ware_cd, 2))), 0) + 1), 3, '0'), 'W001') AS next_ware_cd from wms_ware");
 			rs = pstmt.executeQuery();
 			Ware ware = null;
 			
 			if (rs.next()) {
 				ware = new Ware(
 						rs.getString("next_ware_cd")
+					  , null
 					  , null
 					  , null
 					  , null);
@@ -98,7 +99,7 @@ public class wareDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("SELECT WARE_CD, WARE_NM, ware_gubun, USE_YN FROM WMS_WARE WHERE WARE_CD = ?");
+			pstmt = conn.prepareStatement("SELECT WARE_CD, WARE_NM, ware_gubun, USE_YN, DESCR FROM WMS_WARE WHERE WARE_CD = ?");
 			pstmt.setString(1, wareCd);
 			rs = pstmt.executeQuery();
 			Ware ware = null;
@@ -108,7 +109,8 @@ public class wareDao {
 						rs.getString("ware_cd")
 					  , rs.getString("ware_nm")
 					  , rs.getString("ware_gubun")
-					  , rs.getString("use_yn"));
+					  , rs.getString("use_yn")
+					  , rs.getString("descr"));
 			}
 			return ware;
 		} finally {
@@ -119,11 +121,12 @@ public class wareDao {
 	
 	// 창고 신규 등록
 	public void insert(Connection conn, Ware ware) throws SQLException {
-		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_ware values(?, ?, ?, ?)")) {
+		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_ware values(?, ?, ?, ?, ?)")) {
 			pstmt.setString(1, ware.getWareCd());
 			pstmt.setString(2, ware.getWareNm());
 			pstmt.setString(3, ware.getWareGubun());
-			pstmt.setString(4, ware.getUseYn());
+			pstmt.setString(4, ware.getDescr());
+			pstmt.setString(5, ware.getUseYn());
 			pstmt.executeUpdate();
 		}
 	}
@@ -131,11 +134,12 @@ public class wareDao {
 	public int update(Connection conn, Ware ware) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("update wms_ware set ware_nm=?, ware_gubun=?, use_yn=? where ware_cd = ?");
+			pstmt = conn.prepareStatement("update wms_ware set ware_nm=?, ware_gubun=?, use_yn=?, descr = ? where ware_cd = ?");
 			pstmt.setString(1, ware.getWareNm());
 			pstmt.setString(2, ware.getWareGubun());
 			pstmt.setString(3, ware.getUseYn());
-			pstmt.setString(4, ware.getWareCd());
+			pstmt.setString(4, ware.getDescr());
+			pstmt.setString(5, ware.getWareCd());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -143,8 +147,6 @@ public class wareDao {
 	}
 
 	public int delete(Connection conn, String wareCd) throws SQLException {
-		
-		System.out.println(wareCd);
 		
 		PreparedStatement pstmt = null;
 		try {
@@ -158,7 +160,7 @@ public class wareDao {
 
 	private Ware makeWareFromResultSet(ResultSet rs) throws SQLException {
 		return new Ware(rs.getString("ware_cd"), rs.getString("ware_nm"), rs.getString("ware_gubun"),
-				rs.getString("use_yn"));
+				rs.getString("use_yn"), rs.getString("descr"));
 	}
 
 	private WareStockDTO makeWareStockFromResultSet(ResultSet rs) throws SQLException {
