@@ -11,22 +11,28 @@ import java.util.List;
 
 import jdbc.JdbcUtil;
 import stock.model.Stock;
-import ware.model.Ware;
+import stock.model.StockPlus;
 
 //DB에서 재고 데이터를 가져오는 클래스 / データベースから在庫データを取得するクラス
 public class StockDao {
 
 	// 전체 재고 목록을 조회하는 메서드 / 全在庫リストを取得するメソッド
-	public List<Stock> selectAll(Connection conn) throws SQLException {
+	public List<StockPlus> selectAll(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"SELECT stock_no, item_cd, qty, ware_cd, reg_ymd from wms_stock");
+					"select a.item_cd, a.item_nm, a.spec, a.item_gubun, a.manufacturer, a.qty, a.ware_cd, b.ware_nm, a.reg_ymd\r\n"
+					+ "from (\r\n"
+					+ "    select a.item_cd, b.item_nm, b.spec, b.item_gubun, b.manufacturer, qty, ware_cd, reg_ymd\r\n"
+					+ "    from wms_stock a, wms_item b\r\n"
+					+ "    where a.item_cd = b.item_cd\r\n"
+					+ ") a, wms_ware b\r\n"
+					+ "where a.ware_cd = b.ware_cd");
 			rs = pstmt.executeQuery();
-			List<Stock> result = new ArrayList<>();
+			List<StockPlus> result = new ArrayList<>();
 			while (rs.next()) {
-				result.add(convertStock(rs)); // 결과를 Stock 객체로 변환하여 리스트에 추가 / 結果をStockオブジェクトに変換してリストに追加
+				result.add(convertStockPlus(rs)); // 결과를 Stock 객체로 변환하여 리스트에 추가 / 結果をStockオブジェクトに変換してリストに追加
 			}
 			return result;
 
@@ -115,7 +121,20 @@ public class StockDao {
 	private Date toDate(Timestamp date) {
 		return date == null ? null : new Date(date.getTime());
 	}
+	
+	private StockPlus convertStockPlus(ResultSet rs) throws SQLException {
+	    return new StockPlus(
+	        rs.getString("item_cd"),
+	        rs.getString("item_nm"),
+	        rs.getString("spec"),
+	        rs.getString("item_gubun"),
+	        rs.getString("manufacturer"),
+	        rs.getInt("qty"),
+	        rs.getString("ware_cd"),
+	        rs.getString("ware_nm"),
+	        rs.getDate("reg_ymd")
+	    );
     }
-
+}
 	
 

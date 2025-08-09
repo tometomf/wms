@@ -2,6 +2,7 @@ package stock.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,26 +41,31 @@ public class StockInsertHandler implements CommandHandler {
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 		Stock stock = new Stock();
+		Map<String, Boolean> errors = new HashMap<>();
+		req.setAttribute("errors", errors);
 		
+		try {
+			
 		stock.setStock_No(Integer.parseInt(req.getParameter("stockNo").trim()));
 		stock.setItem_Cd(req.getParameter("itemCd"));
 		stock.setQty(Integer.parseInt(req.getParameter("qty")));
 		stock.setWare_Cd(req.getParameter("wareCd"));
-		//Date타입 형변환 + 에러처리
+	
+		//Date타입 형변환 
 		try {
-		    stock.setReg_Ymd(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("regYmd")));
-		} catch (java.text.ParseException e) {
-		    // 에러 처리 (예: 에러 메시지 출력, 폼으로 다시 이동 등)
-		    e.printStackTrace();
-		    // 또는 사용자에게 에러 메시지 전달하는 코드 작성
+		    stock.setReg_Ymd(
+		        new java.text.SimpleDateFormat("yyyy-MM-dd")
+		            .parse(req.getParameter("regYmd"))
+		    );
+		   //에러처리
+		} catch (ParseException e) {
+		    errors.put("invalidDate", Boolean.TRUE);
+		    return FORM_VIEW; // 잘못된 날짜면 등록 페이지로 다시 이동
 		}
 
-		
-		Map<String, Boolean> errors = new HashMap<>();
-		req.setAttribute("errors", errors);
-
-		try {
+		// 등록 완료 알림창
 			insertService.insert(stock);
+			
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
@@ -68,9 +74,10 @@ public class StockInsertHandler implements CommandHandler {
 			out.println("</script>");
 			out.close();
 			return null;
+			
 		} catch (Exception e) {
-			errors.put("duplicateId", Boolean.TRUE);
-			return FORM_VIEW;
+			errors.put("insertError", Boolean.TRUE);
+			return FORM_VIEW; // 등록 실패시 등록 페이지로 다시 이동
 		}
     }
 }

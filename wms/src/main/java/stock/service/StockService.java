@@ -8,6 +8,7 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import stock.dao.StockDao;
 import stock.model.Stock;
+import stock.model.StockPlus;
 
 //재고 서비스 클래스 / 在庫一覧のサービスクラス
 public class StockService {
@@ -15,7 +16,7 @@ public class StockService {
 	private StockDao stockDao = new StockDao(); // DAO와 연결 / DAOを呼び出す準備
 
 	// 재고 전체 조회
-	public List<Stock> getSelectAll() { // 전체 재고 리스트를 가져오는 메서드 / 全在庫リストを取得するメソッド
+	public List<StockPlus> getSelectAll() { // 전체 재고 리스트를 가져오는 메서드 / 全在庫リストを取得するメソッド
 		 Connection conn = null;
 
 		try {
