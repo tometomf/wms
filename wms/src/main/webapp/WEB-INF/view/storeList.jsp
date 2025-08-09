@@ -23,6 +23,8 @@
 			<tr>
 				<th>入庫番号</th>
 				<th>入庫名</th>
+				<th>品目コード</th>
+				<th>品目数</th>
 				<th>入庫担当部署</th>
 				<th>入庫担当者</th>
 				<th>備考</th>
@@ -31,7 +33,7 @@
 	</thead>		
 	<tbody>
 		<%
-			List<Store> storeList = (List<Store>) request.getAttribute("StoreList");
+			List<Store> storeList = (List<Store>) request.getAttribute("storeList");
 			//storeListインスタンスを作って、StoreHandlerの中にあるstoreListから結果を持ってくる
 			if (storeList != null && !storeList.isEmpty()) {
 			//storeListがnullか相手なければ
@@ -40,6 +42,8 @@
 			<tr>
 				<td><%= store.getStore_no()	%></td>
 				<td><%= store.getStore_nm()	%></td>
+				<td><%= store.getItem_cd()	%></td>
+				<td><%= store.getItem_qty()	%></td>
 				<td><%= store.getStore_dept()	%></td>
 				<td><%= store.getStore_user()	%></td>
 				<td><%= store.getDescr()	%></td>

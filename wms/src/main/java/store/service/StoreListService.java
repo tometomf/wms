@@ -8,7 +8,6 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import store.dao.StoreDao;
 import store.model.Store;
-import store.model.storeStockDTO;
 
 public class StoreListService {
 	private StoreDao storeDao = new StoreDao();
@@ -20,19 +19,6 @@ public class StoreListService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			return storeDao.selectAll(conn);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			JdbcUtil.close(conn);
-		}
-	}
-
-	//ストアーナンバーからストアーの全ての在庫情報を検索し、その結果をリストの形で返還する。
-	public List<storeStockDTO> getselectByStoreNo(String storeNo) {
-		Connection conn = null;
-		try {
-			conn = ConnectionProvider.getConnection();
-			return (List<storeStockDTO>) storeDao.selectByStoreNo(conn, storeNo);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -53,13 +39,12 @@ public class StoreListService {
 			JdbcUtil.close(conn);
 		}
 	}
-
-	//入庫マスター照会 
-	public Store findStoreByNo(String storeNo) {
+	
+	public int getNewStoreNo() {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-				return StoreDao.selectByStoreNo(conn, storeNo);
+			return storeDao.getNewStoreNo(conn);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {

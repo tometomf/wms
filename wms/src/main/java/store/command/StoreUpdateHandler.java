@@ -41,16 +41,25 @@ public class StoreUpdateHandler implements CommandHandler {
 		//２．そのリストをJSPで使用できるよう、Requestに入れる
 		req.setAttribute("storeList", storeList);
 		//３．入庫登録画面のJSPページへ移動する。
-		return "/WEB-INF/view/storeUpdate.jsp";
+		return "/WEB-INF/view/storeList.jsp";
 	}
 	
 	//WebリクエストからのデータをStoreに変換してセーブする。
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
-		Store store = new Store(null, null, null, null, null, null);
+		Store store = new Store(null, null, null, null, null, null, null, null);
 		
-		store.setStore_no(req.getParameter("store_no"));
+		try {
+			store.setStore_no(Integer.parseInt(req.getParameter("store_no")));
+		} catch (NumberFormatException e) {
+			Map<String, Boolean> errors = new HashMap<>();
+			errors.put("invalidNo", Boolean.TRUE);
+			req.setAttribute("errors", errors);
+			return FORM_VIEW;
+		}
 		store.setStore_nm(req.getParameter("store_nm"));
+		store.setItem_cd(req.getParameter("item_cd"));
+		store.setItem_qty(Integer.parseInt(req.getParameter("item_qty")));
 		store.setStore_dept(req.getParameter("store_dept"));
 		store.setStore_user(req.getParameter("store_user"));
 		store.setDescr(req.getParameter("descr"));
