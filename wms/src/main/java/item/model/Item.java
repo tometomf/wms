@@ -1,5 +1,7 @@
 package item.model;
 
+//품목 VO
+//品目　VO
 public class Item {
 	private String itemCd;
 	private String itemNm;

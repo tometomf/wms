@@ -13,52 +13,53 @@
 	<div id="main-content">
 		<div id="wms-title">品目登録</div>
 		<div id="search-bar" style="display: flex;"></div>
-		<form action="insert.do" method="post">
+		<form action="update.do" method="post">
 			<div id="regist">
 				<div id="regist-menu">
 					<div id="regist-text">품목코드</div>
 					<div id="regist-value">
-						<input readonly type="text" name="itemCd" value="${itemCd.itemCd}">
+						<input readonly type="text" name="itemCd" value="${item.itemCd}">
 					</div>
 					<div id="regist-text">품목명</div>
 					<div id="regist-value">
-						<input type="text" name="itemNm">
+						<input type="text" name="itemNm" value="${item.itemNm}">
 					</div>
 					<div id="regist-text">규격</div>
 					<div id="regist-value">
-						<input type="text" name="spec">
+						<input type="text" name="spec" value="${item.spec}">
 					</div>
-					<div id="regist-text">분류</div>
+					<div id="regist-text">품목구분</div>
 					<div id="regist-value">
-						<input type="text" name="itemGubun">
+						<input type="text" name="itemGubun" value="${item.itemGubun}">
 					</div>
 					<div id="regist-text">단위</div>
 					<div id="regist-value">
-						<input type="text" name="unit">
+						<input type="text" name="unit" value="${item.unit}">
 					</div>
 					<div id="regist-text">사용여부</div>
 					<div id="regist-value">
 						<select name="useYn">
-							<option value="Y">예</option>
-							<option value="N">아니요</option>
+							<option value="Y" ${item.useYn == 'Y' ? 'selected' : ''}>利用あり</option>
+							<option value="N" ${item.useYn == 'N' ? 'selected' : ''}>利用なし</option>
 						</select>
 					</div>
 					<div id="regist-text">제조사</div>
 					<div id="regist-value">
-						<input type="text" name="manufacturer">
+						<input type="text" name="manufacturer" value="${item.manufacturer}">
 					</div>
 					<div id="regist-text">수주기준단가</div>
 					<div id="regist-value">
-						<input type="number" name="storePrice">
+						<input type="text" name="storePrice" value="${item.storePrice}">
 					</div>
 					<div id="regist-text">출고기준단가</div>
 					<div id="regist-value">
-						<input type="number" name="shipmentPrice">
+						<input type="text" name="shipmentPrice" value="${item.shipmentPrice}">
 					</div>
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="저장">
+						<input type="submit" value="수정"> <a
+							href="delete.do?itemCd=${item.itemCd}" id="button-link">삭제</a>
 					</div>
 				</div>
 			</div>

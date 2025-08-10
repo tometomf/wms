@@ -41,7 +41,7 @@
 					if (itemList != null && !itemList.isEmpty()) {
 						for (Item item: itemList) {
 					%>
-					<tr>
+					<tr ondblclick="rowClicked(this)">
 						<td><%=item.getItemCd()%></td>
 						<td><%=item.getItemNm()%></td>
 						<td><%=item.getSpec()%></td>
@@ -68,3 +68,11 @@
 		</div>
 </body>
 </html>
+
+<script>
+	// OnRowDblClick Event
+  	function rowClicked(row) {
+		var cellValue = row.cells[0].innerText; // 첫 번째 셀 값
+		location.href = "update.do?itemCd=" + cellValue; 
+  	}
+</script>

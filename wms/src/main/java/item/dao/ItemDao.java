@@ -31,12 +31,14 @@ public class ItemDao {
 		}
 	}
 
+	//item테이블 안의 데이터를 List에 넣어서 모두 반환함.
+	//itemテーブルの全データをListとして返します
 	public List<Item> selectAll(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement("select*from wms_item");
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();//クエリを実行
 			List<Item> itemList = new ArrayList<>();
 			while (rs.next()) {
 				itemList.add(makeItemFromResultSet(rs)); 
@@ -49,7 +51,7 @@ public class ItemDao {
 		}
 	}
 	
-	public Item selectItemCd(Connection conn) throws SQLException {
+	public Item selectItemCd(Connection conn) throws SQLException {//PK가져오는메서드
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -75,19 +77,48 @@ public class ItemDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	public Item selectByItemCd(Connection conn, String itemCd) throws SQLException {//PK로 Item가져오는메서드
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("SELECT item_cd, item_nm, spec, item_gubun, unit, use_yn, manufacturer, store_price, shipment_price FROM wms_item WHERE item_cd = ?");
+			pstmt.setString(1, itemCd);
+			rs = pstmt.executeQuery();
+			Item item = null;
+			
+			if (rs.next()) {
+				item = new Item(
+						rs.getString("item_cd"),
+						rs.getString("item_nm"),
+						rs.getString("spec"),
+						rs.getString("item_gubun"),
+						rs.getString("unit"),
+						rs.getString("use_yn"),
+						rs.getString("manufacturer"),
+						rs.getInt("store_price"),
+						rs.getInt("shipment_price"));
+			}
+			return item;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 
 	public int update(Connection conn, Item item) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("update wms_item set item_cd=?, item_nm=?, spec=?, item_gubun=?, unit=?, use_yn=?, manufacturer=?, store_price=?, shipment_price=?");
-			pstmt.setString(1, item.getItemCd());
-			pstmt.setString(2, item.getItemNm());
-			pstmt.setString(4, item.getSpec());
-			pstmt.setString(5, item.getItemGubun());
-			pstmt.setString(6, item.getUnit());
-			pstmt.setString(7, item.getManufacturer());
-			pstmt.setInt(8, item.getStorePrice());
-			pstmt.setInt(9, item.getShipmentPrice());
+			pstmt = conn.prepareStatement("update wms_item set item_nm=?, spec=?, item_gubun=?, unit=?, use_yn=?, manufacturer=?, store_price=?, shipment_price=? where item_cd=?");
+			pstmt.setString(1, item.getItemNm());
+			pstmt.setString(2, item.getSpec());
+			pstmt.setString(3, item.getItemGubun());
+			pstmt.setString(4, item.getUnit());
+			pstmt.setString(5, item.getUseYn());
+			pstmt.setString(6, item.getManufacturer());
+			pstmt.setInt(7, item.getStorePrice());
+			pstmt.setInt(8, item.getShipmentPrice());
+			pstmt.setString(9, item.getItemCd());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);

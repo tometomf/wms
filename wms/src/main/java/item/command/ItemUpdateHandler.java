@@ -13,11 +13,11 @@ import item.model.Item;
 import item.service.ItemListService;
 import mvc.command.CommandHandler;
 
-public class ItemInsertHandler implements CommandHandler {
+public class ItemUpdateHandler implements CommandHandler {
 
-	private static final String FORM_VIEW = "/WEB-INF/view/itemInsert.jsp";
+	private static final String FORM_VIEW = "/WEB-INF/view/itemUpdate.jsp";
 	private ItemListService itemListService = new ItemListService();
-
+	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
@@ -29,12 +29,14 @@ public class ItemInsertHandler implements CommandHandler {
 			return null;
 		}
 	}
-	
+
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		Item item = itemListService.getItemCd();
-		req.setAttribute("itemCd", item);
+		String itemCd = req.getParameter("itemCd");  //파라미터 가져옴. getParameter 반환형은 String
 		
-		return FORM_VIEW;
+		Item item = itemListService.selectByItemCd(itemCd);
+		req.setAttribute("item", item);
+		
+		return "/WEB-INF/view/itemUpdate.jsp";
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -55,11 +57,11 @@ public class ItemInsertHandler implements CommandHandler {
 		req.setAttribute("errors", errors);
 
 		try {
-			itemListService.insert(item);
+			itemListService.update(item);
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('등록이 완료되었습니다.');");
+			out.println("alert('수정이 완료되었습니다.');");
 			out.println("location.href='list.do';");
 			out.println("</script>");
 			out.close();
