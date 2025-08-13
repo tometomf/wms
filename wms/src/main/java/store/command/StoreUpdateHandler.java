@@ -83,7 +83,7 @@ public class StoreUpdateHandler implements CommandHandler {
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('등록이 완료되었습니다.');");
+			out.println("alert('수정이 완료되었습니다.');");
 			out.println("location.href='list.do';");
 			out.println("</script>");
 			out.close();
