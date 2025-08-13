@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>入庫現況</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/wms.css">
 <style>
 table {
 	border-collapse: collapse;
