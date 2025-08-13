@@ -5,12 +5,14 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mvc.command.CommandHandler;
 import store.service.StoreListService;
 
-public class StoreDeleteHanlder {
+public class StoreDeleteHandler implements CommandHandler{
 
 	public StoreListService storeListService = new StoreListService();
 
+	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		
 		String store = req.getParameter("store_no");
