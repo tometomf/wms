@@ -68,8 +68,8 @@
 
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="수정">
-						<a href="delete.do?shipNo=${ship.shipNo}" id="button-link">삭제</a>
+						<input type="submit" value="修整">
+						<a href="delete.do?shipNo=${ship.shipNo}" id="button-link">削除</a>
 					</div>
 				</div>
 			</div>
