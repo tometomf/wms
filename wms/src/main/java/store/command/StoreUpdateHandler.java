@@ -98,30 +98,3 @@ public class StoreUpdateHandler implements CommandHandler {
 		}
 	}
 }	
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*User user = (User)req.getSession(false).getAttribute("authUser");
-		InsertRequest insertReq = createInsertRequest(user, req);
-		insertReq.validate(errors);
-		
-		if(!errors.isEmpty()) {
-			return FORM_VIEW;
-		}
-		
-		int newStoreNo = insertService.insert(insertReq);
-		req.setAttribute("newStoreNo", newStoreNo);
-
-		return"/WEB-INF/view/newStoreSuccess.jsp";
-	}*/
-	

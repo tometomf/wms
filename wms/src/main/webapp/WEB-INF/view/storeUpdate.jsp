@@ -52,6 +52,7 @@
 					<div>
 						<input type="submit" value="수정">
 						<a href="delete.do?store_no=${store.store_no}" id="button-link">삭제</a>
+						<!-- 이스터에그 -->
 					</div>
 				</div>
 		</form>
