@@ -23,6 +23,7 @@ public class StoreUpdateHandler implements CommandHandler {
 	private StoreListService storeListService = new StoreListService();
 
 	@Override
+	//更新したデータをDBへ送るメソッド
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			return processForm(req, res);
@@ -34,6 +35,7 @@ public class StoreUpdateHandler implements CommandHandler {
 		}
 	}
 	
+	//特定データを照会して修正画面を見せるメソッド
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 	    try {
 	        String noVal = req.getParameter("store_no");

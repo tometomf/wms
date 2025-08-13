@@ -40,6 +40,7 @@ public class StoreListService {
 		}
 	}
 	
+	//新しいstore_no獲得のためのメソッド
 	public int getNewStoreNo() {
 		Connection conn = null;
 		try {

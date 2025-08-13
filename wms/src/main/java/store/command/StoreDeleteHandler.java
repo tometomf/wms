@@ -18,10 +18,11 @@ public class StoreDeleteHandler implements CommandHandler{
 		String store = req.getParameter("store_no");
 		
 		storeListService.delete(store);
+		//delete機能を呼び出す
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		out.println("<script>");
-		out.println("alert('삭제되었습니다.');");
+		out.println("alert('削除出来ました。');");
 		out.println("location.href='list.do';");
 		out.println("</script>");
 		return null;

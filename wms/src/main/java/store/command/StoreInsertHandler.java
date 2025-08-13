@@ -18,14 +18,17 @@ import store.service.StoreListService;
 
 public class StoreInsertHandler implements CommandHandler {
 
+	//入庫登録画面のファイル経路。
 	private static final String FORM_VIEW = "/WEB-INF/view/storeInsert.jsp";
 	private StoreListService storeListService = new StoreListService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
+			//入庫登録フォームの画面を表す。
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
+			//フォームからのデータをDBにセーブ。
 			return processSubmit(req, res);
 		} else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -35,10 +38,12 @@ public class StoreInsertHandler implements CommandHandler {
 	
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 		int nextStoreNo = storeListService.getNewStoreNo();
+		//新しいstore_noを獲得するメソッドを呼び出す。
 		req.setAttribute("store_no", nextStoreNo);
 		return FORM_VIEW;
 	}
 	
+	//Post要請を処理するメソッド
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
 		Store store = new Store(null, null, null, null, null, null, null, null);
@@ -60,6 +65,7 @@ public class StoreInsertHandler implements CommandHandler {
 			errors.put("regYmd", Boolean.TRUE);
 		} else {
 			try {
+				//文字列の日付をDateに変換。
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date regYmdUtilDate = dateFormat.parse(regYmdStr);
 				
@@ -68,17 +74,18 @@ public class StoreInsertHandler implements CommandHandler {
 				errors.put("regYmdFormat", Boolean.TRUE);
 			}
 		}
-		
+		//エラー発生時フォーム画面へ戻る。
 		if (!errors.isEmpty()) {
 			return FORM_VIEW;
 		}
 		
 		try {
+			//問題なければサービスメソッドを通じてDBへデータを入れる。
 			storeListService.insert(store);
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('등록이 완료되었습니다.');");
+			out.println("alert('登録できました。');");
 			out.println("location.href='list.do';");
 			out.println("</script>");
 			out.close();
@@ -89,7 +96,7 @@ public class StoreInsertHandler implements CommandHandler {
 				res.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = res.getWriter();
 				out.println("<script>");
-				out.println("alert('이미 사용된 입고 번호입니다. 다시 시도해 주세요.');");
+				out.println("alert('使用済みの入庫番号です。別の番号をお使いください。');");
 				out.println("location.href='insert.do';");
 				out.println("</script>");
 				out.close();
