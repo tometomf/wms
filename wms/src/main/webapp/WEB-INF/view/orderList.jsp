@@ -1,37 +1,64 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/wms.css">
 </head>
+
 <body>
-<table border="1">
-  <tr>
-    <th>¼öÁÖ¹øÈ£</th>
-    <th>¼öÁÖ¸í</th>
-    <th>´ã´çºÎ¼­</th>
-    <th>´ã´ç»ç¿ø</th>
-    <th>¼öÁÖ±¸ºĞ</th>
-    <th>ºñ°í</th>
-    <th>µî·ÏÀÏ</th>
-    <th>¼öÁ¤ÀÏ</th>
-    <th>¼öÁÖ ¿Ï·á À¯¹«</th>
-  </tr>
-  <c:forEach var="order" items="${orderList}">
-    <tr>
-      <td>${order.orderNo}</td>
-      <td>${order.orderNm}</td>
-      <td>${order.orderDept}</td>
-      <td>${order.orderUser}</td>
-      <td>${order.orderGubun}</td>
-      <td>${order.descr}</td>
-      <td>${order.regYmd}</td>
-      <td>${order.updYmd}</td>
-      <td>${order.storeYn}</td>
-    </tr>
-  </c:forEach>
-</table>
+	<%@ include file="/nav.jsp"%>
+	<div id="main-content">
+		<div id="wms-title">å—æ³¨ç¾æ³</div>
+		<div id="search-bar" style="display: flex;">
+		</div>
+		<div id="result-table">
+			<table>
+				<thead>
+					<tr>
+						<th>ìˆ˜ì£¼ë²ˆí˜¸</th>
+						<th>ìˆ˜ì£¼ëª…</th>
+						<th>ìˆ˜ì£¼í’ˆëª©ë²ˆí˜¸</th>
+						<th>ìˆ˜ì£¼í’ˆëª©ëª…</th>
+						<th>ìˆ˜ì£¼ê°€ê²©</th>
+						<th>ë‹´ë‹¹ë¶€ì„œ</th>
+						<th>ë‹´ë‹¹ì‚¬ì›</th>
+						<th>ë“±ë¡ì¼</th>
+						<th>ìˆ˜ì£¼ì™„ë£Œìœ ë¬´</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="order" items="${orderList}">
+					    <tr ondblclick="rowClicked(this)">
+					        <td align="center">${order.order_No}</td>
+					        <td align="left">${order.order_Nm}</td>
+					        <td align="center">${order.item_Cd}</td>
+					        <td align="center">${order.item_Nm}</td>
+					        <td align="left">${order.order_Price}</td>
+					        <td align="right">${order.order_Dept}</td>
+					        <td align="right">${order.order_User}</td>
+					        <td align="right">${order.reg_Ymd}</td>
+					        <td align="right">${order.store_Yn}</td>
+					    </tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>
+
+<script>
+
+	// OnRowDblClick Event
+  	function rowClicked(row) {
+		var cellValue = row.cells[0].innerText; // ì²« ë²ˆì§¸ ì…€ ê°’
+		location.href = "update.do?OrderNo=" + cellValue;
+    	// alert("ë”ë¸”í´ë¦­í•œ í–‰ì˜ ì²« ë²ˆì§¸ ì…€: " + cellValue);
+  	}
+</script>

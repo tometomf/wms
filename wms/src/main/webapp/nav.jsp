@@ -31,6 +31,12 @@
   margin-bottom: 20px;
 }
 
+#title a {
+  color: #ecf0f1;      /* 흰색 고정 */
+  text-decoration: none; /* 밑줄 없애기 */
+  display: inline-block; /* 필요하면 */
+}
+
 /* 메뉴 섹션 */
 #menu-section {
   margin-bottom: 15px;
@@ -89,7 +95,7 @@
 <body>
 	${ctxPath = pageContext.request.contextPath ; ''}
 	<div id="sidebar">
-		<div id="title">物流管理</div>		<!-- 물류관리 -->
+		<div id="title"><a href="${ctxPath}/index.do">物流管理</a></div>		<!-- 물류관리 -->
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;ユーザー管理</div> <!-- 사용자 관리 -->
 			<ul>
@@ -137,12 +143,6 @@
 			<ul>
 				<li><a href="${ctxPath}/ship/insert.do">出庫登録</a></li> <!-- 출고 등록 -->
 				<li><a href="${ctxPath}/ship/list.do">出庫現況</a></li> <!-- 출고 현황 -->
-			</ul>
-		</div>
-		<div id="menu-section">
-			<div id="menu-title">&nbsp;物流</div> <!-- 물류 -->
-			<ul>
-				<li><a href="#">物流現況</a></li> <!-- 물류 현황 -->
 			</ul>
 		</div>
 	</div>
