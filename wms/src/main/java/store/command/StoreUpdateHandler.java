@@ -35,15 +35,19 @@ public class StoreUpdateHandler implements CommandHandler {
 	}
 	
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		//１．入庫リストを呼び出す。
-		List<Store> storeList = storeListService.getStoreList();
-		
-		//２．そのリストをJSPで使用できるよう、Requestに入れる
-		req.setAttribute("storeList", storeList);
-		//３．入庫登録画面のJSPページへ移動する。
-		return "/WEB-INF/view/storeList.jsp";
-	}
-	
+	    try {
+	        String noVal = req.getParameter("store_no");
+
+	        Store store = storeListService.getStore_no(noVal); 
+
+	        req.setAttribute("store", store);
+	        
+	        return "/WEB-INF/view/storeUpdate.jsp";
+	    } catch (NumberFormatException e) {
+	        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	        return null;
+	    }
+	}	
 	//WebリクエストからのデータをStoreに変換してセーブする。
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
