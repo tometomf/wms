@@ -15,7 +15,7 @@ public class ShipDeleteHandler implements CommandHandler {
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-        // 1) 파라미터 추출
+        // パラメータ抽出
         String shipNoParam = req.getParameter("shipNo");
         if (shipNoParam == null || shipNoParam.isEmpty()) {
             res.setContentType("text/html; charset=UTF-8");
@@ -28,7 +28,7 @@ public class ShipDeleteHandler implements CommandHandler {
             return null;
         }
 
-        // 2) int 변환 (shipNo가 숫자 PK이므로)
+        // int変換（shipNoが数字PKなので）
         int shipNo;
         try {
             shipNo = Integer.parseInt(shipNoParam.trim());
@@ -43,7 +43,7 @@ public class ShipDeleteHandler implements CommandHandler {
             return null;
         }
 
-        // 3) 삭제 실행
+        // 削除実行
         shipService.delete(shipNo);
 
         

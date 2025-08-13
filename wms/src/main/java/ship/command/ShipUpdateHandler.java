@@ -15,7 +15,7 @@ import ship.service.ShipRegiService; // ← 서비스 클래스 이름 맞춤
 public class ShipUpdateHandler implements CommandHandler {
 
     private static final String FORM_VIEW = "/WEB-INF/view/ship_update.jsp";
-    private final ShipRegiService shipService = new ShipRegiService(); // ← 서비스 타입/이름 일치
+    private final ShipRegiService shipService = new ShipRegiService(); // ← サービスタイプ/名前一致
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -29,13 +29,13 @@ public class ShipUpdateHandler implements CommandHandler {
         }
     }
 
-    // 수정 폼 표시
+    // 修正フォーム表示
     private String processForm(HttpServletRequest req, HttpServletResponse res) throws Exception {
         String shipNoParam = req.getParameter("shipNo");
         if (shipNoParam == null || shipNoParam.isEmpty()) {
             res.setContentType("text/html; charset=UTF-8");
             try (PrintWriter out = res.getWriter()) {
-                out.println("<script>alert('출고번호가 없습니다.'); location.href='list.do';</script>");
+                out.println("<script>alert('出庫番号がありません'); location.href='list.do';</script>");
             }
             return null;
         }
@@ -46,7 +46,7 @@ public class ShipUpdateHandler implements CommandHandler {
         } catch (NumberFormatException e) {
             res.setContentType("text/html; charset=UTF-8");
             try (PrintWriter out = res.getWriter()) {
-                out.println("<script>alert('출고번호 형식이 올바르지 않습니다.'); location.href='list.do';</script>");
+                out.println("<script>alert('出庫番号の形式が正しくありません'); location.href='list.do';</script>");
             }
             return null;
         }
@@ -56,7 +56,7 @@ public class ShipUpdateHandler implements CommandHandler {
         return FORM_VIEW;
     }
 
-    // 수정 처리
+    // 修正処理
     private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception {
         req.setCharacterEncoding("UTF-8");
 
@@ -78,7 +78,7 @@ public class ShipUpdateHandler implements CommandHandler {
             shipService.update(ship);
             res.setContentType("text/html; charset=UTF-8");
             try (PrintWriter out = res.getWriter()) {
-                out.println("<script>alert('수정이 완료되었습니다.'); location.href='list.do';</script>");
+                out.println("<script>alert('修正が完了しました'); location.href='list.do';</script>");
             }
             return null;
         } catch (RuntimeException e) { 
