@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>재고 수정</title>
+<title>在庫修正</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wms.css">
 </head>
 <body>
@@ -16,27 +16,27 @@
     <form action="update.do" method="post">
         <div id="regist">
             <div id="regist-menu">
-                <div id="regist-text">재고번호</div>
+                <div id="regist-text">在庫番号</div>
                 <div id="regist-value">
                     <input readonly type="text" name="stockNo" value="${stock.stock_No}">
                 </div>
 
-                <div id="regist-text">품목코드</div>
+                <div id="regist-text">品目コード</div>
                 <div id="regist-value">
                     <input type="text" name="itemCd" value="${stock.item_Cd}">
                 </div>
 
-                <div id="regist-text">재고수량</div>
+                <div id="regist-text">在庫数量</div>
                 <div id="regist-value">
                     <input type="number" name="qty" value="${stock.qty}">
                 </div>
 
-                <div id="regist-text">창고코드</div>
+                <div id="regist-text">倉庫コード</div>
                 <div id="regist-value">
                     <input type="text" name="wareCd" value="${stock.ware_Cd}">
                 </div>
 
-                <div id="regist-text">등록일</div>
+                <div id="regist-text">登録日</div>
                 <div id="regist-value">
                     <input type="date" name="regYmd" value="${stock.reg_Ymd}">
                 </div>

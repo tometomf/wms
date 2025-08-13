@@ -22,11 +22,11 @@ public class StockDao {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select a.stock_no,a.item_cd, a.item_nm, a.spec, a.item_gubun, a.manufacturer, a.qty, a.ware_cd, b.ware_nm, a.reg_ymd\r\n"
-							+ "from (\r\n"
-							+ "    select a.stock_no,a.item_cd, b.item_nm, b.spec, b.item_gubun, b.manufacturer, qty, ware_cd, reg_ymd\r\n"
-							+ "    from wms_stock a, wms_item b\r\n" + "    where a.item_cd = b.item_cd\r\n"
-							+ ") a, wms_ware b\r\n" + "where a.ware_cd = b.ware_cd order by a.stock_no" );
+					"select a.stock_no,a.item_cd, nvl(a.item_nm,  ' ')as item_nm , a.spec, a.item_gubun, a.manufacturer, a.qty, a.ware_cd, nvl(b.ware_nm, ' ')as ware_nm, a.reg_ymd \r\n"
+					+ "from (\r\n"
+					+ "    select a.stock_no,a.item_cd, b.item_nm, b.spec, b.item_gubun, b.manufacturer, qty, ware_cd, reg_ymd\r\n"
+					+ "   from wms_stock a left outer join wms_item b  on a.item_cd = b.item_cd\r\n"
+					+ ") a left outer join wms_ware b on a.ware_cd = b.ware_cd order by a.stock_no" );
 			rs = pstmt.executeQuery();
 			List<StockPlus> result = new ArrayList<>();
 			while (rs.next()) {

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>재고 조회</title>
+<title>在庫現況</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wms.css">
 </head>
 
@@ -16,9 +16,7 @@
 	<div id="main-content">
 		<div id="wms-title">在庫現況</div>
 		<div id="search-bar" style="display: flex;">
-			<div>
-				<button id="search-button">조회</button>
-			</div>
+	
 		</div>
 
 		<div id="result-table">
