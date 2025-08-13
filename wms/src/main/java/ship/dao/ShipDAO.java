@@ -125,4 +125,65 @@ public class ShipDAO {
             JdbcUtil.close(pstmt);
         }
     }
+    
+    public ShipViewModel selectOne(Connection conn, int shipNo) throws SQLException {
+        PreparedStatement ps = null; ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(
+              "select ship_no, ship_nm, item_cd, ship_price, ship_qty, " +
+              "       ship_dept, ship_user, descr, reg_ymd, upd_ymd, ship_yn " +
+              "  from wms_ship where ship_no=?");
+            ps.setInt(1, shipNo);
+            rs = ps.executeQuery();
+            if (!rs.next()) return null;
+            ShipViewModel v = new ShipViewModel();
+            v.setShipNo(rs.getInt("ship_no"));
+            v.setShipNm(rs.getString("ship_nm"));
+            v.setItemCd(rs.getString("item_cd"));
+            v.setShipPrice(rs.getInt("ship_price"));
+            v.setShipQty(rs.getInt("ship_qty"));
+            v.setShipDept(rs.getString("ship_dept"));
+            v.setShipUser(rs.getString("ship_user"));
+            v.setDescr(rs.getString("descr"));
+            v.setRegYmd(rs.getDate("reg_ymd"));
+            v.setUpdYmd(rs.getDate("upd_ymd"));
+            v.setShipYn(rs.getString("ship_yn"));
+            return v;
+        } finally {
+            JdbcUtil.close(rs);
+            JdbcUtil.close(ps);
+        }
+    }
+    
+    
+    public int update(Connection conn, ShipViewModel ship) throws SQLException {
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement("update wms_ship set ship_nm=?, item_cd=?, ship_price=?, ship_qty=?, ship_dept=?, ship_user=?, descr=?, ship_yn=? where ship_no=?");
+            pstmt.setString(1, ship.getShipNm());
+            pstmt.setString(2, ship.getItemCd());
+            pstmt.setInt(3, ship.getShipPrice());
+            pstmt.setInt(4, ship.getShipQty());
+            pstmt.setString(5, ship.getShipDept());
+            pstmt.setString(6, ship.getShipUser());
+            pstmt.setString(7, ship.getDescr());
+            pstmt.setString(8, ship.getShipYn());
+            pstmt.setInt(9, ship.getShipNo());
+            return pstmt.executeUpdate();
+        } finally {
+            JdbcUtil.close(pstmt);
+        }
+    }
+    
+    
+    public int delete(Connection conn, int shipNo) throws SQLException {
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement("delete wms_ship where ship_no=?");
+            pstmt.setInt(1, shipNo);
+            return pstmt.executeUpdate();
+        } finally {
+            JdbcUtil.close(pstmt);
+        }
+    }
 }

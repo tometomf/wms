@@ -4,125 +4,137 @@ import java.util.Date;
 
 public class ShipViewModel {
 
-    // 출고 정보
-    private int shipNo;
-    private String shipNm;
-    private String shipDept;
-    private String shipUser;
-    private String descr;
-    private Date regYmd;
-    private Date updYmd;
-    private String shipYn;
+	// 출고 정보
+	private int shipNo;
+	private String shipNm;
+	private String shipDept;
+	private String shipUser;
+	private String descr;
+	private Date regYmd;
+	private Date updYmd;
+	private String shipYn;
 
-    // 품목 정보
-    private String itemCd;
-    private int shipPrice;
-    private int shipQty;
+	// 품목 정보
+	private String itemCd;
+	private int shipPrice;
+	private int shipQty;
 
-    public ShipViewModel() {
-    }
+	public ShipViewModel() {
+	}
 
-    public ShipViewModel(int shipNo, String shipNm, String shipDept, String shipUser, String descr,
-                         Date regYmd, Date updYmd, String shipYn,
-                         String itemCd, int shipPrice, int shipQty) {
-        this.shipNo = shipNo;
-        this.shipNm = shipNm;
-        this.shipDept = shipDept;
-        this.shipUser = shipUser;
-        this.descr = descr;
-        this.regYmd = regYmd;
-        this.updYmd = updYmd;
-        this.shipYn = shipYn;
-        this.itemCd = itemCd;
-        this.shipPrice = shipPrice;
-        this.shipQty = shipQty;
-    }
+	public ShipViewModel(int shipNo, String shipNm, String shipDept, String shipUser, String descr, Date regYmd,
+			Date updYmd, String shipYn, String itemCd, int shipPrice, int shipQty) {
+		this.shipNo = shipNo;
+		this.shipNm = shipNm;
+		this.shipDept = shipDept;
+		this.shipUser = shipUser;
+		this.descr = descr;
+		this.regYmd = regYmd;
+		this.updYmd = updYmd;
+		this.shipYn = shipYn;
+		this.itemCd = itemCd;
+		this.shipPrice = shipPrice;
+		this.shipQty = shipQty;
+	}
 
-    public int getShipNo() {
-        return shipNo;
-    }
+	public ShipViewModel(int shipNo, String shipNm, String itemCd, int shipPrice, int shipQty, String shipDept,
+			String shipUser, String descr, String shipYn) {
+		this.shipNo = shipNo;
+		this.shipNm = shipNm;
+		this.itemCd = itemCd;
+		this.shipPrice = shipPrice;
+		this.shipQty = shipQty;
+		this.shipDept = shipDept;
+		this.shipUser = shipUser;
+		this.descr = descr;
+		this.shipYn = shipYn;
+	}
 
-    public void setShipNo(int shipNo) {
-        this.shipNo = shipNo;
-    }
+	public int getShipNo() {
+		return shipNo;
+	}
 
-    public String getShipNm() {
-        return shipNm;
-    }
+	public void setShipNo(int shipNo) {
+		this.shipNo = shipNo;
+	}
 
-    public void setShipNm(String shipNm) {
-        this.shipNm = shipNm;
-    }
+	public String getShipNm() {
+		return shipNm;
+	}
 
-    public String getShipDept() {
-        return shipDept;
-    }
+	public void setShipNm(String shipNm) {
+		this.shipNm = shipNm;
+	}
 
-    public void setShipDept(String shipDept) {
-        this.shipDept = shipDept;
-    }
+	public String getShipDept() {
+		return shipDept;
+	}
 
-    public String getShipUser() {
-        return shipUser;
-    }
+	public void setShipDept(String shipDept) {
+		this.shipDept = shipDept;
+	}
 
-    public void setShipUser(String shipUser) {
-        this.shipUser = shipUser;
-    }
+	public String getShipUser() {
+		return shipUser;
+	}
 
-    public String getDescr() {
-        return descr;
-    }
+	public void setShipUser(String shipUser) {
+		this.shipUser = shipUser;
+	}
 
-    public void setDescr(String descr) {
-        this.descr = descr;
-    }
+	public String getDescr() {
+		return descr;
+	}
 
-    public Date getRegYmd() {
-        return regYmd;
-    }
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
 
-    public void setRegYmd(Date regYmd) {
-        this.regYmd = regYmd;
-    }
+	public Date getRegYmd() {
+		return regYmd;
+	}
 
-    public Date getUpdYmd() {
-        return updYmd;
-    }
+	public void setRegYmd(Date regYmd) {
+		this.regYmd = regYmd;
+	}
 
-    public void setUpdYmd(Date updYmd) {
-        this.updYmd = updYmd;
-    }
+	public Date getUpdYmd() {
+		return updYmd;
+	}
 
-    public String getShipYn() {
-        return shipYn;
-    }
+	public void setUpdYmd(Date updYmd) {
+		this.updYmd = updYmd;
+	}
 
-    public void setShipYn(String shipYn) {
-        this.shipYn = shipYn;
-    }
+	public String getShipYn() {
+		return shipYn;
+	}
 
-    public String getItemCd() {
-        return itemCd;
-    }
+	public void setShipYn(String shipYn) {
+		this.shipYn = shipYn;
+	}
 
-    public void setItemCd(String itemCd) {
-        this.itemCd = itemCd;
-    }
+	public String getItemCd() {
+		return itemCd;
+	}
 
-    public int getShipPrice() {
-        return shipPrice;
-    }
+	public void setItemCd(String itemCd) {
+		this.itemCd = itemCd;
+	}
 
-    public void setShipPrice(int shipPrice) {
-        this.shipPrice = shipPrice;
-    }
+	public int getShipPrice() {
+		return shipPrice;
+	}
 
-    public int getShipQty() {
-        return shipQty;
-    }
+	public void setShipPrice(int shipPrice) {
+		this.shipPrice = shipPrice;
+	}
 
-    public void setShipQty(int shipQty) {
-        this.shipQty = shipQty;
-    }
+	public int getShipQty() {
+		return shipQty;
+	}
+
+	public void setShipQty(int shipQty) {
+		this.shipQty = shipQty;
+	}
 }
