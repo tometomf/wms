@@ -9,32 +9,16 @@
 <title>入庫現況</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/wms.css">
-<style>
-table {
-	border-collapse: collapse;
-	width: 100%;
-	margin-top: 30px;
-}
 
-th, td {
-	border: 1px solid #ccc;
-	padding: 8px;
-	text-align: center;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-
-h1 {
-	margin-bottom: 20px;
-}
-</style>
 </head>
 <body>
 
-	<h1>入庫現況</h1>
-
+<%@ include file="/nav.jsp"%>
+	<div id="main-content">
+		<div id="wms-title">入庫現況</div>
+		<div id="search-bar" style="display: flex;">
+		</div>
+		<div id="result-table">
 	<table border="1">
 		<thead>
 			<tr>
@@ -79,6 +63,8 @@ h1 {
 			%>
 		</tbody>
 	</table>
+	</div>
+	</div>
 </body>
 </html>
 
