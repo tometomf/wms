@@ -31,24 +31,24 @@ public class ShipRegiHandler implements CommandHandler {
 
     // GET: 등록 화면 요청
     private String processForm(HttpServletRequest req, HttpServletResponse res) {
-        ShipViewModel ship = shipRegiService.getShipNo(); // 다음 출고번호 받아오기
-        req.setAttribute("shipNo", ship); // JSP에 넘겨서 <input> value로 사용
+        ShipViewModel ship = shipRegiService.getShipNo(); // 次の出庫番号を受け取る
+        req.setAttribute("shipNo", ship); // JSPに渡して「input」valueとして使用
         return FORM_VIEW;
     }
 
-    // POST: 등록 처리
+    // POST:登録処理
     private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
         Map<String, Boolean> errors = new HashMap<>();
         req.setAttribute("errors", errors);
 
-        // 사용자 입력값을 모델로 변환
+        // ユーザー入力値をモデルに変換
         ShipViewModel ship = createShipFromRequest(req);
 
         try {
-            // 등록 서비스 실행
+            // 登録サービス実行
             shipRegiService.register(ship);
 
-            // 등록 성공 후 alert 띄우고 list.do로 이동
+            // 登録成功後、alertを表示してlist.do に移動
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
             out.println("<script>");
@@ -64,7 +64,7 @@ public class ShipRegiHandler implements CommandHandler {
         }
     }
 
-    // 사용자 입력 → DTO 변환
+    // ユーザー入力→DTO変換
     private ShipViewModel createShipFromRequest(HttpServletRequest req) {
         ShipViewModel ship = new ShipViewModel();
 

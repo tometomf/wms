@@ -78,23 +78,23 @@
 		<script>
 		function validateForm() {
 		    const requiredFields = [
-		        { name: "shipNm", label: "출고명" },
-		        { name: "itemCd", label: "품목코드" },
-		        { name: "shipPrice", label: "출고단가" },
-		        { name: "shipQty", label: "출고수량" },
-		        { name: "shipDept", label: "출고부서" },
-		        { name: "shipUser", label: "담당자" }
+		        { name: "shipNm", label: "出庫名" },
+		        { name: "itemCd", label: "品目コード" },
+		        { name: "shipPrice", label: "出庫単価" },
+		        { name: "shipQty", label: "出庫数量" },
+		        { name: "shipDept", label: "出庫部署" },
+		        { name: "shipUser", label: "担当者" }
 		    ];
 
 		    for (let field of requiredFields) {
 		        const el = document.getElementsByName(field.name)[0];
 		        if (!el || el.value.trim() === "") {
-		            alert(field.label + "을(를) 입력하세요.");
+		            alert(field.label + "を入力してください");
 		            if (el) el.focus();
-		            return false; // 제출 중단
+		            return false; // 提出中断
 		        }
 		    }
-		    return true; // 통과 시 제출
+		    return true; // 通過すれば提出
 		}
 		</script>
 	</div>

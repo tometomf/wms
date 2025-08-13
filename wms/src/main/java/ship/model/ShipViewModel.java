@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ShipViewModel {
 
-	// 출고 정보
+	// 出庫情報
 	private int shipNo;
 	private String shipNm;
 	private String shipDept;
@@ -14,7 +14,7 @@ public class ShipViewModel {
 	private Date updYmd;
 	private String shipYn;
 
-	// 품목 정보
+	// 品目情報
 	private String itemCd;
 	private int shipPrice;
 	private int shipQty;
