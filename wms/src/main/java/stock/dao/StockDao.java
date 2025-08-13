@@ -40,7 +40,7 @@ public class StockDao {
 		}
 	}
 
-	// 재고번호 1씩 증가
+	// 재고번호 1씩 증가 / 在庫番号1ずつ増加
 	public Stock selectStockNo(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -61,7 +61,7 @@ public class StockDao {
 		}
 	}
 
-	// 재고번호로 조회
+	// 재고번호로 조회 / 在庫番号で照会
 	public Stock selectByStockNo(Connection conn, int stockNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -92,14 +92,14 @@ public class StockDao {
 //				 rs.getDate("reg_ymd"));
 //	}
 
-	// 컬럼 추가된 재고 조회
+	// 컬럼 추가된 재고 조회 / カラム追加された在庫照会
 	private StockPlus convertStockPlus(ResultSet rs) throws SQLException {
 		return new StockPlus(rs.getInt("stock_no"), rs.getString("item_cd"), rs.getString("item_nm"),
 				rs.getString("spec"), rs.getString("item_gubun"), rs.getString("manufacturer"), rs.getInt("qty"),
 				rs.getString("ware_cd"), rs.getString("ware_nm"), rs.getDate("reg_ymd"));
 	}
 
-	// 재고 신규 등록
+	// 재고 신규 등록 / 在庫新規登録
 	public void insert(Connection conn, Stock stock) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_stock values(?, ?, ?, ?, ?)")) {
 			pstmt.setInt(1, stock.getStock_No()); // 품목코드 / 品目コード
@@ -112,7 +112,7 @@ public class StockDao {
 		}
 	}
 
-	// 재고 수정
+	// 재고 수정 / 在庫修正
 	public void update(Connection conn, Stock stock) throws SQLException {
 		String sql = "UPDATE wms_stock " + "SET item_cd = ?, qty = ?, ware_cd = ?, reg_ymd = ? " + "WHERE stock_no = ?";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -125,7 +125,7 @@ public class StockDao {
 		}
 	}
 	
-	//재고 삭제
+	// 재고 삭제 / 在庫削除
 	public int delete(Connection conn, int stockNo) throws SQLException {
 		
 		PreparedStatement pstmt = null;

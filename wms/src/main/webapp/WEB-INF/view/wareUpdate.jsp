@@ -16,34 +16,34 @@
 		<form action = "update.do" method = "post">
 			<div id = "regist">
 				<div id = "regist-menu">
-					<div id = "regist-text">창고코드</div>
+					<div id = "regist-text">倉庫コード</div>
 					<div id = "regist-value">
 						<input readonly type = "text" name = "warecd" value = "${ware.wareCd}">
 					</div>
-					<div id = "regist-text">창고명</div>
+					<div id = "regist-text">倉庫名</div>
 					<div id = "regist-value">
 						<input type = "text" name = "warenm" value = "${ware.wareNm}">
 					</div>
-					<div id = "regist-text">창고구분</div>
+					<div id = "regist-text">倉庫区分</div>
 					<div id = "regist-value">
 						<input type = "text" name = "waregb" value = "${ware.wareGubun}">
 					</div>
-					<div id = "regist-text">사용여부</div>
+					<div id = "regist-text">使用可否</div>
 					<div id = "regist-value">
 						<select	name = "useyn">
 							<option value="Y" ${ware.useYn == 'Y' ? 'selected' : ''}>利用あり</option>
     						<option value="N" ${ware.useYn == 'N' ? 'selected' : ''}>利用なし</option>
 						</select>
 					</div>
-					<div id = "regist-text">비고</div>
+					<div id = "regist-text">備考</div>
 					<div id = "regist-value">
 						<textarea name="descr" rows="4" cols="56">${ware.descr}</textarea>
 					</div>
 				</div>
 				<div id = "regist-button">
 					<div>
-						<input type = "submit" value = "수정">
-						<a href="delete.do?wareCd=${ware.wareCd}" id="button-link">삭제</a>
+						<input type = "submit" value = "修整">
+						<a href="delete.do?wareCd=${ware.wareCd}" id="button-link">削除</a>
 					</div>
 				</div>	
 			</div>

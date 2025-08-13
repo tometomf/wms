@@ -21,7 +21,7 @@ public class StockInsertHandler implements CommandHandler {
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
         
-        // POST 방식으로 폼 데이터가 넘어왔는지 확인
+        // POST 방식으로 폼 데이터가 넘어왔는지 확인 / POST方式でフォームデータが渡ってきたか確認
         if (req.getMethod().equalsIgnoreCase("GET")) {
         	return processForm(req,res);
         } else if (req.getMethod().equalsIgnoreCase("POST")) {
@@ -51,19 +51,19 @@ public class StockInsertHandler implements CommandHandler {
 		stock.setQty(Integer.parseInt(req.getParameter("qty")));
 		stock.setWare_Cd(req.getParameter("wareCd"));
 	
-		//Date타입 형변환 
+		// Date타입 형변환  / Dateタイプ変換
 		try {
 		    stock.setReg_Ymd(
 		        new java.text.SimpleDateFormat("yyyy-MM-dd")
 		            .parse(req.getParameter("regYmd"))
 		    );
-		   //에러처리
+		   // 에러처리 / エラー処理
 		} catch (ParseException e) {
 		    errors.put("invalidDate", Boolean.TRUE);
-		    return FORM_VIEW; // 잘못된 날짜면 등록 페이지로 다시 이동
+		    return FORM_VIEW; // 잘못된 날짜면 등록 페이지로 다시 이동 / 間違った日付の場合は登録ページに再度移動
 		}
 
-		// 등록 완료 알림창
+		// 등록 완료 알림창 / 登録完了のお知らせ
 			insertService.insert(stock);
 			
 			res.setContentType("text/html; charset=UTF-8");
@@ -77,7 +77,7 @@ public class StockInsertHandler implements CommandHandler {
 			
 		} catch (Exception e) {
 			errors.put("insertError", Boolean.TRUE);
-			return FORM_VIEW; // 등록 실패시 등록 페이지로 다시 이동
+			return FORM_VIEW; // 등록 실패시 등록 페이지로 다시 이동 / 登録に失敗した場合、登録ページに再度移動
 		}
     }
 }

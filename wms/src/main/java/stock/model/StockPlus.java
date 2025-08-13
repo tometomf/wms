@@ -7,21 +7,21 @@ import java.util.Date;
  * - 재고 + 품목 + 창고 정보를 모두 담는 클래스
  */
 public class StockPlus {
-    private int stock_No;         // 재고번호
-    private String item_Cd;       // 품목코드
-    private String item_Nm;       // 품목명
-    private String spec;          // 규격
-    private String item_Gubun;    // 품목구분
-    private String manufacturer;  // 제조사
-    private int qty;              // 수량
-    private String ware_Cd;       // 창고코드
-    private String ware_Nm;       // 창고명
-    private Date reg_Ymd;         // 등록일
+    private int stock_No;         // 재고번호 / 在庫番号
+    private String item_Cd;       // 품목코드 / 品目コード
+    private String item_Nm;       // 품목명 / 品目名
+    private String spec;          // 규격 / 規格
+    private String item_Gubun;    // 품목구분 / 品目区分
+    private String manufacturer;  // 제조사 / メーカー
+    private int qty;              // 수량 / 数量
+    private String ware_Cd;       // 창고코드 / 倉庫コード
+    private String ware_Nm;       // 창고명 / 倉庫名
+    private Date reg_Ymd;         // 등록일 / 登録日
 
-    // 기본 생성자
+    // 기본 생성자 /  基本 コンストラクタ
     public StockPlus() {}
 
-    // 전체 필드를 받는 생성자
+    // 전체 필드를 받는 생성자 / 全フィールドを受けるコンストラクタ
     public StockPlus(int stock_No, String item_Cd, String item_Nm, String spec,
                      String item_Gubun, String manufacturer, int qty,
                      String ware_Cd, String ware_Nm, Date reg_Ymd) {
@@ -37,6 +37,7 @@ public class StockPlus {
         this.reg_Ymd = reg_Ymd;
     }
 
+ // 각 필드에 대한 getter/setter / 各フィールドの getter/setter
     public int getStock_No() {
         return stock_No;
     }

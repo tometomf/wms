@@ -16,49 +16,49 @@
 		<form action = "insert.do" method = "post">
 			<div id = "regist">
 				<div id = "regist-menu">
-					<div id = "regist-text">수주번호</div>
+					<div id = "regist-text">受注番号</div>
 					<div id = "regist-value">
 						<input readonly type = "text" name = "order_no" value = "${orderNo.order_No}">
 					</div>
-					<div id = "regist-text">수주명</div>
+					<div id = "regist-text">受注名</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_nm">
 					</div>
-					<div id = "regist-text">수주품목번호</div>
+					<div id = "regist-text">受注品目番号</div>
 					<div id = "regist-value">
 						<input type = "text" name = "item_cd">
 					</div>
-					<div id = "regist-text">수주가격</div>
+					<div id = "regist-text">受注価格</div>
 					<div id = "regist-value">
 						<input type = "number" name = "order_price">
 					</div>
-					<div id = "regist-text">담당부서</div>
+					<div id = "regist-text">担当部署</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_dept">
 					</div>
-					<div id = "regist-text">담당사원</div>
+					<div id = "regist-text">担当社員</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_user">
 					</div>
-					<div id = "regist-text">수주구분</div>
+					<div id = "regist-text">受注区分</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_gubun">
 					</div>
-					<div id = "regist-text">수주완료유무</div>
+					<div id = "regist-text">受注完了の有無</div>
 					<div id = "regist-value">
 						<select	name = "store_yn">
 							<option value="N">未完了</option>
 							<option value="Y">完了</option>
 						</select>
 					</div>
-					<div id = "regist-text">비고</div>
+					<div id = "regist-text">備考</div>
 					<div id = "regist-value">
 						<textarea name="descr" rows="4" cols="55"></textarea>
 					</div>
 				</div>
 				<div id = "regist-button">
 					<div>
-						<input type = "submit" value = "저장">
+						<input type = "submit" value = "貯蔵">
 					</div>
 				</div>
 			</div>

@@ -53,7 +53,7 @@
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="저장">
+						<input type="submit" value="貯蔵">
 					</div>
 				</div>
 			</div>

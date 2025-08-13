@@ -16,33 +16,33 @@
 		<form action = "insert.do" method = "post">
 			<div id = "regist">
 				<div id = "regist-menu">
-					<div id = "regist-text">창고코드</div>
+					<div id = "regist-text">倉庫コード</div>
 					<div id = "regist-value">
 						<input readonly type = "text" name = "warecd" value = "${wareCd.wareCd}">
 					</div>
-					<div id = "regist-text">창고명</div>
+					<div id = "regist-text">倉庫名</div>
 					<div id = "regist-value">
 						<input type = "text" name = "warenm">
 					</div>
-					<div id = "regist-text">창고구분</div>
+					<div id = "regist-text">倉庫区分</div>
 					<div id = "regist-value">
 						<input type = "text" name = "waregb">
 					</div>
-					<div id = "regist-text">사용여부</div>
+					<div id = "regist-text">使用可否</div>
 					<div id = "regist-value">
 						<select	name = "useyn">
 							<option value="Y">利用あり</option>
 							<option value="N">利用なし</option>
 						</select>
 					</div>
-					<div id = "regist-text">비고</div>
+					<div id = "regist-text">備考</div>
 					<div id = "regist-value">
 						<textarea name="descr" rows="4" cols="56"></textarea>
 					</div>
 				</div>
 				<div id = "regist-button">
 					<div>
-						<input type = "submit" value = "저장">
+						<input type = "submit" value = "貯蔵">
 					</div>
 				</div>
 			</div>

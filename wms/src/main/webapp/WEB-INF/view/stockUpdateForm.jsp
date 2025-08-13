@@ -43,8 +43,8 @@
             </div>
             <div id="regist-button">
                 <div>
-                    <input type="submit" value="수정">
-                    <a href="delete.do?stockNo=${stock.stock_No}" id="button-link">삭제</a>
+                    <input type="submit" value="修正">
+                    <a href="delete.do?stockNo=${stock.stock_No}" id="button-link">削除</a>
                 </div>
             </div>
         </div>

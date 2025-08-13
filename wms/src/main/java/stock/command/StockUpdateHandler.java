@@ -13,6 +13,7 @@ import mvc.command.CommandHandler;
 import stock.model.Stock;
 import stock.service.StockService;
 
+//재고 수정 요청을 처리하는 핸들러 / 在庫修正リクエストを処理するハンドラ
 public class StockUpdateHandler implements CommandHandler {
 
     private static final String FORM_VIEW = "/WEB-INF/view/stockUpdateForm.jsp";
@@ -31,7 +32,7 @@ public class StockUpdateHandler implements CommandHandler {
         }
     }
 
-    // 수정 폼 보여주기 (기존 데이터 세팅)
+    // 수정 폼 보여주기 (기존 데이터 세팅) / 修正フォームを表示 (既存のデータセット)
     private String processForm(HttpServletRequest req, HttpServletResponse res) {
      
     	 String stockNoParam = req.getParameter("stockNo");
@@ -41,13 +42,13 @@ public class StockUpdateHandler implements CommandHandler {
     	    }
     	
     	int stockNo = Integer.parseInt(req.getParameter("stockNo"));
-        Stock stock = stockService.getStockByNo(stockNo); // 기존 데이터 조회
+        Stock stock = stockService.getStockByNo(stockNo); // 기존 데이터 조회 / 既存データ照会
         req.setAttribute("stock", stock);
 
         return FORM_VIEW;
     }
 
-    // 수정 처리
+    // 수정 처리 / 修正処理
     private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         Map<String, Boolean> errors = new HashMap<>();
@@ -66,8 +67,9 @@ public class StockUpdateHandler implements CommandHandler {
             return FORM_VIEW;
         }
 
+     // DAO 통해 DB 수정 / DAOを通じてDBを修正
         try {
-            stockService.update(stock); // DAO 통해 DB 수정
+            stockService.update(stock); 
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
             out.println("<script>");

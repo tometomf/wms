@@ -21,15 +21,15 @@
 			<table>
 				<thead>
 					<tr>
-						<th>수주번호</th>
-						<th>수주명</th>
-						<th>수주품목번호</th>
-						<th>수주품목명</th>
-						<th>수주가격</th>
-						<th>담당부서</th>
-						<th>담당사원</th>
-						<th>등록일</th>
-						<th>수주완료유무</th>
+						<th>受注番号</th>
+						<th>受注名</th>
+						<th>受注品目番号</th>
+						<th>受注品目名</th>
+						<th>受注価格</th>
+						<th>担当部署</th>
+						<th>担当社員</th>
+						<th>登録日</th>
+						<th>受注完了の有無</th>
 					</tr>
 				</thead>
 				<tbody>

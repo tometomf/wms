@@ -16,19 +16,17 @@
 	<div id="main-content">
 		<div id="wms-title">倉庫現況</div>
 		<div id="search-bar" style="display: flex;">
-			<div>
-				<button id="search-button">조회</button>
-			</div>
+	
 		</div>
 		<div id="result-table">
 			<table>
 				<thead>
 					<tr>
-						<th>창고코드</th>
-						<th>창고명</th>
-						<th>창고구분</th>
-						<th>사용여부</th>
-						<th>비고</th>
+						<th>倉庫コード</th>
+						<th>倉庫名</th>
+						<th>倉庫区分</th>
+						<th>使用可否</th>
+						<th>備考</th>
 					</tr>
 				</thead>
 				<tbody>
