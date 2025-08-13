@@ -21,7 +21,7 @@ public class ShipDeleteHandler implements CommandHandler {
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
             out.println("<script>");
-            out.println("alert('출고번호가 없습니다.');");
+            out.println("alert('出庫番号がありません');");
             out.println("location.href='list.do';");
             out.println("</script>");
             out.close();
@@ -36,7 +36,7 @@ public class ShipDeleteHandler implements CommandHandler {
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
             out.println("<script>");
-            out.println("alert('유효하지 않은 출고번호입니다.');");
+            out.println("alert('無効な出庫番号です');");
             out.println("location.href='list.do';");
             out.println("</script>");
             out.close();
@@ -50,7 +50,7 @@ public class ShipDeleteHandler implements CommandHandler {
         res.setContentType("text/html; charset=UTF-8");
         PrintWriter out = res.getWriter();
         out.println("<script>");
-        out.println("alert('삭제되었습니다.');");
+        out.println("alert('削除されました');");
         out.println("location.href='list.do';");
         out.println("</script>");
         out.close();
