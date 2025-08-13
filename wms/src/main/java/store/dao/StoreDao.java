@@ -99,6 +99,7 @@ public class StoreDao {
 		}
 	}
 
+	//データ修正のメソッド
 	public int update(Connection conn, Store store) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
@@ -117,6 +118,7 @@ public class StoreDao {
 		}
 	}
 
+	//データ削除のメソッド
 	public int delete(Connection conn, String store_No) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
