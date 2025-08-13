@@ -25,6 +25,7 @@
 			<table>
 				<thead>
 					<tr>
+						<th>在庫番号</th>
 						<th>品目コード</th>
 						<th>品目名</th>
 						<th>規格</th>
@@ -43,15 +44,16 @@
 						for (StockPlus stock : stockList) {
 					%>
 					<tr ondblclick="rowClicked(this)">
-						<td><%=stock.getItemCd()%></td>
-						<td><%=stock.getItemNm()%></td>
+						<td><%=stock.getStock_No()%></td>
+						<td><%=stock.getItem_Cd()%></td>
+						<td><%=stock.getItem_Nm()%></td>
 						<td><%=stock.getSpec()%></td>
-						<td><%=stock.getItemGubun()%></td>
+						<td><%=stock.getItem_Gubun()%></td>
 						<td><%=stock.getManufacturer()%></td>
 						<td><%=stock.getQty()%></td>
-						<td><%=stock.getWareCd()%></td>
-						<td><%=stock.getWareNm()%></td>
-						<td><%=stock.getRegYmd()%></td>
+						<td><%=stock.getWare_Cd()%></td>
+						<td><%=stock.getWare_Nm()%></td>
+						<td><%=stock.getReg_Ymd()%></td>
 					</tr>
 					<%
 						}
@@ -67,7 +69,7 @@
 <script>
 	// 더블클릭 시 해당 품목 코드로 수정 페이지 이동
   	function rowClicked(row) {
-		var itemCode = row.cells[0].innerText; // 첫 번째 셀: itemCd
-		location.href = "update.do?itemCd=" + itemCode;
+		var stockNo = row.cells[0].innerText; // 첫 번째 셀: stockNo
+		location.href = "update.do?stockNo=" + stockNo;
   	}
 </script>

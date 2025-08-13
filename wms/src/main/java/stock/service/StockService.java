@@ -29,7 +29,7 @@ public class StockService {
 		}
 	}
 	
-	// 재고번호 조회
+	// 다음에 등록될 재고번호 조회
 	public Stock getstockNo() {
 		Connection conn = null;
         try {
@@ -64,6 +64,49 @@ public class StockService {
 	    } finally {
 	        JdbcUtil.close(conn);
 	    }
+	}
+	// 재고번호로 데이터 조회
+	public Stock getStockByNo(int stockNo) {
+	    Connection conn = null;
+	    try {
+	        conn = ConnectionProvider.getConnection();
+	        return stockDao.selectByStockNo(conn, stockNo);
+	    } catch (SQLException e) {
+	        throw new RuntimeException(e);
+	    } finally {
+	        JdbcUtil.close(conn);
+	    }
+	}
+
+	// 재고 수정
+	public void update(Stock stock) {
+	    Connection conn = null;
+	    try {
+	        conn = ConnectionProvider.getConnection();
+	        conn.setAutoCommit(false);
+
+	        stockDao.update(conn, stock);
+
+	        conn.commit();
+	    } catch (SQLException e) {
+	        JdbcUtil.rollback(conn);
+	        throw new RuntimeException(e);
+	    } finally {
+	        JdbcUtil.close(conn);
+	    }
+	}
+
+	// 재고 삭제
+	public void delete(String stockNo) {
+		Connection conn = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+        	stockDao.delete(conn, Integer.parseInt(stockNo));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtil.close(conn);
+        }
 	}
 	}
 
