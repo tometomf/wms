@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>재고 등록</title>
+<title>在庫登録</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/wms.css">
 </head>
@@ -13,7 +14,7 @@
 	<div id="main-content">
 		<div id="wms-title">在庫登録</div>
 		<div id="search-bar" style="display: flex;"></div>
-		<form action="insert.do" method="post">
+		<form action="insert.do" method="post" novalidate>
 			<div id="regist">
 				<div id="regist-menu">
 
@@ -44,9 +45,6 @@
 					</div>
 
 					<div id="regist-text">備考</div>
-
-
-
 					<div id="regist-value">
 						<textarea name="descr" rows="4" cols="56"></textarea>
 					</div>
@@ -59,5 +57,37 @@
 			</div>
 		</form>
 	</div>
+	
+<!-- 	에러 메세지 알림창 / エラーメッセージ通知ウィンドウ -->
+	<script>
+		window.onload = function() {
+			<c:choose>
+			<c:when test="${errors.itemCd}">
+			alert("品目コードを入力してください。");
+			</c:when>
+			<c:when test="${errors.qty}">
+			alert("在庫数量を入力してください。");
+			</c:when>
+			<c:when test="${errors.wareCd}">
+			alert("倉庫コードを入力してください。");
+			</c:when>
+			<c:when test="${errors.regYmd}">
+			alert("登録日を入力してください。");
+			</c:when>
+			<c:when test="${errors.invalidNumber}">
+			alert("数量または在庫番号は数字で入力してください。");
+			</c:when>
+			<c:when test="${errors.invalidQtyNegative}">
+			alert("数量は0以上で入力してください。");
+			</c:when>
+			<c:when test="${errors.invalidDate}">
+			alert("登録日の日付形式が正しくありません。");
+			</c:when>
+			<c:when test="${errors.insertError}">
+			alert("登録中にエラーが発生しました。もう一度お試しください。");
+			</c:when>
+			</c:choose>
+		};
+	</script>
 </body>
 </html>
