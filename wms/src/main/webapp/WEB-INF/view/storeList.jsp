@@ -74,3 +74,4 @@
 		location.href = "update.do?store_no=" + cellValue;
 	}
 </script>
+
