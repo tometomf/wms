@@ -21,23 +21,23 @@
 				</div>
 				<div id="regist-text">入庫名</div>
 				<div id="regist-value">
-					<input type="text" name="store_nm">
+					<input type="text" name="store_nm" required>
 				</div>
 				<div id="regist-text">品目コード</div>
 				<div id="regist-value">
-					<input type="text" name="item_cd">
+					<input type="text" name="item_cd" required>
 				</div>
 				<div id="regist-text">品目数</div>
 				<div id="regist-value">
-					<input type="number" name="item_qty" min="0">
+					<input type="number" name="item_qty" min="0" required>
 				</div>
 				<div id="regist-text">入庫担当部署</div>
 				<div id="regist-value">
-					<input type="text" name="store_dept">
+					<input type="text" name="store_dept" required>
 				</div>
 				<div id="regist-text">入庫担当者名</div>
 				<div id="regist-value">
-					<input type="text" name="store_user">
+					<input type="text" name="store_user" required>
 				</div>
 				<div id="regist-text">備考</div>
 				<div id="regist-value">
@@ -45,7 +45,7 @@
 				</div>
 				<div id="regist-text">入庫日</div>
 				<div id="regist-value">
-					<input type="date" name="reg_ymd">
+					<input type="date" name="reg_ymd" required>
 				</div>
 			</div>
 				<div id="regist-button">

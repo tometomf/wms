@@ -21,23 +21,23 @@
 				</div>
 				<div id="regist-text">入庫名</div>
 				<div id="regist-value">
-					<input type="text" name="store_nm" value="${store_nm}">
+					<input type="text" name="store_nm" value="${store_nm}" required>
 				</div>
 				<div id="regist-text">品目コード</div>
 				<div id="regist-value">
-					<input type="text" name="item_cd" value="${item_cd}">
+					<input type="text" name="item_cd" value="${item_cd}"required>
 				</div>
 				<div id="regist-text">品目数</div>
 				<div id="regist-value">
-					<input type="number" name="item_qty" min="0" value="${item_qty}">
+					<input type="number" name="item_qty" min="0" value="${item_qty}"required>
 				</div>
 				<div id="regist-text">入庫担当部署</div>
 				<div id="regist-value">
-					<input type="text" name="store_dept" value="${store_dept}">
+					<input type="text" name="store_dept" value="${store_dept}"required>
 				</div>
 				<div id="regist-text">入庫担当者名</div>
 				<div id="regist-value">
-					<input type="text" name="store_user" value="${store_user}">
+					<input type="text" name="store_user" value="${store_user}"required>
 				</div>
 				<div id="regist-text">備考</div>
 				<div id="regist-value">
@@ -45,14 +45,13 @@
 				</div>
 				<div id="regist-text">入庫日</div>
 				<div id="regist-value">
-					<input type="date" name="reg_ymd" value="${reg_ymd}">
+					<input type="date" name="reg_ymd" value="${reg_ymd}"required>
 				</div>
 			</div>
 				<div id="regist-button">
 					<div>
 						<input type="submit" value="수정">
 						<a href="delete.do?store_no=${store.store_no}" id="button-link">삭제</a>
-						<!-- 이스터에그 -->
 					</div>
 				</div>
 		</form>
