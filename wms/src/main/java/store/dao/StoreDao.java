@@ -43,22 +43,12 @@ public class StoreDao {
 	    ResultSet rs = null;
 	    try {
 	        pstmt = conn.prepareStatement(
-	            "select store_no, store_nm, item_cd, item_qty, store_dept, store_user, descr, reg_ymd " +
-	            "from wms_store where store_no = ?");
+	        		"select * from wms_store where store_no = ?");
 	        pstmt.setInt(1, Integer.parseInt(storeNo));
 	        rs = pstmt.executeQuery();
 	        Store store = null;
 	        if (rs.next()) {
-	            store = new Store(
-	                rs.getInt("store_no"),              // store_no
-	                rs.getString("store_nm"),           // store_nm
-	                rs.getString("store_dept"),         // store_dept
-	                rs.getString("store_user"),         // store_user
-	                rs.getString("descr"),              // descr
-	                rs.getDate("reg_ymd"),               // reg_ymd
-	                rs.getString("item_cd"),            // item_cd
-	                rs.getInt("item_qty")                // item_qty
-	            );
+	            store = convertStore(rs);
 	        }
 	        return store;
 	    } finally {
@@ -104,14 +94,16 @@ public class StoreDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"update wms_store set store_nm=?, store_dept=?, store_user=?, descr=?, reg_ymd=? where store_no=?");
+					"update wms_store set store_nm=?, item_cd=?, item_qty=?, store_dept=?, store_user=?, descr=?, reg_ymd=? where store_no=?");
 			pstmt.setString(1, store.getStore_nm());
-			pstmt.setString(2, store.getItem_cd());
-			pstmt.setInt(3, store.getItem_qty());
-			pstmt.setString(4, store.getStore_dept());
-			pstmt.setString(5, store.getStore_user());
-			pstmt.setString(6, store.getDescr());
-			pstmt.setDate(7, (java.sql.Date) store.getReg_ymd());
+	        pstmt.setString(2, store.getItem_cd());
+	        pstmt.setInt(3, store.getItem_qty());
+	        pstmt.setString(4, store.getStore_dept());
+	        pstmt.setString(5, store.getStore_user());
+	        pstmt.setString(6, store.getDescr());
+	        pstmt.setDate(7, new java.sql.Date(store.getReg_ymd().getTime()));
+	        pstmt.setInt(8, store.getStore_no()); 
+			
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -123,7 +115,7 @@ public class StoreDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("delete wms_store where store_no=?");
-			pstmt.setString(1, store_No);
+			pstmt.setInt(1, Integer.parseInt(store_No));
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
