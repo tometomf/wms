@@ -22,11 +22,10 @@ public class StockDao {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select a.stock_no,a.item_cd, nvl(a.item_nm,  ' ')as item_nm , a.spec, a.item_gubun, a.manufacturer, a.qty, a.ware_cd, nvl(b.ware_nm, ' ')as ware_nm, a.reg_ymd \r\n"
-					+ "from (\r\n"
-					+ "    select a.stock_no,a.item_cd, b.item_nm, b.spec, b.item_gubun, b.manufacturer, qty, ware_cd, reg_ymd\r\n"
-					+ "   from wms_stock a left outer join wms_item b  on a.item_cd = b.item_cd\r\n"
-					+ ") a left outer join wms_ware b on a.ware_cd = b.ware_cd order by a.stock_no" );
+					"select rownum no, stock_no, a.item_cd, b.item_nm\r\n"
+					+ "     , qty, a.ware_cd, c.ware_nm\r\n"
+					+ "     , to_char(a.reg_ymd, 'yyyy-MM-dd') as reg_ymd, a.descr\r\n"
+					+ "from wms_stock a join wms_item b on a.item_cd = b.item_cd join wms_ware c on a.ware_cd = c.ware_cd" );
 			rs = pstmt.executeQuery();
 			List<StockPlus> result = new ArrayList<>();
 			while (rs.next()) {
@@ -41,20 +40,20 @@ public class StockDao {
 	}
 
 	// 재고번호 1씩 증가 / 在庫番号1ずつ増加
-	public Stock selectStockNo(Connection conn) throws SQLException {
+	public String selectStockNo(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("SELECT NVL(MAX(stock_no), 0) + 1 AS next_stock_no FROM wms_stock");
+			pstmt = conn.prepareStatement("select NVL('K' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(stock_no, 2))), 0) + 1), 3, '0'), 'K001') AS stock_no from wms_stock");
 			rs = pstmt.executeQuery();
+			
+			String stock_No = null;
+			
 			if (rs.next()) {
-				return new Stock(rs.getInt("next_stock_no"), null, // item_Cd
-						0, // qty
-						null, // ware_Cd
-						null // reg_Ymd
-				);
+				stock_No = rs.getString("stock_no");
 			}
-			return null;
+			
+			return stock_No;
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
@@ -62,19 +61,24 @@ public class StockDao {
 	}
 
 	// 재고번호로 조회 / 在庫番号で照会
-	public Stock selectByStockNo(Connection conn, int stockNo) throws SQLException {
+	public Stock selectByStockNo(Connection conn, String stockNo) throws SQLException {
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
 			pstmt = conn.prepareStatement(
-					"SELECT stock_no, item_cd, qty, ware_cd, reg_ymd FROM wms_stock WHERE stock_no = ?");
-			pstmt.setInt(1, stockNo);
+					"select rownum no, stock_no, b.item_nm as item_cd, qty, c.ware_nm as ware_cd, a.reg_ymd, a.descr\r\n"
+					+ "from wms_stock a join wms_item b on a.item_cd = b.item_cd join wms_ware c on a.ware_cd = c.ware_cd \r\n"
+					+ "where stock_no = ?");
+			pstmt.setString(1, stockNo);
 			rs = pstmt.executeQuery();
+			
 			Stock stock = null;
 
 			if (rs.next()) {
-				stock = new Stock(rs.getInt("stock_no"), rs.getString("item_cd"), rs.getInt("qty"),
-						rs.getString("ware_cd"), rs.getDate("reg_ymd"));
+				stock = new Stock(rs.getString("stock_no"), rs.getString("item_cd"), rs.getInt("qty"),
+						rs.getString("ware_cd"), rs.getDate("reg_ymd"), rs.getString("descr"));
 			}
 			return stock;
 		} finally {
@@ -92,35 +96,35 @@ public class StockDao {
 //				 rs.getDate("reg_ymd"));
 //	}
 
-	// 컬럼 추가된 재고 조회 / カラム追加された在庫照会
-	private StockPlus convertStockPlus(ResultSet rs) throws SQLException {
-		return new StockPlus(rs.getInt("stock_no"), rs.getString("item_cd"), rs.getString("item_nm"),
-				rs.getString("spec"), rs.getString("item_gubun"), rs.getString("manufacturer"), rs.getInt("qty"),
-				rs.getString("ware_cd"), rs.getString("ware_nm"), rs.getDate("reg_ymd"));
-	}
-
 	// 재고 신규 등록 / 在庫新規登録
 	public void insert(Connection conn, Stock stock) throws SQLException {
-		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_stock values(?, ?, ?, ?, ?)")) {
-			pstmt.setInt(1, stock.getStock_No()); // 품목코드 / 品目コード
+		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_stock values(?, ?, ?, ?, ?, ?)")) {
+			pstmt.setString(1, stock.getStock_No()); // 품목코드 / 品目コード
 			pstmt.setString(2, stock.getItem_Cd()); // 품목코드 / 品目コード
 			pstmt.setInt(3, stock.getQty()); // 수량 / 数量
 			pstmt.setString(4, stock.getWare_Cd()); // 창고코드 / 倉庫コード
-			pstmt.setDate(5, new java.sql.Date(stock.getReg_Ymd().getTime())); // 등록일 / 登録日
-
+			pstmt.setString(5, stock.getDescr()); // 등록일 / 登録日
+			pstmt.setDate(6, new java.sql.Date(stock.getReg_Ymd().getTime())); // 등록일 / 登録日
 			pstmt.executeUpdate();
 		}
 	}
 
 	// 재고 수정 / 在庫修正
 	public void update(Connection conn, Stock stock) throws SQLException {
-		String sql = "UPDATE wms_stock " + "SET item_cd = ?, qty = ?, ware_cd = ?, reg_ymd = ? " + "WHERE stock_no = ?";
+		
+		System.out.println(stock.getQty());
+		System.out.println(stock.getWare_Cd());
+		System.out.println(new java.sql.Date(stock.getReg_Ymd().getTime()));
+		System.out.println(stock.getDescr());
+		System.out.println(stock.getStock_No());
+		
+		String sql = "UPDATE wms_stock SET qty = ?, reg_ymd = ?, descr = ? WHERE stock_no = ?";
+		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, stock.getItem_Cd());
-			pstmt.setInt(2, stock.getQty());
-			pstmt.setString(3, stock.getWare_Cd());
-			pstmt.setDate(4, new java.sql.Date(stock.getReg_Ymd().getTime()));
-			pstmt.setInt(5, stock.getStock_No());
+			pstmt.setInt(1, stock.getQty());
+			pstmt.setDate(2, new java.sql.Date(stock.getReg_Ymd().getTime()));
+			pstmt.setString(3, stock.getDescr());
+			pstmt.setString(4, stock.getStock_No());
 			pstmt.executeUpdate();
 		}
 	}
@@ -138,4 +142,16 @@ public class StockDao {
 		}
 	}
 
+	// 컬럼 추가된 재고 조회 / カラム追加された在庫照会
+	public StockPlus convertStockPlus(ResultSet rs) throws SQLException {
+		return new StockPlus(rs.getString("no")
+					 	   , rs.getString("stock_no")
+					 	   , rs.getString("item_cd")
+					 	   , rs.getString("item_nm")
+					 	   , rs.getInt("qty")
+					 	   , rs.getString("ware_cd")
+					 	   , rs.getString("ware_nm")
+					 	   , rs.getDate("reg_ymd")
+					 	   , rs.getString("descr"));
+	}
 }

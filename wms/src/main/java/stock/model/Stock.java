@@ -4,11 +4,12 @@ import java.util.Date;
 //재고 정보를 담는 클래스 (在庫情報を保持するクラス)
 public class Stock {
 
-	private int stock_No;				// 재고번호 / 在庫番号
+	private String stock_No;				// 재고번호 / 在庫番号
 	private String item_Cd;			// 품목코드 / 品目コード
 	private int qty;						// 재고수량 / 在庫数量
 	private String ware_Cd;			// 창고코드 / 倉庫コード
 	private Date reg_Ymd;			// 등록일 / 登録日
+	private String descr;
 	
 	public Stock() {
 		super();
@@ -16,21 +17,22 @@ public class Stock {
 	}
 	
 	// 생성자 / コンストラクタ
-	public Stock(int stock_No, String item_Cd, int qty, String ware_Cd, Date reg_Ymd) {
+	public Stock(String stock_No, String item_Cd, int qty, String ware_Cd, Date reg_Ymd, String descr) {
 		super();
 		this.stock_No = stock_No;
 		this.item_Cd = item_Cd;
 		this.qty = qty;
 		this.ware_Cd = ware_Cd;
 		this.reg_Ymd = reg_Ymd;
+		this.descr = descr;
 	}
 
 	// 각 필드에 대한 getter/setter / 各フィールドの getter/setter
-	public int getStock_No() {
+	public String getStock_No() {
 		return stock_No;
 	}
 	
-	public void setStock_No(int stock_No) {
+	public void setStock_No(String stock_No) {
 		this.stock_No = stock_No;
 	}
 
@@ -64,6 +66,14 @@ public class Stock {
 
 	public void setReg_Ymd(Date reg_Ymd) {
 		this.reg_Ymd = reg_Ymd;
+	}
+	
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
 	}
 }
 
