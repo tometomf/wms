@@ -96,13 +96,14 @@
 	${ctxPath = pageContext.request.contextPath ; ''}
 	<div id="sidebar">
 		<div id="title"><a href="${ctxPath}/index.do">物流管理</a></div>		<!-- 물류관리 -->
-		<div id="menu-section">
-			<div id="menu-title">&nbsp;ユーザー管理</div> <!-- 사용자 관리 -->
-			<ul>
-				<li><a href="${ctxPath}/user/insert.do">ユーザー登録</a></li> <!-- 사용자 등록 -->
-				<li><a href="${ctxPath}/user/list.do">ユーザー現況</a></li> <!-- 사용자 현황 -->
-			</ul>
-		</div>
+<!-- 		사용자 정보 사용 X -->
+<!-- 		<div id="menu-section"> -->
+<!-- 			<div id="menu-title">&nbsp;ユーザー管理</div> 사용자 관리 -->
+<!-- 			<ul> -->
+<%-- 				<li><a href="${ctxPath}/user/insert.do">ユーザー登録</a></li> <!-- 사용자 등록 --> --%>
+<%-- 				<li><a href="${ctxPath}/user/list.do">ユーザー現況</a></li> <!-- 사용자 현황 --> --%>
+<!-- 			</ul> -->
+<!-- 		</div> -->
 		<div id="menu-section">
 			<div id="menu-title">&nbsp;品目</div> <!-- 품목 -->
 			<ul>
@@ -118,10 +119,10 @@
 			</ul>
 		</div>
 		<div id="menu-section">
-			<div id="menu-title">&nbsp;在庫</div> <!-- 재고 -->
+			<div id="menu-title">&nbsp;発注</div> <!-- 발주 -->
 			<ul>
-				<li><a href="${ctxPath}/stock/insert.do">在庫登録</a></li> <!-- 재고 등록 -->
-				<li><a href="${ctxPath}/stock/list.do">在庫現況</a></li> <!-- 재고 현황 -->
+				<li><a href="${ctxPath}/porder/insert.do">発注登録</a></li> <!-- 창고 등록 -->
+				<li><a href="${ctxPath}/porder/list.do">発注現況</a></li> <!-- 창고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
@@ -129,6 +130,13 @@
 			<ul>
 				<li><a href="${ctxPath}/store/insert.do">入庫登録</a></li> <!-- 입고 등록 -->
 				<li><a href="${ctxPath}/store/list.do">入庫現況</a></li> <!-- 입고 현황 -->
+			</ul>
+		</div>
+		<div id="menu-section">
+			<div id="menu-title">&nbsp;在庫</div> <!-- 재고 -->
+			<ul>
+				<li><a href="${ctxPath}/stock/insert.do">在庫登録</a></li> <!-- 재고 등록 -->
+				<li><a href="${ctxPath}/stock/list.do">在庫現況</a></li> <!-- 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
