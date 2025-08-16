@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.DuplicateFormatFlagsException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import item.model.Item;
+import item.service.ItemListService;
 import mvc.command.CommandHandler;
 import order.model.Order;
 import order.service.OrderService;
@@ -19,6 +22,7 @@ public class OrderInsertHandler implements CommandHandler {
 	
 	private static final String FORM_VIEW = "/WEB-INF/view/wareInsert.jsp";
 	private OrderService orderService = new OrderService();
+	private ItemListService itemService = new ItemListService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -34,8 +38,11 @@ public class OrderInsertHandler implements CommandHandler {
 	
 	// 등록 전 창고 pk 조회
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		Order order = orderService.getOrderCd();
-		req.setAttribute("orderNo", order);
+		String orderNo = orderService.selectOrderNo();
+		List<Item> itemList = itemService.getItemList();
+		
+		req.setAttribute("orderNo", orderNo);
+		req.setAttribute("itemList", itemList);
 		
 		return "/WEB-INF/view/orderInsert.jsp";
 	}
@@ -48,36 +55,23 @@ public class OrderInsertHandler implements CommandHandler {
 		order.setOrder_No(req.getParameter("order_no"));
 		order.setOrder_Nm(req.getParameter("order_nm"));
 		order.setItem_Cd(req.getParameter("item_cd"));
+		order.setQty(req.getParameter("qty"));
 		order.setOrder_Price(req.getParameter("order_price"));
 		order.setOrder_Dept(req.getParameter("order_dept"));
 		order.setOrder_User(req.getParameter("order_user"));
-		order.setOrder_Gubun(req.getParameter("order_gubun"));
-		order.setStore_Yn(req.getParameter("store_yn"));
 		order.setDescr(req.getParameter("descr"));
 		
-		Map<String, Boolean> errors = new HashMap<>();
-		req.setAttribute("errors", errors);
-		
-//		ware.validate(errors);
-//		
-//		if (!errors.isEmpty()) {
-//			Ware ware1 = wareListService.getWareCd();
-//			req.setAttribute("wareCd", ware1);
-//			
-//			return FORM_VIEW;
-//		}
 		try {
 			orderService.insert(order);
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('등록이 완료되었습니다.');");
+			out.println("alert('登録できました。');");
 			out.println("location.href='list.do';");
 			out.println("</script>");
 			out.close();
 			return null;
 		} catch (DuplicateFormatFlagsException e) {
-			errors.put("duplicateId", Boolean.TRUE);
 			return FORM_VIEW;
 		}
 	}

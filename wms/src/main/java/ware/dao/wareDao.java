@@ -37,7 +37,7 @@ public class wareDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select NVL('W' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ware_cd, 2))), 0) + 1), 3, '0'), 'W001') AS next_ware_cd from wms_ware");
+			pstmt = conn.prepareStatement("select NVL('SO' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(order_no, 3))), 0) + 1), 3, '0'), 'SO001') AS order_no from wms_order");
 			rs = pstmt.executeQuery();
 			Ware ware = null;
 			

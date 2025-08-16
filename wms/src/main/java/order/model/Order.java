@@ -1,50 +1,44 @@
 package order.model;
 
-import java.util.Date;
-
 public class Order {
 
+	public String no;
 	public String order_No;
 	public String order_Nm;
 	public String item_Cd;
 	public String item_Nm;
+	public String qty;
 	public String order_Price;
 	public String order_Dept;
 	public String order_User;
-	public String order_Gubun;
 	public String descr;
 	public String reg_Ymd;
-	public String upd_ymd;
-	public String store_Yn;
 	
 	public Order() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
-	
-	public Order(String order_No, String order_Nm, String item_Cd, String item_Nm, String order_Price, String order_Dept,
-			String order_User, String order_Gubun, String descr, String reg_Ymd, String upd_ymd, String store_Yn) {
-		super();
+
+	public Order(String no, String order_No, String order_Nm, String item_Cd, String item_Nm, String qty, String order_Price,
+			String order_Dept, String order_User, String descr, String reg_Ymd) {		
+		this.no = no;
 		this.order_No = order_No;
 		this.order_Nm = order_Nm;
 		this.item_Cd = item_Cd;
 		this.item_Nm = item_Nm;
+		this.qty = qty;
 		this.order_Price = order_Price;
 		this.order_Dept = order_Dept;
 		this.order_User = order_User;
-		this.order_Gubun = order_Gubun;
 		this.descr = descr;
 		this.reg_Ymd = reg_Ymd;
-		this.upd_ymd = upd_ymd;
-		this.store_Yn = store_Yn;
+	}
+	
+	public String getNo() {
+		return no;
 	}
 
-	public String getItem_Nm() {
-		return item_Nm;
-	}
-
-	public void setItem_Nm(String item_Nm) {
-		this.item_Nm = item_Nm;
+	public void setNo(String no) {
+		this.no = no;
 	}
 
 	public String getOrder_No() {
@@ -71,6 +65,22 @@ public class Order {
 		this.item_Cd = item_Cd;
 	}
 
+	public String getItem_Nm() {
+		return item_Nm;
+	}
+
+	public void setItem_Nm(String item_Nm) {
+		this.item_Nm = item_Nm;
+	}
+
+	public String getQty() {
+		return qty;
+	}
+
+	public void setQty(String qty) {
+		this.qty = qty;
+	}
+
 	public String getOrder_Price() {
 		return order_Price;
 	}
@@ -95,14 +105,6 @@ public class Order {
 		this.order_User = order_User;
 	}
 
-	public String getOrder_Gubun() {
-		return order_Gubun;
-	}
-
-	public void setOrder_Gubun(String order_Gubun) {
-		this.order_Gubun = order_Gubun;
-	}
-
 	public String getDescr() {
 		return descr;
 	}
@@ -117,21 +119,5 @@ public class Order {
 
 	public void setReg_Ymd(String reg_Ymd) {
 		this.reg_Ymd = reg_Ymd;
-	}
-
-	public String getUpd_ymd() {
-		return upd_ymd;
-	}
-
-	public void setUpd_ymd(String upd_ymd) {
-		this.upd_ymd = upd_ymd;
-	}
-
-	public String getStore_Yn() {
-		return store_Yn;
-	}
-
-	public void setStore_Yn(String store_Yn) {
-		this.store_Yn = store_Yn;
 	}
 }

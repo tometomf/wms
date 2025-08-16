@@ -21,29 +21,31 @@
 			<table>
 				<thead>
 					<tr>
-						<th>受注番号</th>
-						<th>受注名</th>
-						<th>受注品目番号</th>
-						<th>受注品目名</th>
+						<th width = "4%">No.</th>
+						<th width = "8%">受注番号</th>
+						<th width = "18%">受注名</th>
+						<th width = "8%">受注品目</th>
+						<th width = "16%">受注品目名</th>
+						<th width = "5%">수량</th>
 						<th>受注価格</th>
-						<th>担当部署</th>
-						<th>担当社員</th>
+						<th width = "">担当部署</th>
+						<th width = "">担当社員</th>
 						<th>登録日</th>
-						<th>受注完了の有無</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="order" items="${orderList}">
 					    <tr ondblclick="rowClicked(this)">
-					        <td align="center">${order.order_No}</td>
-					        <td align="left">${order.order_Nm}</td>
-					        <td align="center">${order.item_Cd}</td>
-					        <td align="center">${order.item_Nm}</td>
-					        <td align="left">${order.order_Price}</td>
-					        <td align="right">${order.order_Dept}</td>
-					        <td align="right">${order.order_User}</td>
-					        <td align="right">${order.reg_Ymd}</td>
-					        <td align="right">${order.store_Yn}</td>
+					        <td>${order.no}</td>
+					        <td>${order.order_No}</td>
+					        <td style = "text-align: left; padding-left: 5px">${order.order_Nm}</td>
+					        <td>${order.item_Cd}</td>
+					        <td style = "text-align: left; padding-left: 5px">${order.item_Nm}</td>
+					        <td style = "text-align: right; padding-right: 5px">${order.qty}</td>
+					        <td style = "text-align: right; padding-right: 5px">${order.order_Price}</td>
+					        <td>${order.order_Dept}</td>
+					        <td>${order.order_User}</td>
+					        <td>${order.reg_Ymd}</td>
 					    </tr>
 					</c:forEach>
 				</tbody>
@@ -57,7 +59,7 @@
 
 	// OnRowDblClick Event
   	function rowClicked(row) {
-		var cellValue = row.cells[0].innerText; // 첫 번째 셀 값
+		var cellValue = row.cells[1].innerText; // 첫 번째 셀 값
 		location.href = "update.do?OrderNo=" + cellValue;
     	// alert("더블클릭한 행의 첫 번째 셀: " + cellValue);
   	}

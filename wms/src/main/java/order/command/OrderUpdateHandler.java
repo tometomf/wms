@@ -33,11 +33,10 @@ public class OrderUpdateHandler implements CommandHandler {
 	}
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
+		
 		String orderNo = req.getParameter("OrderNo");  // 여기서 파라미터 읽음
-		
-		System.out.println(orderNo);
-		
 		Order order = orderService.selectByOrderNo(orderNo);
+		
 		req.setAttribute("order", order);
 		
 		return "/WEB-INF/view/orderUpdate.jsp";
@@ -50,24 +49,12 @@ public class OrderUpdateHandler implements CommandHandler {
 		order.setOrder_No(req.getParameter("order_no"));
 		order.setOrder_Nm(req.getParameter("order_nm"));
 		order.setItem_Cd(req.getParameter("item_cd"));
+		order.setQty(req.getParameter("qty"));
 		order.setOrder_Price(req.getParameter("order_price"));
 		order.setOrder_Dept(req.getParameter("order_dept"));
 		order.setOrder_User(req.getParameter("order_user"));
-		order.setOrder_Gubun(req.getParameter("order_gubun"));
-		order.setStore_Yn(req.getParameter("store_yn"));
 		order.setDescr(req.getParameter("descr"));
-		
-		Map<String, Boolean> errors = new HashMap<>();
-		req.setAttribute("errors", errors);
-		
-//		 ware.validate(errors);
-		
-//		if (!errors.isEmpty()) {
-//			Ware ware1 = wareListService.getWareCd();
-//			req.setAttribute("wareCd", ware1);
-//			
-//			return FORM_VIEW;
-//		}
+
 		try {
 			orderService.update(order);
 			res.setContentType("text/html; charset=UTF-8");
@@ -79,7 +66,6 @@ public class OrderUpdateHandler implements CommandHandler {
 			out.close();
 			return null;
 		} catch (DuplicateFormatFlagsException e) {
-			errors.put("duplicateId", Boolean.TRUE);
 			return FORM_VIEW;
 		}
 	}

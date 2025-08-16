@@ -24,9 +24,13 @@
 					<div id = "regist-value">
 						<input type = "text" name = "order_nm" value = "${order.order_Nm}">
 					</div>
-					<div id = "regist-text">受注品目番号</div>
+					<div id = "regist-text">受注品目</div>
 					<div id = "regist-value">
-						<input type = "text" name = "item_cd" value = "${order.item_Cd}">
+						<input readonly type = "text" name = "item_cd" value = "${order.item_Nm}">
+					</div>
+					<div id = "regist-text">数量</div>
+					<div id = "regist-value">
+						<input type = "number" name = "qty" value = "${order.qty}">
 					</div>
 					<div id = "regist-text">受注価格</div>
 					<div id = "regist-value">
@@ -39,17 +43,6 @@
 					<div id = "regist-text">担当社員</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_user" value = "${order.order_User}">
-					</div>
-					<div id = "regist-text">受注区分</div>
-					<div id = "regist-value">
-						<input type = "text" name = "order_gubun" value = "${order.order_Gubun}">
-					</div>
-					<div id = "regist-text">受注完了の有無</div>
-					<div id = "regist-value">
-						<select	name = "useyn">
-							<option value="Y" ${order.store_Yn == 'Y' ? 'selected' : ''}>利用あり</option>
-    						<option value="N" ${order.store_Yn == 'N' ? 'selected' : ''}>利用なし</option>
-						</select>
 					</div>
 					<div id = "regist-text">備考</div>
 					<div id = "regist-value">
