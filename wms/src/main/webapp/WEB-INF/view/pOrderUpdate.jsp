@@ -46,6 +46,10 @@
 					<div id = "regist-value">
 						<textarea name="descr" rows="4" cols="56">${pOrder.descr}</textarea>
 					</div>
+					<div id="regist-text">발주등록일</div>
+					<div id="regist-value">
+						<input type="date" name="reg_ymd" value="${pOrder.reg_Ymd}">
+					</div>
 				</div>
 				<div id = "regist-button">
 					<div>

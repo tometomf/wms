@@ -70,7 +70,7 @@ public class PorderService {
 							  ,	pOrder.getPurchase_Dept()
 							  ,	pOrder.getPurchase_User()
 							  ,	pOrder.getDescr()
-							  ,	null));
+							  ,	pOrder.getReg_Ymd()));
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
@@ -97,7 +97,7 @@ public class PorderService {
 						  ,	pOrder.getPurchase_Dept()
 						  ,	pOrder.getPurchase_User()
 						  ,	pOrder.getDescr()
-						  ,	null));
+						  ,	pOrder.getReg_Ymd()));
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

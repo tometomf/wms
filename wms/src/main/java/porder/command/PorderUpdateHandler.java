@@ -53,6 +53,7 @@ public class PorderUpdateHandler implements CommandHandler {
 		pOrder.setPurchase_Dept(req.getParameter("purchase_dept"));
 		pOrder.setPurchase_User(req.getParameter("purchase_user"));
 		pOrder.setDescr(req.getParameter("descr"));
+		pOrder.setReg_Ymd(req.getParameter("reg_ymd"));
 		
 		try {
 			pOrderService.update(pOrder);

@@ -1,7 +1,14 @@
+<%@ page import="java.util.Date, java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
     
+<%
+    Date today = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String todayStr = sdf.format(today);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +58,10 @@
 					<div id = "regist-value">
 						<textarea name="descr" rows="4" cols="56"></textarea>
 					</div>
+					<div id="regist-text">발주등록일</div>
+					<div id="regist-value">
+						<input type="date" name="reg_ymd" value="<%= todayStr %>">
+					</div>
 				</div>
 				<div id = "regist-button">
 					<div>
@@ -71,7 +82,8 @@
 	        { name: "item_cd", label: "발주품목" },
 	        { name: "qty", label: "수량" },
 	        { name: "purchase_dept", label: "발주담당부서" },
-	        { name: "purchase_user", label: "발주담당자" }
+	        { name: "purchase_user", label: "발주담당자" },
+	        { name: "reg_ymd", label: "발주등록일" },
 	    ];
 	
 	    for (let field of requiredFields) {

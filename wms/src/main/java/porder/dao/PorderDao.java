@@ -95,7 +95,7 @@ public class PorderDao {
 						  , rs.getString("purchase_dept")
 						  , rs.getString("purchase_user")
 						  , rs.getString("descr")
-						  , null);
+						  , rs.getString("reg_ymd"));
 			}
 			return pOrder;
 		} finally {
@@ -107,7 +107,7 @@ public class PorderDao {
 	// 창고 마스터 등록
 	public void insert(Connection conn, Porder pOrder) throws SQLException {
 		
-		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_porder values(?, ?, ?, ?, ?, ?, ?, sysdate)")) {
+		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_porder values(?, ?, ?, ?, ?, ?, ?, ?)")) {
 			pstmt.setString(1, pOrder.getPurchase_No());
 			pstmt.setString(2, pOrder.getPurchase_Nm());
 			pstmt.setString(3, pOrder.getItem_Cd());
@@ -115,6 +115,7 @@ public class PorderDao {
 			pstmt.setString(5, pOrder.getPurchase_Dept());
 			pstmt.setString(6, pOrder.getPurchase_User());
 			pstmt.setString(7, pOrder.getDescr());
+			pstmt.setString(8, pOrder.getReg_Ymd());
 			pstmt.executeUpdate();
 		}
 	}
@@ -124,13 +125,14 @@ public class PorderDao {
 		PreparedStatement pstmt = null;
 		
 		try {
-			pstmt = conn.prepareStatement("update wms_porder set purchase_nm = ?, qty = ?, purchase_dept = ?, purchase_user = ?, descr = ? where purchase_no = ?");
+			pstmt = conn.prepareStatement("update wms_porder set purchase_nm = ?, qty = ?, purchase_dept = ?, purchase_user = ?, descr = ?, reg_ymd = ?where purchase_no = ?");
 			pstmt.setString(1, pOrder.getPurchase_Nm());
 			pstmt.setString(2, pOrder.getQty());
 			pstmt.setString(3, pOrder.getPurchase_Dept());
 			pstmt.setString(4, pOrder.getPurchase_User());
 			pstmt.setString(5, pOrder.getDescr());
-			pstmt.setString(6, pOrder.getPurchase_No());
+			pstmt.setString(6, pOrder.getReg_Ymd());
+			pstmt.setString(7, pOrder.getPurchase_No());
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
