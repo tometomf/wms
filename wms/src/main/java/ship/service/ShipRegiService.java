@@ -12,18 +12,20 @@ public class ShipRegiService {
 
     private ShipDAO shipDao = new ShipDAO();
 
-    public int register(ShipViewModel ship) {
+    public String register(ShipViewModel ship) {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
             conn.setAutoCommit(false);
 
-            int newShipNo = shipDao.insert(conn, ship);
-            if (newShipNo == 0) {
+            String newShipNo = shipDao.insert(conn, ship);
+            
+            if (newShipNo == "") {
                 throw new RuntimeException("출고 등록 실패");
             }
 
             conn.commit();
+            
             return newShipNo;
 
         } catch (SQLException e) {
@@ -65,7 +67,7 @@ public class ShipRegiService {
         }
     }
     
-    public void delete(int shipNo) {
+    public void delete(String shipNo) {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
@@ -78,7 +80,7 @@ public class ShipRegiService {
     }
 
 
-    public ShipViewModel selectOne(int shipNo) {
+    public ShipViewModel selectOne(String shipNo) {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();

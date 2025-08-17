@@ -5,7 +5,8 @@ import java.util.Date;
 public class ShipViewModel {
 
 	// 出庫情報
-	private int shipNo;
+	private String no;
+	private String shipNo;
 	private String shipNm;
 	private String shipDept;
 	private String shipUser;
@@ -16,14 +17,16 @@ public class ShipViewModel {
 
 	// 品目情報
 	private String itemCd;
+	private String itemNm;
 	private int shipPrice;
 	private int shipQty;
 
 	public ShipViewModel() {
 	}
 
-	public ShipViewModel(int shipNo, String shipNm, String shipDept, String shipUser, String descr, Date regYmd,
-			Date updYmd, String shipYn, String itemCd, int shipPrice, int shipQty) {
+	public ShipViewModel(String no, String shipNo, String shipNm, String shipDept, String shipUser, String descr, Date regYmd,
+			Date updYmd, String shipYn, String itemCd, String itemNm, int shipPrice, int shipQty) {
+		this.no = no;
 		this.shipNo = shipNo;
 		this.shipNm = shipNm;
 		this.shipDept = shipDept;
@@ -33,11 +36,12 @@ public class ShipViewModel {
 		this.updYmd = updYmd;
 		this.shipYn = shipYn;
 		this.itemCd = itemCd;
+		this.itemNm = itemNm;
 		this.shipPrice = shipPrice;
 		this.shipQty = shipQty;
 	}
 
-	public ShipViewModel(int shipNo, String shipNm, String itemCd, int shipPrice, int shipQty, String shipDept,
+	public ShipViewModel(String shipNo, String shipNm, String itemCd, int shipPrice, int shipQty, String shipDept,
 			String shipUser, String descr, String shipYn) {
 		this.shipNo = shipNo;
 		this.shipNm = shipNm;
@@ -50,11 +54,19 @@ public class ShipViewModel {
 		this.shipYn = shipYn;
 	}
 
-	public int getShipNo() {
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
+
+	public String getShipNo() {
 		return shipNo;
 	}
 
-	public void setShipNo(int shipNo) {
+	public void setShipNo(String shipNo) {
 		this.shipNo = shipNo;
 	}
 
@@ -136,5 +148,13 @@ public class ShipViewModel {
 
 	public void setShipQty(int shipQty) {
 		this.shipQty = shipQty;
+	}
+
+	public String getItemNm() {
+		return itemNm;
+	}
+
+	public void setItemNm(String itemNm) {
+		this.itemNm = itemNm;
 	}
 }

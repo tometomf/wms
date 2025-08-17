@@ -3,11 +3,14 @@ package ship.command;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import item.model.Item;
+import item.service.ItemListService;
 import mvc.command.CommandHandler;
 import ship.model.ShipViewModel;
 import ship.service.ShipRegiService;
@@ -16,6 +19,7 @@ public class ShipRegiHandler implements CommandHandler {
 
     private static final String FORM_VIEW = "/WEB-INF/view/ship_regist.jsp";
     private ShipRegiService shipRegiService = new ShipRegiService();
+    private ItemListService itemService = new ItemListService();
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -32,7 +36,11 @@ public class ShipRegiHandler implements CommandHandler {
     // GET: 등록 화면 요청
     private String processForm(HttpServletRequest req, HttpServletResponse res) {
         ShipViewModel ship = shipRegiService.getShipNo(); // 次の出庫番号を受け取る
+        List<Item> itemList = itemService.getItemList();
+        
         req.setAttribute("shipNo", ship); // JSPに渡して「input」valueとして使用
+        req.setAttribute("itemList", itemList);
+        
         return FORM_VIEW;
     }
 
@@ -68,12 +76,13 @@ public class ShipRegiHandler implements CommandHandler {
     private ShipViewModel createShipFromRequest(HttpServletRequest req) {
         ShipViewModel ship = new ShipViewModel();
 
+        ship.setShipNo(req.getParameter("shipNo"));
         ship.setShipNm(req.getParameter("shipNm"));
+        ship.setItemCd(req.getParameter("itemCd"));
         ship.setShipDept(req.getParameter("shipDept"));
         ship.setShipUser(req.getParameter("shipUser"));
-        ship.setDescr(req.getParameter("descr"));
-        ship.setItemCd(req.getParameter("itemCd"));
         ship.setShipYn(req.getParameter("shipYn"));
+        ship.setDescr(req.getParameter("descr"));
 
         try {
             ship.setShipPrice(Integer.parseInt(req.getParameter("shipPrice")));
