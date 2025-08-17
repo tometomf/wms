@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>入庫登録</title>
+<title>内訳修正</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/wms.css">
 </head>
@@ -57,8 +57,8 @@
 			</div>
 			<div id="regist-button">
 				<div>
-					<input type="submit" value="수정"> <a
-						href="delete.do?store_no=${store.store_no}" id="button-link">삭제</a>
+					<input type="submit" value="修正"> <a
+						href="delete.do?store_no=${store.store_no}" id="button-link">削除</a>
 				</div>
 			</div>
 		</form>
