@@ -6,6 +6,7 @@ import java.util.List;
 
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
+import order.model.Order;
 import store.dao.StoreDao;
 import store.model.Store;
 
@@ -41,7 +42,7 @@ public class StoreListService {
 	}
 	
 	//新しいstore_no獲得のためのメソッド
-	public int getNewStoreNo() {
+	public String getNewStoreNo() {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -77,7 +78,19 @@ public class StoreListService {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 
-			storeDao.update(conn, store);
+			storeDao.update(conn, new Store(
+						null
+				      , store.getStore_no()
+					  ,	store.getStore_nm()
+					  ,	store.getItem_cd()
+					  , store.getItem_nm()
+					  , store.getQty()
+					  ,	store.getStore_price()
+					  ,	store.getStore_dept()
+					  ,	store.getStore_user()
+					  ,	store.getDescr()
+					  ,	store.getReg_ymd())
+			);
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

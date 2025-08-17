@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import jdbc.JdbcUtil;
+import order.model.Order;
 import store.model.Store;
 
 public class StoreDao {
@@ -19,7 +20,9 @@ public class StoreDao {
 		ResultSet rs = null;
 		// ResultSet,Pre... インスタンス初期化
 		try {
-			pstmt = conn.prepareStatement("select*from wms_store");
+			pstmt = conn.prepareStatement("select rownum no, store_no, store_nm, a.item_cd, b.item_nm\r\n"
+					+ "     , qty, a.store_price, store_dept, store_user, descr, to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
+					+ "from wms_store a join wms_item b on a.item_cd = b.item_cd");
 			// wms_store_masterに存在するコラムを全て紹介するQueryを用意
 
 			rs = pstmt.executeQuery();
@@ -43,12 +46,25 @@ public class StoreDao {
 	    ResultSet rs = null;
 	    try {
 	        pstmt = conn.prepareStatement(
-	        		"select * from wms_store where store_no = ?");
-	        pstmt.setInt(1, Integer.parseInt(storeNo));
+	        		"select store_no, store_nm, b.item_nm as item_cd, qty, a.store_price, store_dept, store_user, descr, to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
+	        		+ "from wms_store a join wms_item b on a.item_cd = b.item_cd\r\n"
+	        		+ "where store_no = ?");
+	        pstmt.setString(1, storeNo);
 	        rs = pstmt.executeQuery();
 	        Store store = null;
 	        if (rs.next()) {
-	            store = convertStore(rs);
+	            store = new Store(
+							null
+						  , rs.getString("store_no")
+						  , rs.getString("store_nm")
+						  , rs.getString("item_cd")
+						  , null
+						  , rs.getInt("qty")
+						  , rs.getInt("store_price")
+						  , rs.getString("store_dept")
+						  , rs.getString("store_user")
+						  , rs.getString("descr")
+						  , rs.getString("reg_ymd"));
 	        }
 	        return store;
 	    } finally {
@@ -58,16 +74,16 @@ public class StoreDao {
 	}
 
 
-	public int getNewStoreNo(Connection conn) throws SQLException {
+	public String getNewStoreNo(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select nvl(max(STORE_NO), 0) + 1 as store_no from wms_store");
+			pstmt = conn.prepareStatement("select NVL('S' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(store_no, 2))), 0) + 1), 3, '0'), 'S001') AS store_no from wms_store");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				return rs.getInt("store_no");
+				return rs.getString("store_no");
 			}
-			return 1;
+			return "";
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
@@ -75,16 +91,16 @@ public class StoreDao {
 	}
 
 	public static void insert(Connection conn, Store store) throws SQLException {
-		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_store values(?,?,?,?,?,?,?,?)")) {
-			pstmt.setInt(1, store.getStore_no());
+		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_store values(?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+			pstmt.setString(1, store.getStore_no());
 			pstmt.setString(2, store.getStore_nm());
 			pstmt.setString(3, store.getItem_cd());
-			pstmt.setInt(4, store.getItem_qty());
-			pstmt.setString(5, store.getStore_dept());
-			pstmt.setString(6, store.getStore_user());
-			pstmt.setString(7, store.getDescr());
-			pstmt.setDate(8, new java.sql.Date(store.getReg_ymd().getTime()));
-
+			pstmt.setInt(4, store.getQty());
+			pstmt.setInt(5, store.getStore_price());
+			pstmt.setString(6, store.getStore_dept());
+			pstmt.setString(7, store.getStore_user());
+			pstmt.setString(8, store.getDescr());
+			pstmt.setString(9, store.getReg_ymd());
 			pstmt.executeUpdate();
 		}
 	}
@@ -94,15 +110,15 @@ public class StoreDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"update wms_store set store_nm=?, item_cd=?, item_qty=?, store_dept=?, store_user=?, descr=?, reg_ymd=? where store_no=?");
+					"update wms_store set store_nm = ?, qty = ?, store_price = ?, store_dept=?, store_user = ?, descr = ?, reg_ymd = ? where store_no = ?");
 			pstmt.setString(1, store.getStore_nm());
-	        pstmt.setString(2, store.getItem_cd());
-	        pstmt.setInt(3, store.getItem_qty());
+	        pstmt.setInt(2, store.getQty());
+	        pstmt.setInt(3, store.getStore_price());
 	        pstmt.setString(4, store.getStore_dept());
 	        pstmt.setString(5, store.getStore_user());
 	        pstmt.setString(6, store.getDescr());
-	        pstmt.setDate(7, new java.sql.Date(store.getReg_ymd().getTime()));
-	        pstmt.setInt(8, store.getStore_no()); 
+	        pstmt.setString(7, store.getReg_ymd());
+	        pstmt.setString(8, store.getStore_no()); 
 			
 			return pstmt.executeUpdate();
 		} finally {
@@ -114,8 +130,8 @@ public class StoreDao {
 	public int delete(Connection conn, String store_No) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("delete wms_store where store_no=?");
-			pstmt.setInt(1, Integer.parseInt(store_No));
+			pstmt = conn.prepareStatement("delete wms_store where store_no = ?");
+			pstmt.setString(1, store_No);
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -126,14 +142,17 @@ public class StoreDao {
 	// 教科書を参考にしたコード。selectByStoreNoを使うために作ったが、selectAllから必要とされているため残す。
 	private static Store convertStore(ResultSet rs) throws SQLException {
 	    return new Store(
-	        rs.getInt("STORE_NO"),               // store_no
+    		rs.getString("no"),
+	        rs.getString("STORE_NO"),            // store_no
 	        rs.getString("STORE_NM"),            // store_nm
+	        rs.getString("ITEM_CD"),             // item_cd
+	        rs.getString("ITEM_NM"),             // item_cd
+	        rs.getInt("QTY"),            		 // item_cd
+	        rs.getInt("STORE_PRICE"),            // item_cd
 	        rs.getString("STORE_DEPT"),          // store_dept
 	        rs.getString("STORE_USER"),          // store_user
 	        rs.getString("DESCR"),               // descr
-	        toDate(rs.getTimestamp("REG_YMD")),  // reg_ymd
-	        rs.getString("ITEM_CD"),             // item_cd
-	        rs.getInt("ITEM_QTY")                 // item_qty
+	        rs.getString("REG_YMD")   // reg_ymd
 	    );
 	}
 

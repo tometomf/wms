@@ -70,30 +70,29 @@
                 </div>
             </div>
         </form>
-        
-        <script>
-function validateForm() {
-    const requiredFields = [
-        { name: "shipNm", label: "出庫名" },
-        { name: "shipDept", label: "出庫部署" },
-        { name: "shipUser", label: "担当者" },
-        { name: "itemCd", label: "品目コード" },
-        { name: "shipPrice", label: "出庫単価" },
-        { name: "shipQty", label: "出庫数量" }
-    ];
-
-    for (let field of requiredFields) {
-        let value = document.getElementsByName(field.name)[0].value.trim();
-        if (!value) {
-            alert(field.label + "を入力してください");
-            document.getElementsByName(field.name)[0].focus();
-            return false; 
-        }
-    }
-    return true; 
-}
-</script>
-
     </div>
 </body>
 </html>
+
+<script>
+	function validateForm() {
+	    const requiredFields = [
+	        { name: "shipNm", label: "出庫名" },
+	        { name: "shipDept", label: "出庫部署" },
+	        { name: "shipUser", label: "担当者" },
+	        { name: "itemCd", label: "品目コード" },
+	        { name: "shipPrice", label: "出庫単価" },
+	        { name: "shipQty", label: "出庫数量" }
+	    ];
+	
+	    for (let field of requiredFields) {
+	        let value = document.getElementsByName(field.name)[0].value.trim();
+	        if (!value) {
+	            alert(field.label + "を入力してください");
+	            document.getElementsByName(field.name)[0].focus();
+	            return false; 
+	        }
+	    }
+	    return true; 
+	}
+</script>

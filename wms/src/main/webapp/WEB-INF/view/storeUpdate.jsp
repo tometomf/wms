@@ -14,51 +14,54 @@
 	<div id="main-content">
 		<div id="wms-title">入庫登録</div>
 		<div id="search-bar" style="display: flex;"></div>
-		<form action="update.do" method="post">
+		<form action="update.do" method="post" onsubmit = "return validateForm();">
 			<div id="regist">
-				<div id="regist-text">入庫番号</div>
-				<div id="regist-value">
-					<input readonly type="text" name="store_no"
-						value="${store.store_no}">
+				<div id = "regist-menu">
+					<div id="regist-text">入庫番号</div>
+					<div id="regist-value">
+						<input readonly type="text" name="store_no" value="${store.store_no}">
+					</div>
+					<div id="regist-text">入庫名</div>
+					<div id="regist-value">
+						<input type="text" name="store_nm" value="${store.store_nm}"
+							required>
+					</div>
+					<div id="regist-text">입고품목</div>
+					<div id="regist-value">
+						<input readonly type="text" name="item_cd" value="${store.item_cd}">
+					</div>
+					<div id="regist-text">입고수량</div>
+					<div id="regist-value">
+						<input type="number" name="qty" min="0" value="${store.qty}">
+					</div>
+					<div id="regist-text">입고금액</div>
+					<div id="regist-value">
+						<input type="number" name="store_price" min="0" value="${store.store_price}">
+					</div>
+					<div id="regist-text">入庫担当部署</div>
+					<div id="regist-value">
+						<input type="text" name="store_dept" value="${store.store_dept}"
+							required>
+					</div>
+					<div id="regist-text">入庫担当者</div>
+					<div id="regist-value">
+						<input type="text" name="store_user" value="${store.store_user}"
+							required>
+					</div>
+					<div id="regist-text">備考</div>
+					<div id="regist-value">
+						<input type="text" name="descr" value="${store.descr}">
+					</div>
+					<div id="regist-text">入庫日</div>
+					<div id="regist-value">
+						<input type="date" name="reg_ymd" value="${store.reg_ymd}"/>
+					</div>
 				</div>
-				<div id="regist-text">入庫名</div>
-				<div id="regist-value">
-					<input type="text" name="store_nm" value="${store.store_nm}"
-						required>
-				</div>
-				<div id="regist-text">品目コード</div>
-				<div id="regist-value">
-					<input type="text" name="item_cd" value="${store.item_cd}" required>
-				</div>
-				<div id="regist-text">品目数</div>
-				<div id="regist-value">
-					<input type="number" name="item_qty" min="0"
-						value="${store.item_qty}" required>
-				</div>
-				<div id="regist-text">入庫担当部署</div>
-				<div id="regist-value">
-					<input type="text" name="store_dept" value="${store.store_dept}"
-						required>
-				</div>
-				<div id="regist-text">入庫担当者名</div>
-				<div id="regist-value">
-					<input type="text" name="store_user" value="${store.store_user}"
-						required>
-				</div>
-				<div id="regist-text">備考</div>
-				<div id="regist-value">
-					<input type="text" name="descr" value="${store.descr}">
-				</div>
-				<div id="regist-text">入庫日</div>
-				<div id="regist-value">
-					<input type="date" name="reg_ymd"
-						value="<fmt:formatDate value="${store.reg_ymd}" pattern="yyyy-MM-dd"/>" required>
-				</div>
-			</div>
-			<div id="regist-button">
-				<div>
-					<input type="submit" value="수정"> <a
-						href="delete.do?store_no=${store.store_no}" id="button-link">삭제</a>
+				<div id="regist-button">
+					<div>
+						<input type="submit" value="수정"> 
+						<a href="delete.do?store_no=${store.store_no}" id="button-link">삭제</a>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -66,3 +69,26 @@
 </body>
 </html>
 
+<script>
+	function validateForm() {
+		
+	    var requiredFields = [
+	        { name: "store_nm", label: "入庫名" },
+	        { name: "shipDept", label: "出庫部署" },
+	        { name: "shipUser", label: "担当者" },
+	        { name: "itemCd", label: "品目コード" },
+	        { name: "shipPrice", label: "出庫単価" },
+	        { name: "shipQty", label: "出庫数量" }
+	    ];
+	
+	    for (let field of requiredFields) {
+	        let value = document.getElementsByName(field.name)[0].value.trim();
+	        if (!value) {
+	            alert(field.label + "を入力してください");
+	            document.getElementsByName(field.name)[0].focus();
+	            return false; 
+	        }
+	    }
+	    return true; 
+	}
+</script>

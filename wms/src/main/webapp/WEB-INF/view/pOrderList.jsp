@@ -20,9 +20,9 @@
 				<thead>
 					<tr>
 						<th width = "4%">No</th>
-						<th width = "8%">발주번호</th>
+						<th width = "6%">발주번호</th>
 						<th width = "18%">발주명</th>
-						<th width = "8%">발주품목</th>
+						<th width = "6%">발주품목</th>
 						<th width = "16%">발주품목명</th>
 						<th width = "5%">수량</th>
 						<th width = "">담당부서</th>
