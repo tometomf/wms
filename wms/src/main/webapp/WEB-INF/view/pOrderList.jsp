@@ -20,14 +20,14 @@
 				<thead>
 					<tr>
 						<th width = "4%">No</th>
-						<th width = "6%">발주번호</th>
-						<th width = "18%">발주명</th>
-						<th width = "6%">발주품목</th>
-						<th width = "16%">발주품목명</th>
-						<th width = "5%">수량</th>
-						<th width = "">담당부서</th>
-						<th width = "">담당자</th>
-						<th width = "8%">등록일</th>
+						<th width = "6%">発注番号</th>
+						<th width = "18%">発注名</th>
+						<th width = "6%">発注品目</th>
+						<th width = "16%">発注品目名</th>
+						<th width = "5%">数量</th>
+						<th width = "">担当部署</th>
+						<th width = "">担当部署</th>
+						<th width = "8%">登録日</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,8 +54,8 @@
 <script>
 	// OnRowDblClick Event
   	function rowClicked(row) {
-		var cellValue = row.cells[1].innerText; // 첫 번째 셀 값
+		var cellValue = row.cells[1].innerText; // 第一のCELLの結果
 		location.href = "update.do?purchase_No=" + cellValue;
-    	// alert("더블클릭한 행의 첫 번째 셀: " + cellValue);
+    	// alert("ダブルクリックした行の第一のCELL: " + cellValue);
   	}
 </script>

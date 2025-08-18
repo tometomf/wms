@@ -19,21 +19,21 @@
 <body>
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
-		<div id="wms-title">발주등록</div>
+		<div id="wms-title">発注登録</div>
 		<div id="search-bar" style="display: flex;">
 		</div>
 		<form action = "insert.do" method = "post" onsubmit="return validateForm();">
 			<div id = "regist">
 				<div id = "regist-menu">
-					<div id = "regist-text">발주번호</div>
+					<div id = "regist-text">発注番号</div>
 					<div id = "regist-value">
 						<input readonly type = "text" name = "purchase_no" value = "${purchaseNo.purchase_No}">
 					</div>
-					<div id = "regist-text">발주명</div>
+					<div id = "regist-text">発注名</div>
 					<div id = "regist-value">
 						<input type = "text" name = "purchase_nm">
 					</div>
-					<div id = "regist-text">발주품목</div>
+					<div id = "regist-text">発注品目</div>
 					<div id = "regist-value">
 						<select name = "item_cd">
 							<option value = ""></option>
@@ -42,23 +42,23 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div id = "regist-text">수량</div>
+					<div id = "regist-text">数量</div>
 					<div id = "regist-value">
 						<input type = "number" name = "qty">
 					</div>
-					<div id = "regist-text">발주담당부서</div>
+					<div id = "regist-text">発注担当部署</div>
 					<div id = "regist-value">
 						<input type = "text" name = "purchase_dept">
 					</div>
-					<div id = "regist-text">발주담당자</div>
+					<div id = "regist-text">発注担当者</div>
 					<div id = "regist-value">
 						<input type = "text" name = "purchase_user">
 					</div>
-					<div id = "regist-text">비고</div>
+					<div id = "regist-text">備考</div>
 					<div id = "regist-value">
 						<textarea name="descr" rows="4" cols="56"></textarea>
 					</div>
-					<div id="regist-text">발주등록일</div>
+					<div id="regist-text">発注登録日</div>
 					<div id="regist-value">
 						<input type="date" name="reg_ymd" value="<%= todayStr %>">
 					</div>
