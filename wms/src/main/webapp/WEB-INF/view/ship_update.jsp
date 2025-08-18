@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,9 @@
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
 		<div id="wms-title">出庫修正</div>
+
+        
+        <fmt:formatDate value="${ship.regYmd}" pattern="yyyy-MM-dd" var="regYmdStr"/>
 
 		<form action="update.do" method="post" onsubmit="return validateForm();">
 			<div id="regist">
@@ -25,41 +30,55 @@
 					<div id="regist-value">
 						<input type="text" name="shipNm" value="${ship.shipNm}">
 					</div>
+
 					<div id="regist-text">出庫品目</div>
 					<div id="regist-value">
 						<input readonly type="text" name="itemCd" value="${ship.itemCd}">
 					</div>
+
 					<div id="regist-text">出庫数量</div>
 					<div id="regist-value">
-						<input type="number" name="shipPrice" value="${ship.shipQty}">
+						<input type="number" name="shipQty" value="${ship.shipQty}">
 					</div>
+
 					<div id="regist-text">出庫単価</div>
 					<div id="regist-value">
-						<input type="number" name="shipQty" value="${ship.shipPrice}">
+						<input type="number" name="shipPrice" value="${ship.shipPrice}">
 					</div>
+
 					<div id="regist-text">出庫担当部署</div>
 					<div id="regist-value">
 						<input type="text" name="shipDept" value="${ship.shipDept}">
 					</div>
+
 					<div id="regist-text">出庫担当者</div>
 					<div id="regist-value">
 						<input type="text" name="shipUser" value="${ship.shipUser}">
 					</div>
+
 					<div id="regist-text">出庫可否</div>
 					<div id="regist-value">
 						<select name="shipYn">
-							<option value="Y" ${ship.shipYn == 'Y' ? 'selected' : ''}>出庫完了</option>
-							<option value="N" ${ship.shipYn == 'N' ? 'selected' : ''}>未出庫</option>
+							<option value="Y" <c:if test="${ship.shipYn == 'Y'}">selected</c:if>>出庫完了</option>
+							<option value="N" <c:if test="${ship.shipYn == 'N'}">selected</c:if>>未出庫</option>
 						</select>
 					</div>
+
+                    
+                    <div id="regist-text">出庫日</div>
+                    <div id="regist-value">
+                        <input type="date" name="regYmd" value="${regYmdStr}">
+                    </div>
+
 					<div id="regist-text">備考</div>
 					<div id="regist-value">
 						<textarea name="descr" rows="4" cols="56">${ship.descr}</textarea>
 					</div>
 				</div>
+
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="修整">
+						<input type="submit" value="修正">
 						<a href="delete.do?shipNo=${ship.shipNo}" id="button-link">削除</a>
 					</div>
 				</div>
@@ -72,22 +91,23 @@
 <script>
 	function validateForm() {
 	    const requiredFields = [
-	        { name: "shipNm", label: "出庫名" },
-	        { name: "itemCd", label: "品目コード" },
+	        { name: "shipNm",    label: "出庫名" },
+	        { name: "itemCd",    label: "品目コード" },
 	        { name: "shipPrice", label: "出庫単価" },
-	        { name: "shipQty", label: "出庫数量" },
-	        { name: "shipDept", label: "出庫部署" },
-	        { name: "shipUser", label: "担当者" }
+	        { name: "shipQty",   label: "出庫数量" },
+	        { name: "shipDept",  label: "出庫部署" },
+	        { name: "shipUser",  label: "担当者" },
+            { name: "regYmd",    label: "出庫日" } 
 	    ];
-	
+
 	    for (let field of requiredFields) {
 	        const el = document.getElementsByName(field.name)[0];
 	        if (!el || el.value.trim() === "") {
 	            alert(field.label + "を入力してください");
 	            if (el) el.focus();
-	            return false; // 提出中断
+	            return false;
 	        }
 	    }
-	    return true; // 通過すれば提出
+	    return true;
 	}
 </script>

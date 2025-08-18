@@ -49,7 +49,7 @@ public class ShipDeleteHandler implements CommandHandler {
         res.setContentType("text/html; charset=UTF-8");
         PrintWriter out = res.getWriter();
         out.println("<script>");
-        out.println("alert('削除されました');");
+        out.println("alert('削除されました。');");
         out.println("location.href='list.do';");
         out.println("</script>");
         out.close();
