@@ -24,24 +24,24 @@
 			<table>
 				<thead>
 					<tr>
-						<th>품목코드</th>
-						<th>품목명</th>
-						<th>규격</th>
-						<th>분류</th>
-						<th>단위</th>
-						<th>사용유무</th>
-						<th>제조사</th>
-						<th>수주기준단가</th>
-						<th>출고기준단가</th>
+						<th>品目コード</th>
+						<th>品目名</th>
+						<th>規格</th>
+						<th>分類</th>
+						<th>単位</th>
+						<th>使用有無</th>
+						<th>メーカー</th>
+						<th>受注基準単価</th>
+						<th>出庫基準単価</th>
 					</tr>
 				</thead>
 				<tbody>
 					<%
-					List<Item> itemList = (List<Item>) request.getAttribute("itemList");
+					List<Item> itemList = (List<Item>) request.getAttribute("itemList"); //”itemList”名前で探す。string形式ので型変換してList<item>として扱う。
 					if (itemList != null && !itemList.isEmpty()) {
 						for (Item item: itemList) {
 					%>
-					<tr ondblclick="rowClicked(this)">
+					<tr ondblclick="rowClicked(this)">　<!-- ダブルクリックのイベント -->
 						<td><%=item.getItemCd()%></td>
 						<td><%=item.getItemNm()%></td>
 						<td><%=item.getSpec()%></td>
@@ -72,7 +72,7 @@
 <script>
 	// OnRowDblClick Event
   	function rowClicked(row) {
-		var cellValue = row.cells[0].innerText; // 첫 번째 셀 값
-		location.href = "update.do?itemCd=" + cellValue; 
+		var cellValue = row.cells[0].innerText; 
+		location.href = "update.do?itemCd=" + cellValue;　//最初のセルの値(コード)をセットしてupdateに移動 
   	}
 </script>

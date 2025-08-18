@@ -21,7 +21,7 @@ public class ItemUpdateHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
-			return processForm(req, res);
+			return processForm(req, res);//GETリクエストの場合、FORM画面を表示
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
 			return processSubmit(req, res);
 		} else {
@@ -31,7 +31,7 @@ public class ItemUpdateHandler implements CommandHandler {
 	}
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		String itemCd = req.getParameter("itemCd");  //파라미터 가져옴. getParameter 반환형은 String
+		String itemCd = req.getParameter("itemCd");  
 		
 		Item item = itemListService.selectByItemCd(itemCd);
 		req.setAttribute("item", item);

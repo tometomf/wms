@@ -16,49 +16,49 @@
 		<form action="insert.do" method="post">
 			<div id="regist">
 				<div id="regist-menu">
-					<div id="regist-text">품목코드</div>
+					<div id="regist-text">品目コード</div>
 					<div id="regist-value">
 						<input readonly type="text" name="itemCd" value="${itemCd.itemCd}">
 					</div>
-					<div id="regist-text">품목명</div>
+					<div id="regist-text">品目名</div>
 					<div id="regist-value">
 						<input type="text" name="itemNm">
 					</div>
-					<div id="regist-text">규격</div>
+					<div id="regist-text">規格</div>
 					<div id="regist-value">
 						<input type="text" name="spec">
 					</div>
-					<div id="regist-text">분류</div>
+					<div id="regist-text">分類</div>
 					<div id="regist-value">
 						<input type="text" name="itemGubun">
 					</div>
-					<div id="regist-text">단위</div>
+					<div id="regist-text">単位</div>
 					<div id="regist-value">
 						<input type="text" name="unit">
 					</div>
-					<div id="regist-text">사용여부</div>
+					<div id="regist-text">使用有無</div>
 					<div id="regist-value">
 						<select name="useYn">
-							<option value="Y">예</option>
-							<option value="N">아니요</option>
+							<option value="Y">使用</option>
+							<option value="N">未使用</option>
 						</select>
 					</div>
-					<div id="regist-text">제조사</div>
+					<div id="regist-text">メーカー</div>
 					<div id="regist-value">
 						<input type="text" name="manufacturer">
 					</div>
-					<div id="regist-text">수주기준단가</div>
+					<div id="regist-text">受注基準単価</div>
 					<div id="regist-value">
 						<input type="number" name="storePrice">
 					</div>
-					<div id="regist-text">출고기준단가</div>
+					<div id="regist-text">出庫基準単価</div>
 					<div id="regist-value">
 						<input type="number" name="shipmentPrice">
 					</div>
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="저장">
+						<input type="submit" value="保存">
 					</div>
 				</div>
 			</div>

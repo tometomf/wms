@@ -14,11 +14,11 @@ public class ItemListService {
 	
 	private ItemDao itemDao = new ItemDao();
 	
-	public List<Item> getItemList() {
+	public List<Item> getItemList() {//itemテーブルのデータがListとして返される
 		 Connection conn = null;
 	        try {
 	            conn = ConnectionProvider.getConnection();
-	            return itemDao.selectAll(conn);
+	            return itemDao.selectAll(conn); 
 	        } catch (SQLException e) {
 	            throw new RuntimeException(e);
 	        } finally {
@@ -26,12 +26,12 @@ public class ItemListService {
 	        }
 	}
 	
-	public Item getItemCd() {
+	public Item getItemCd() {//PKを取得
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
             
-            return itemDao.selectItemCd(conn);
+            return itemDao.selectItemCd(conn); 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -39,7 +39,7 @@ public class ItemListService {
         }
 	}
 	
-	public Item selectByItemCd(String itemCd) {
+	public Item selectByItemCd(String itemCd) {//PKで Item取得
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();

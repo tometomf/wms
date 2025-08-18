@@ -21,7 +21,7 @@ public class ItemInsertHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
-			return processForm(req, res);
+			return processForm(req, res);//GETリクエストの場合、FORM画面を表示
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
 			return processSubmit(req, res);
 		} else {
@@ -40,6 +40,7 @@ public class ItemInsertHandler implements CommandHandler {
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 		Item item = new Item();
+		//request parameterを取得し、対応するVOにセットする
 		
 		item.setItemCd(req.getParameter("itemCd"));
 		item.setItemNm(req.getParameter("itemNm"));

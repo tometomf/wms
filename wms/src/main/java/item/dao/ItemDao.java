@@ -51,7 +51,7 @@ public class ItemDao {
 		}
 	}
 	
-	public Item selectItemCd(Connection conn) throws SQLException {//PK가져오는메서드
+	public Item selectItemCd(Connection conn) throws SQLException {//PKを取得する
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -78,7 +78,7 @@ public class ItemDao {
 		}
 	}
 	
-	public Item selectByItemCd(Connection conn, String itemCd) throws SQLException {//PK로 Item가져오는메서드
+	public Item selectByItemCd(Connection conn, String itemCd) throws SQLException {//PKで Item取得
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
