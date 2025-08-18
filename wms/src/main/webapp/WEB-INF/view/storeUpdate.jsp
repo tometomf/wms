@@ -47,13 +47,13 @@
 						<input type="text" name="store_user" value="${store.store_user}"
 							required>
 					</div>
+					<div id="regist-text">入庫登録日</div>
+					<div id="regist-value">
+						<input type="date" name="reg_ymd" value="${store.reg_ymd}"/>
+					</div>
 					<div id="regist-text">備考</div>
 					<div id="regist-value">
 						<input type="text" name="descr" value="${store.descr}">
-					</div>
-					<div id="regist-text">入庫日</div>
-					<div id="regist-value">
-						<input type="date" name="reg_ymd" value="${store.reg_ymd}"/>
 					</div>
 				</div>
 				<div id="regist-button">
