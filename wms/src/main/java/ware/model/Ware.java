@@ -1,6 +1,8 @@
 package ware.model;
 
 public class Ware {
+	
+	private String no;
 	private String wareCd;
 	private String wareNm;
 	private String wareGubun;
@@ -13,20 +15,23 @@ public class Ware {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	/**
-	 * @param wareCd
-	 * @param wareNm
-	 * @param wareGubun
-	 * @param useYn
-	 */
-	public Ware(String wareCd, String wareNm, String wareGubun, String useYn, String descr) {
-		super();
+	
+	public Ware(String no, String wareCd, String wareNm, String wareGubun, String useYn, String descr) {
+		this.no = no;
 		this.wareCd = wareCd;
 		this.wareNm = wareNm;
 		this.wareGubun = wareGubun;
 		this.useYn = useYn;
 		this.descr = descr;
 	}
+	
+	public String getNo() {
+		return no;
+	}
+	public void setNo(String no) {
+		this.no = no;
+	}
+	
 	public String getWareCd() {
 		return wareCd;
 	}

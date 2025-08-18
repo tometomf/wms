@@ -108,7 +108,7 @@ body {
 #regist-menu {
   display: flex;
   flex-wrap: wrap;
-  gap: 50px 10px;
+  gap: 35px 20px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -124,7 +124,7 @@ body {
   flex: 0 0 27%; /* 고정 비율로 35% */	
   font-weight: bold;
   color: #333;
-  padding-right: 10px;
+  padding-right: 5px;
   text-align: right;
 }
 
@@ -162,7 +162,7 @@ input[type="submit"]:hover {
 	display: flex;
 	justify-content: end;
 	gap: 5px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 #button-link {

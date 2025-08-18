@@ -15,18 +15,17 @@
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
 		<div id="wms-title">倉庫現況</div>
-		<div id="search-bar" style="display: flex;">
-	
-		</div>
+		<div id="search-bar" style="display: flex;"></div>
 		<div id="result-table">
 			<table>
 				<thead>
 					<tr>
-						<th>倉庫コード</th>
-						<th>倉庫名</th>
-						<th>倉庫区分</th>
-						<th>使用可否</th>
-						<th>備考</th>
+						<th width = "4%">No</th>
+						<th width = "8%">倉庫コード</th>
+						<th width = "18%">倉庫名</th>
+						<th width = "12%">倉庫区分</th>
+						<th width = "8%">使用可否</th>
+						<th width = "50%">備考</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -36,12 +35,12 @@
 						for (Ware ware : wareList) {
 					%>
 							<tr ondblclick="rowClicked(this)">
+								<td><%=ware.getNo()%></td>
 								<td><%=ware.getWareCd()%></td>
-								<td><%=ware.getWareNm()%></td>
+								<td style = "text-align: left; padding-left: 5px"><%=ware.getWareNm()%></td>
 								<td><%=ware.getWareGubun()%></td>
 								<td><%=ware.getUseYn()%></td>
-								<td><%=ware.getDescr()%></td>
-		
+								<td style = "text-align: left; padding-left: 5px"><%=ware.getDescr()%></td>
 							</tr>
 						<%
 						}

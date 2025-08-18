@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import item.model.Item;
+import item.service.ItemListService;
 import mvc.command.CommandHandler;
 import store.model.Store;
 import store.service.StoreListService;
@@ -21,6 +23,7 @@ public class StoreUpdateHandler implements CommandHandler {
 
 	private static final String FORM_VIEW = "/WEB-INF/view/storeUpdate.jsp";
 	private StoreListService storeListService = new StoreListService();
+	private ItemListService itemService = new ItemListService();
 
 	@Override
 	//更新したデータをDBへ送るメソッド
@@ -39,10 +42,12 @@ public class StoreUpdateHandler implements CommandHandler {
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 	    try {
 	        String noVal = req.getParameter("store_no");
-
+	        
 	        Store store = storeListService.getStore_no(noVal); 
-
+	        List<Item> itemList = itemService.getItemList();
+	        
 	        req.setAttribute("store", store);
+	        req.setAttribute("itemList", itemList);
 	        
 	        return "/WEB-INF/view/storeUpdate.jsp";
 	    } catch (NumberFormatException e) {
@@ -53,37 +58,41 @@ public class StoreUpdateHandler implements CommandHandler {
 	//WebリクエストからのデータをStoreに変換してセーブする。
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
-		Store store = new Store(null, null, null, null, null, null, null, null);
+		Store store = new Store();
 		
-		try {
-			store.setStore_no(Integer.parseInt(req.getParameter("store_no")));
-		} catch (NumberFormatException e) {
-			Map<String, Boolean> errors = new HashMap<>();
-			errors.put("invalidNo", Boolean.TRUE);
-			req.setAttribute("errors", errors);
-			return FORM_VIEW;
-		}
+//		try {
+//			store.setStore_no(Integer.parseInt(req.getParameter("store_no")));
+//		} catch (NumberFormatException e) {
+//			Map<String, Boolean> errors = new HashMap<>();
+//			errors.put("invalidNo", Boolean.TRUE);
+//			req.setAttribute("errors", errors);
+//			return FORM_VIEW;
+//		}
+		store.setStore_no(req.getParameter("store_no"));
 		store.setStore_nm(req.getParameter("store_nm"));
 		store.setItem_cd(req.getParameter("item_cd"));
-		store.setItem_qty(Integer.parseInt(req.getParameter("item_qty")));
+		store.setQty(Integer.parseInt(req.getParameter("qty")));
+		store.setStore_price(Integer.parseInt(req.getParameter("store_price")));
 		store.setStore_dept(req.getParameter("store_dept"));
 		store.setStore_user(req.getParameter("store_user"));
 		store.setDescr(req.getParameter("descr"));
+		store.setReg_ymd(req.getParameter("reg_ymd"));
 		
-		String regYmdStr = req.getParameter("reg_ymd");
-		if (regYmdStr != null && !regYmdStr.isEmpty()) {
-			try {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date regYmd = dateFormat.parse(regYmdStr);
-				store.setReg_ymd(regYmd);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
+//		String regYmdStr = req.getParameter("reg_ymd");
+//		if (regYmdStr != null && !regYmdStr.isEmpty()) {
+//			try {
+//				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//				Date regYmd = dateFormat.parse(regYmdStr);
+//				store.setReg_ymd(regYmd);
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		
 		//データが登録されたかどうかを確認するメソッド
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
+		
 		try {
 			storeListService.update(store);
 			res.setContentType("text/html; charset=UTF-8");

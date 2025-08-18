@@ -8,31 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ware.model.Ware;
-import ware.model.WareStockDTO;
 import jdbc.JdbcUtil;
 
 public class wareDao {
 	
-//	public int insert(Connection conn, Ware ware) throws SQLException {
-//		PreparedStatement pstmt = null;
-//		try {
-//			pstmt = conn
-//					.prepareStatement("insert into wms_ware (ware_cd, ware_nm, ware_gubun, use_yn) values(?,?,?,?)");
-//			pstmt.setString(1, ware.getWareCd());
-//			pstmt.setString(2, ware.getWareNm());
-//			pstmt.setString(3, ware.getWareGubun());
-//			pstmt.setString(4, ware.getUseYn());
-//			return pstmt.executeUpdate();
-//		} finally {
-//			JdbcUtil.close(pstmt);
-//		}
-//	}
-
-	public List<Ware> selectAll(Connection conn) throws SQLException {
+	// 전체 조회
+	public List<Ware> select(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select ware_cd, ware_nm, ware_gubun, descr, case when use_yn = 'Y' then '利用あり' else '利用なし' end as use_yn from wms_ware");
+			pstmt = conn.prepareStatement("select rownum no, ware_cd, ware_nm, ware_gubun, nvl(descr, ' ') as descr, case when use_yn = 'Y' then '利用あり' else '利用なし' end as use_yn "
+					+ "from wms_ware order by ware_cd");
 			rs = pstmt.executeQuery();
 			List<Ware> wareList = new ArrayList<>();
 			while (rs.next()) {
@@ -45,33 +31,8 @@ public class wareDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-
-	public List<WareStockDTO> selectWareStock(Connection conn) throws SQLException {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement("select a.stock_no       -- 재고번호\r\n" + "     , a.item_cd        -- 품목코드\r\n"
-					+ "     , a.item_nm        -- 품목명\r\n" + "     , a.qty            -- 재고수량\r\n"
-					+ "     , a.spec           -- 규격\r\n" + "     , a.item_gubun     -- 분류\r\n"
-					+ "     , a.manufacturer   -- 제조사\r\n" + "     , a.ware_cd        -- 창고코드\r\n"
-					+ "     , b.ware_nm        -- 창고명\r\n" + "     , a.reg_ymd        -- 재고등록일\r\n" + "from (\r\n"
-					+ "    select a.stock_no, a.item_cd, a.qty, a.ware_cd, a.reg_ymd\r\n"
-					+ "         , b.item_nm, b.spec, b.item_gubun, b.unit, b.use_yn, b.manufacturer\r\n"
-					+ "         , b.store_price, b.shipment_price\r\n" + "    from wms_stock a, wms_item b\r\n"
-					+ "    where a.item_cd = b.item_cd\r\n" + ") a, wms_ware b\r\n" + "where a.ware_cd = b.ware_cd;");
-			rs = pstmt.executeQuery();
-			List<WareStockDTO> wareStockList = new ArrayList<>();
-			while (rs.next()) {
-				wareStockList.add(makeWareStockFromResultSet(rs));
-			}
-			return wareStockList;
-
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-		}
-	}
-	
+		
+	// 신규 등록 시 창고 코드 조회
 	public Ware selectWareCd(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -82,7 +43,8 @@ public class wareDao {
 			
 			if (rs.next()) {
 				ware = new Ware(
-						rs.getString("next_ware_cd")
+						null
+					  ,	rs.getString("next_ware_cd")
 					  , null
 					  , null
 					  , null
@@ -95,6 +57,7 @@ public class wareDao {
 		}
 	}
 	
+	// 창고 마스터 조회
 	public Ware selectByWareCd(Connection conn, String wareCd) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -106,7 +69,8 @@ public class wareDao {
 			
 			if (rs.next()) {
 				ware = new Ware(
-						rs.getString("ware_cd")
+					    null
+				      , rs.getString("ware_cd")
 					  , rs.getString("ware_nm")
 					  , rs.getString("ware_gubun")
 					  , rs.getString("use_yn")
@@ -119,7 +83,7 @@ public class wareDao {
 		}
 	}
 	
-	// 창고 신규 등록
+	// 창고 마스터 등록
 	public void insert(Connection conn, Ware ware) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_ware values(?, ?, ?, ?, ?)")) {
 			pstmt.setString(1, ware.getWareCd());
@@ -131,6 +95,7 @@ public class wareDao {
 		}
 	}
 
+	// 창고 마스터 수정
 	public int update(Connection conn, Ware ware) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
@@ -145,7 +110,8 @@ public class wareDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-
+	
+	// 창고 마스터 삭제
 	public int delete(Connection conn, String wareCd) throws SQLException {
 		
 		PreparedStatement pstmt = null;
@@ -158,12 +124,9 @@ public class wareDao {
 		}
 	}
 
+	// convert
 	private Ware makeWareFromResultSet(ResultSet rs) throws SQLException {
-		return new Ware(rs.getString("ware_cd"), rs.getString("ware_nm"), rs.getString("ware_gubun"),
+		return new Ware(rs.getString("no"), rs.getString("ware_cd"), rs.getString("ware_nm"), rs.getString("ware_gubun"),
 				rs.getString("use_yn"), rs.getString("descr"));
-	}
-
-	private WareStockDTO makeWareStockFromResultSet(ResultSet rs) throws SQLException {
-		return new WareStockDTO(rs.getString("ware_cd"),rs.getString("ware_nm"),rs.getInt("stock_no"),rs.getString("item.cd"),rs.getInt("qty"),rs.getDate("req_ymd"));
 	}
 }

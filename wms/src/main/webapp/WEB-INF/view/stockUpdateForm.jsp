@@ -20,26 +20,26 @@
                 <div id="regist-value">
                     <input readonly type="text" name="stockNo" value="${stock.stock_No}">
                 </div>
-
                 <div id="regist-text">品目コード</div>
                 <div id="regist-value">
-                    <input type="text" name="itemCd" value="${stock.item_Cd}">
+                    <input readonly type="text" name="itemCd" value="${stock.item_Cd}">
                 </div>
-
                 <div id="regist-text">在庫数量</div>
                 <div id="regist-value">
                     <input type="number" name="qty" value="${stock.qty}">
                 </div>
-
                 <div id="regist-text">倉庫コード</div>
                 <div id="regist-value">
-                    <input type="text" name="wareCd" value="${stock.ware_Cd}">
+                    <input readonly type="text" name="wareCd" value="${stock.ware_Cd}">
                 </div>
-
                 <div id="regist-text">登録日</div>
                 <div id="regist-value">
                     <input type="date" name="regYmd" value="${stock.reg_Ymd}">
                 </div>
+                <div id="regist-text">備考</div>
+				<div id="regist-value">
+					<textarea name="descr" rows="4" cols="56">${stock.descr}</textarea>
+				</div>
             </div>
             <div id="regist-button">
                 <div>

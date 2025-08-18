@@ -1,6 +1,13 @@
+<%@ page import="java.util.Date, java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+    
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    
+<%
+    Date today = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String todayStr = sdf.format(today);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -12,21 +19,21 @@
 <body>
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
-		<div id="wms-title">受注登録</div>
+		<div id="wms-title">발주등록</div>
 		<div id="search-bar" style="display: flex;">
 		</div>
-		<form action = "insert.do" method = "post">
+		<form action = "insert.do" method = "post" onsubmit="return validateForm();">
 			<div id = "regist">
 				<div id = "regist-menu">
-					<div id = "regist-text">受注番号</div>
+					<div id = "regist-text">발주번호</div>
 					<div id = "regist-value">
-						<input readonly type = "text" name = "order_no" value = "${orderNo}">
+						<input readonly type = "text" name = "purchase_no" value = "${purchaseNo.purchase_No}">
 					</div>
-					<div id = "regist-text">受注名</div>
+					<div id = "regist-text">발주명</div>
 					<div id = "regist-value">
-						<input type = "text" name = "order_nm">
+						<input type = "text" name = "purchase_nm">
 					</div>
-					<div id = "regist-text">受注品目</div>
+					<div id = "regist-text">발주품목</div>
 					<div id = "regist-value">
 						<select name = "item_cd">
 							<option value = ""></option>
@@ -35,25 +42,25 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div id = "regist-text">数量</div>
+					<div id = "regist-text">수량</div>
 					<div id = "regist-value">
 						<input type = "number" name = "qty">
 					</div>
-					<div id = "regist-text">受注価格</div>
+					<div id = "regist-text">발주담당부서</div>
 					<div id = "regist-value">
-						<input type = "number" name = "order_price">
+						<input type = "text" name = "purchase_dept">
 					</div>
-					<div id = "regist-text">担当部署</div>
+					<div id = "regist-text">발주담당자</div>
 					<div id = "regist-value">
-						<input type = "text" name = "order_dept">
+						<input type = "text" name = "purchase_user">
 					</div>
-					<div id = "regist-text">担当社員</div>
+					<div id = "regist-text">비고</div>
 					<div id = "regist-value">
-						<input type = "text" name = "order_user">
+						<textarea name="descr" rows="4" cols="56"></textarea>
 					</div>
-					<div id = "regist-text">備考</div>
-					<div id = "regist-value">
-						<textarea name="descr" rows="4" cols="55"></textarea>
+					<div id="regist-text">발주등록일</div>
+					<div id="regist-value">
+						<input type="date" name="reg_ymd" value="<%= todayStr %>">
 					</div>
 				</div>
 				<div id = "regist-button">
@@ -71,12 +78,12 @@
 
 	function validateForm() {
 	    var requiredFields = [
-	        { name: "order_nm", label: "受注名" },
-	        { name: "item_cd", label: "受注品目" },
-	        { name: "qty", label: "数量" },
-	        { name: "order_price", label: "발주담당부서" },
-	        { name: "order_dept", label: "担当部署" },
-	        { name: "order_user", label: "担当社員" }
+	        { name: "purchase_nm", label: "발주명" },
+	        { name: "item_cd", label: "발주품목" },
+	        { name: "qty", label: "수량" },
+	        { name: "purchase_dept", label: "발주담당부서" },
+	        { name: "purchase_user", label: "발주담당자" },
+	        { name: "reg_ymd", label: "발주등록일" },
 	    ];
 	
 	    for (let field of requiredFields) {

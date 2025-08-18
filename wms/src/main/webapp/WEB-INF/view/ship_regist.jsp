@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,57 +18,51 @@
         <form action="insert.do" method="post" onsubmit="return validateForm();">
             <div id="regist">
                 <div id="regist-menu">
-
                     <div id="regist-text">出庫番号</div>
                     <div id="regist-value">
                         <input readonly type="text" name="shipNo" value="${shipNo.shipNo}">
                     </div>
-
                     <div id="regist-text">出庫名</div>
                     <div id="regist-value">
                         <input type="text" name="shipNm">
                     </div>
-
-                    <div id="regist-text">出庫部署</div>
+                    <div id="regist-text">出庫品目</div>
                     <div id="regist-value">
-                        <input type="text" name="shipDept">
+                       <select name = "itemCd">
+							<option value = ""></option>
+							<c:forEach var = "itemList" items = "${itemList}">
+						   		<option value = "${itemList.itemCd}">${itemList.itemNm}</option>
+							</c:forEach>
+						</select>
                     </div>
-
-                    <div id="regist-text">担当者</div>
-                    <div id="regist-value">
-                        <input type="text" name="shipUser">
-                    </div>
-
-                    <div id="regist-text">品目コード</div>
-                    <div id="regist-value">
-                        <input type="text" name="itemCd">
-                    </div>
-
-                    <div id="regist-text">出庫単価</div>
-                    <div id="regist-value">
-                        <input type="number" name="shipPrice" step="1">
-                    </div>
-
                     <div id="regist-text">出庫数量</div>
                     <div id="regist-value">
                         <input type="number" name="shipQty" step="1">
                     </div>
-
+                    <div id="regist-text">出庫単価</div>
+                    <div id="regist-value">
+                        <input type="number" name="shipPrice" step="1">
+                    </div>
+                    <div id="regist-text">出庫担当部署</div>
+                    <div id="regist-value">
+                        <input type="text" name="shipDept">
+                    </div>
+                    <div id="regist-text">出庫担当者</div>
+                    <div id="regist-value">
+                        <input type="text" name="shipUser">
+                    </div>
+                    <div id="regist-text">出庫可否</div>
+                    <div id="regist-value">
+                        <select name="shipYn">
+	                        <option value="N">未出庫</option>
+                            <option value="Y">出庫完了</option>
+                        </select>
+                    </div>
                     <div id="regist-text">備考</div>
                     <div id="regist-value">
                         <textarea name="descr" rows="4" cols="56"></textarea>
                     </div>
-
-                    <div id="regist-text">出庫可否</div>
-                    <div id="regist-value">
-                        <select name="shipYn">
-                            <option value="Y">出庫可</option>
-                            <option value="N">出庫不可</option>
-                        </select>
-                    </div>
-
                 </div>
-
                 <div id="regist-button">
                     <div>
                         <input type="submit" value="保存">
@@ -74,30 +70,29 @@
                 </div>
             </div>
         </form>
-        
-        <script>
-function validateForm() {
-    const requiredFields = [
-        { name: "shipNm", label: "出庫名" },
-        { name: "shipDept", label: "出庫部署" },
-        { name: "shipUser", label: "担当者" },
-        { name: "itemCd", label: "品目コード" },
-        { name: "shipPrice", label: "出庫単価" },
-        { name: "shipQty", label: "出庫数量" }
-    ];
-
-    for (let field of requiredFields) {
-        let value = document.getElementsByName(field.name)[0].value.trim();
-        if (!value) {
-            alert(field.label + "を入力してください");
-            document.getElementsByName(field.name)[0].focus();
-            return false; 
-        }
-    }
-    return true; 
-}
-</script>
-
     </div>
 </body>
 </html>
+
+<script>
+	function validateForm() {
+	    const requiredFields = [
+	        { name: "shipNm", label: "出庫名" },
+	        { name: "shipDept", label: "出庫部署" },
+	        { name: "shipUser", label: "担当者" },
+	        { name: "itemCd", label: "品目コード" },
+	        { name: "shipPrice", label: "出庫単価" },
+	        { name: "shipQty", label: "出庫数量" }
+	    ];
+	
+	    for (let field of requiredFields) {
+	        let value = document.getElementsByName(field.name)[0].value.trim();
+	        if (!value) {
+	            alert(field.label + "を入力してください");
+	            document.getElementsByName(field.name)[0].focus();
+	            return false; 
+	        }
+	    }
+	    return true; 
+	}
+</script>

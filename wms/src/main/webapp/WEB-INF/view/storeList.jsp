@@ -23,14 +23,17 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>入庫番号</th>
-				<th>入庫名</th>
-				<th>品目コード</th>
-				<th>品目数</th>
-				<th>入庫担当部署</th>
-				<th>入庫担当者</th>
-				<th>備考</th>
-				<th>入庫日</th>
+				<th width = "4%">No.</th>
+				<th width = "6%">入庫番号</th>
+				<th width = "14%">入庫名</th>
+				<th width = "6%">入庫品目</th>
+				<th width = "14%">入庫品目명</th>
+				<th width = "5%">수량</th>
+				<th width = "6%">입고금액</th>
+				<th width = "6%">担当部署</th>
+				<th width = "5%">担当者</th>
+				<th width = "6%">수주등록일</th>
+				<th>비고</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,26 +44,23 @@
 				//storeListがnullか相手なければ
 				for (Store store : storeList) {
 			%>
-			<tr onclick="rowClicked(this)">
+			<tr ondblclick = "rowClicked(this)">
+				<td><%=store.getNo()%></td>
 				<td><%=store.getStore_no()%></td>
-				<td><%=store.getStore_nm()%></td>
+				<td style = "text-align: left; padding-left: 5px"><%=store.getStore_nm()%></td>
 				<td><%=store.getItem_cd()%></td>
-				<td><%=store.getItem_qty()%></td>
+				<td style = "text-align: left; padding-left: 5px"><%=store.getItem_nm()%></td>
+				<td style = "text-align: right; padding-right: 5px"><%=store.getQty()%></td>
+				<td style = "text-align: right; padding-right: 5px"><%=store.getStore_price()%></td>
 				<td><%=store.getStore_dept()%></td>
 				<td><%=store.getStore_user()%></td>
-				<td><%=store.getDescr()%></td>
 				<td><%=store.getReg_ymd()%></td>
+				<td style = "text-align: left; padding-left: 5px"><%=store.getDescr()%></td>
 			</tr>
 			<%
 			//データを持ってくる
 			}
-			} else {
-			%>
-			<tr>
-				<td colspan="7">No data retrieved.</td>
-			</tr>
-			<%
-			} //それともデータなしを見せる
+			} 
 			%>
 		</tbody>
 	</table>
@@ -71,7 +71,7 @@
 
 <script>
 	function rowClicked(row) {
-		var cellValue = row.cells[0].innerText;
+		var cellValue = row.cells[1].innerText;
 		location.href = "update.do?store_no=" + cellValue;
 	}
 </script>

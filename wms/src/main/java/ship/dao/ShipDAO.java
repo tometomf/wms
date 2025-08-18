@@ -18,10 +18,10 @@ public class ShipDAO {
         ResultSet rs = null;
         try {
             pstmt = conn.prepareStatement(
-                "SELECT ship_no, ship_nm, item_cd, ship_price, ship_qty, " +
-                "       ship_dept, ship_user, descr, reg_ymd, upd_ymd, ship_yn " +
-                "  FROM wms_ship " +
-                " ORDER BY ship_no"
+                "SELECT rownum no, ship_no, ship_nm, a.item_cd, b.item_nm, ship_qty, ship_price, ship_dept, ship_user\r\n"
+                + "     , case when ship_yn = 'Y' then '出庫完了' else '未出庫' end as ship_yn, descr\r\n"
+                + "FROM wms_ship a join wms_item b on a.item_cd = b.item_cd\r\n"
+                + "ORDER BY ship_no"
             );
 
             rs = pstmt.executeQuery();
@@ -39,18 +39,21 @@ public class ShipDAO {
 
     // 照会結果をDTOに変換
     private ShipViewModel makeShipFromResultSet(ResultSet rs) throws SQLException {
-        ShipViewModel dto = new ShipViewModel();
-        dto.setShipNo(rs.getInt("ship_no"));
+        
+    	ShipViewModel dto = new ShipViewModel();
+        
+        dto.setNo(rs.getString("no"));
+        dto.setShipNo(rs.getString("ship_no"));
         dto.setShipNm(rs.getString("ship_nm"));
         dto.setItemCd(rs.getString("item_cd"));
-        dto.setShipPrice(rs.getInt("ship_price"));
+        dto.setItemNm(rs.getString("item_nm"));
         dto.setShipQty(rs.getInt("ship_qty"));
+        dto.setShipPrice(rs.getInt("ship_price"));
         dto.setShipDept(rs.getString("ship_dept"));
         dto.setShipUser(rs.getString("ship_user"));
-        dto.setDescr(rs.getString("descr"));
-        dto.setRegYmd(rs.getDate("reg_ymd"));
-        dto.setUpdYmd(rs.getDate("upd_ymd"));
         dto.setShipYn(rs.getString("ship_yn"));
+        dto.setDescr(rs.getString("descr"));
+        
         return dto;
     }
 
@@ -61,14 +64,14 @@ public class ShipDAO {
 
         try {
             pstmt = conn.prepareStatement(
-                "SELECT NVL(MAX(ship_no) + 1, 1) AS ship_no FROM wms_ship"
+                "select 'D' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ship_no, 2))), 0) + 1), 3, '0') AS ship_no from wms_ship"
             );
             rs = pstmt.executeQuery();
 
             ShipViewModel ship = null;
             if (rs.next()) {
                 ship = new ShipViewModel();
-                ship.setShipNo(rs.getInt("ship_no")); 
+                ship.setShipNo(rs.getString("ship_no")); 
             }
 
             return ship;
@@ -80,18 +83,18 @@ public class ShipDAO {
     }
 
     // 出庫登録
-    public int insert(Connection conn, ShipViewModel ship) throws SQLException {
+    public String insert(Connection conn, ShipViewModel ship) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
             // 出庫番号を生成
-        	String seqSql = "SELECT NVL(MAX(ship_no) + 1, 1) AS ship_no FROM wms_ship";
+        	String seqSql = "select 'D' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ship_no, 2))), 0) + 1), 3, '0') AS ship_no from wms_ship";
         	pstmt = conn.prepareStatement(seqSql);
         	rs = pstmt.executeQuery();
-        	int newShipNo = 0;
+        	String newShipNo = "";
         	if (rs.next()) {
-        	    newShipNo = rs.getInt("ship_no"); 
+        	    newShipNo = rs.getString("ship_no"); 
         	} else {
         	    throw new SQLException("出庫番号シーケンス作成失敗");
         	}
@@ -102,7 +105,7 @@ public class ShipDAO {
                 "(ship_no, ship_nm, item_cd, ship_price, ship_qty, ship_dept, ship_user, descr, reg_ymd, upd_ymd, ship_yn) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE, ?)";
             pstmt = conn.prepareStatement(insertSql);
-            pstmt.setInt(1, newShipNo);
+            pstmt.setString(1, newShipNo);
             pstmt.setString(2, ship.getShipNm());
             pstmt.setString(3, ship.getItemCd());
             pstmt.setInt(4, ship.getShipPrice());
@@ -126,18 +129,19 @@ public class ShipDAO {
         }
     }
     
-    public ShipViewModel selectOne(Connection conn, int shipNo) throws SQLException {
+    public ShipViewModel selectOne(Connection conn, String shipNo) throws SQLException {
         PreparedStatement ps = null; ResultSet rs = null;
         try {
             ps = conn.prepareStatement(
-              "select ship_no, ship_nm, item_cd, ship_price, ship_qty, " +
+              "select ship_no, ship_nm, b.item_nm as item_cd, ship_price, ship_qty, " +
               "       ship_dept, ship_user, descr, reg_ymd, upd_ymd, ship_yn " +
-              "  from wms_ship where ship_no=?");
-            ps.setInt(1, shipNo);
+              " from wms_ship a join wms_item b on a.item_cd = b.item_cd" + 
+              " where ship_no = ?");
+            ps.setString(1, shipNo);
             rs = ps.executeQuery();
             if (!rs.next()) return null;
             ShipViewModel v = new ShipViewModel();
-            v.setShipNo(rs.getInt("ship_no"));
+            v.setShipNo(rs.getString("ship_no"));
             v.setShipNm(rs.getString("ship_nm"));
             v.setItemCd(rs.getString("item_cd"));
             v.setShipPrice(rs.getInt("ship_price"));
@@ -159,16 +163,15 @@ public class ShipDAO {
     public int update(Connection conn, ShipViewModel ship) throws SQLException {
         PreparedStatement pstmt = null;
         try {
-            pstmt = conn.prepareStatement("update wms_ship set ship_nm=?, item_cd=?, ship_price=?, ship_qty=?, ship_dept=?, ship_user=?, descr=?, ship_yn=? where ship_no=?");
+            pstmt = conn.prepareStatement("update wms_ship set ship_nm=?, ship_price=?, ship_qty=?, ship_dept=?, ship_user=?, descr=?, ship_yn=?, upd_ymd = sysdate where ship_no=?");
             pstmt.setString(1, ship.getShipNm());
-            pstmt.setString(2, ship.getItemCd());
-            pstmt.setInt(3, ship.getShipPrice());
-            pstmt.setInt(4, ship.getShipQty());
-            pstmt.setString(5, ship.getShipDept());
-            pstmt.setString(6, ship.getShipUser());
-            pstmt.setString(7, ship.getDescr());
-            pstmt.setString(8, ship.getShipYn());
-            pstmt.setInt(9, ship.getShipNo());
+            pstmt.setInt(2, ship.getShipPrice());
+            pstmt.setInt(3, ship.getShipQty());
+            pstmt.setString(4, ship.getShipDept());
+            pstmt.setString(5, ship.getShipUser());
+            pstmt.setString(6, ship.getDescr());
+            pstmt.setString(7, ship.getShipYn());
+            pstmt.setString(8, ship.getShipNo());
             return pstmt.executeUpdate();
         } finally {
             JdbcUtil.close(pstmt);
@@ -176,11 +179,11 @@ public class ShipDAO {
     }
     
     
-    public int delete(Connection conn, int shipNo) throws SQLException {
+    public int delete(Connection conn, String shipNo) throws SQLException {
         PreparedStatement pstmt = null;
         try {
             pstmt = conn.prepareStatement("delete wms_ship where ship_no=?");
-            pstmt.setInt(1, shipNo);
+            pstmt.setString(1, shipNo);
             return pstmt.executeUpdate();
         } finally {
             JdbcUtil.close(pstmt);

@@ -15,13 +15,13 @@ public class OrderService {
 
 	private OrderDao orderDao = new OrderDao();
 
-	public List<Order> selectAll() {
+	public List<Order> select() {
 
 		Connection conn = null;
 
 		try {
 			conn = ConnectionProvider.getConnection();
-			return orderDao.selectAll(conn);
+			return orderDao.select(conn);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -29,12 +29,12 @@ public class OrderService {
 		}
 	}
 	
-	public Order getOrderCd() {
+	public String selectOrderNo() {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
             
-            return orderDao.selectOrderCd(conn);
+            return orderDao.selectOrderNo(conn);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -62,18 +62,17 @@ public class OrderService {
 			conn.setAutoCommit(false);
 			
 			orderDao.insert(conn, new Order(
-								order.getOrder_No()
+							    null
+						      , order.getOrder_No()
 							  ,	order.getOrder_Nm()
 							  ,	order.getItem_Cd()
 							  , order.getItem_Nm()
+							  , order.getQty()
 							  ,	order.getOrder_Price()
 							  ,	order.getOrder_Dept()
 							  ,	order.getOrder_User()
-							  ,	order.getOrder_Gubun()
 							  ,	order.getDescr()
-							  ,	order.getReg_Ymd()
-							  ,	order.getUpd_ymd()
-							  ,	order.getStore_Yn())
+							  , null)
 			);
 			conn.commit();
 		} catch (SQLException e) {
@@ -91,18 +90,17 @@ public class OrderService {
 			conn.setAutoCommit(false);
 			
 			orderDao.update(conn, new Order(
-								order.getOrder_No()
-							  ,	order.getOrder_Nm()
-							  ,	order.getItem_Cd()
-							  ,	order.getItem_Nm()
-							  ,	order.getOrder_Price()
-							  ,	order.getOrder_Dept()
-							  ,	order.getOrder_User()
-							  ,	order.getOrder_Gubun()
-							  ,	order.getDescr()
-							  ,	order.getReg_Ymd()
-							  ,	order.getUpd_ymd()
-							  ,	order.getStore_Yn())
+									null
+							      , order.getOrder_No()
+								  ,	order.getOrder_Nm()
+								  ,	order.getItem_Cd()
+								  , order.getItem_Nm()
+								  , order.getQty()
+								  ,	order.getOrder_Price()
+								  ,	order.getOrder_Dept()
+								  ,	order.getOrder_User()
+								  ,	order.getDescr()
+								  ,	order.getReg_Ymd())
 			);
 			conn.commit();
 		} catch (SQLException e) {

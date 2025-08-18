@@ -15,7 +15,7 @@ public class WareHandler implements CommandHandler{
 	public String process (HttpServletRequest request, HttpServletResponse response) {
 		WareListService wareListService = new WareListService();
 		
-		List<Ware> wareList = wareListService.getWareList();
+		List<Ware> wareList = wareListService.select();
         request.setAttribute("wareList", wareList);
         return "/WEB-INF/view/wareList.jsp";
 	}

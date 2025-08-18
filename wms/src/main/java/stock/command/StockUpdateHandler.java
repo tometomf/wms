@@ -33,16 +33,15 @@ public class StockUpdateHandler implements CommandHandler {
     }
 
     // 수정 폼 보여주기 (기존 데이터 세팅) / 修正フォームを表示 (既存のデータセット)
-    private String processForm(HttpServletRequest req, HttpServletResponse res) {
+    public String processForm(HttpServletRequest req, HttpServletResponse res) {
      
-    	 String stockNoParam = req.getParameter("stockNo");
+		String stockNoParam = req.getParameter("stockNo");
 
-    	    if (stockNoParam == null || stockNoParam.trim().isEmpty()) {
-    	        throw new IllegalArgumentException("stockNo 파라미터가 없습니다.");
-    	    }
+		if (stockNoParam == null || stockNoParam.trim().isEmpty()) {
+			throw new IllegalArgumentException("stockNo 파라미터가 없습니다.");
+	    }
     	
-    	int stockNo = Integer.parseInt(req.getParameter("stockNo"));
-        Stock stock = stockService.getStockByNo(stockNo); // 기존 데이터 조회 / 既存データ照会
+        Stock stock = stockService.getStockByNo(stockNoParam); // 기존 데이터 조회 / 既存データ照会
         req.setAttribute("stock", stock);
 
         return FORM_VIEW;
@@ -56,13 +55,14 @@ public class StockUpdateHandler implements CommandHandler {
 
         Stock stock = new Stock();
         try {
-            stock.setStock_No(Integer.parseInt(req.getParameter("stockNo").trim()));
+            stock.setStock_No(req.getParameter("stockNo"));
             stock.setItem_Cd(req.getParameter("itemCd"));
             stock.setQty(Integer.parseInt(req.getParameter("qty")));
             stock.setWare_Cd(req.getParameter("wareCd"));
-            stock.setReg_Ymd(new java.text.SimpleDateFormat("yyyy-MM-dd")
-                                .parse(req.getParameter("regYmd")));
+            stock.setDescr(req.getParameter("descr"));
+            stock.setReg_Ymd(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("regYmd")));
         } catch (NumberFormatException | ParseException e) {
+    		
             errors.put("invalidInput", true);
             return FORM_VIEW;
         }

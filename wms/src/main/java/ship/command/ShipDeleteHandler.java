@@ -17,6 +17,7 @@ public class ShipDeleteHandler implements CommandHandler {
 
         // パラメータ抽出
         String shipNoParam = req.getParameter("shipNo");
+        
         if (shipNoParam == null || shipNoParam.isEmpty()) {
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
@@ -29,24 +30,22 @@ public class ShipDeleteHandler implements CommandHandler {
         }
 
         // int変換（shipNoが数字PKなので）
-        int shipNo;
-        try {
-            shipNo = Integer.parseInt(shipNoParam.trim());
-        } catch (NumberFormatException e) {
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>");
-            out.println("alert('無効な出庫番号です');");
-            out.println("location.href='list.do';");
-            out.println("</script>");
-            out.close();
-            return null;
-        }
+//        int shipNo;
+//        try {
+//            shipNo = Integer.parseInt(shipNoParam.trim());
+//        } catch (NumberFormatException e) {
+//            res.setContentType("text/html; charset=UTF-8");
+//            PrintWriter out = res.getWriter();
+//            out.println("<script>");
+//            out.println("alert('無効な出庫番号です');");
+//            out.println("location.href='list.do';");
+//            out.println("</script>");
+//            out.close();
+//            return null;
+//        }
 
         // 削除実行
-        shipService.delete(shipNo);
-
-        
+        shipService.delete(shipNoParam);
         res.setContentType("text/html; charset=UTF-8");
         PrintWriter out = res.getWriter();
         out.println("<script>");

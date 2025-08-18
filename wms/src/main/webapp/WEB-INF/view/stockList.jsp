@@ -23,16 +23,15 @@
 			<table>
 				<thead>
 					<tr>
-						<th>在庫番号</th>
-						<th>品目コード</th>
-						<th>品目名</th>
-						<th>規格</th>
-						<th>区分</th>
-						<th>メーカー</th>
-						<th>在庫数量</th>
-						<th>倉庫コード</th>
-						<th>倉庫名</th>
-						<th>登録日</th>
+						<th width = "4%">No.</th> 
+						<th width = "8%">在庫番号</th> 
+						<th width = "8%">品目コード</th>
+						<th width = "16%">品目名</th>
+						<th width = "5%">数量</th>
+						<th width = "8%">倉庫コード</th>
+						<th width = "16%">倉庫名</th>
+						<th width = "8%">登録日</th>
+						<th>備考</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,16 +41,15 @@
 						for (StockPlus stock : stockList) {
 					%>
 					<tr ondblclick="rowClicked(this)">
+						<td><%=stock.getNo()%></td>
 						<td><%=stock.getStock_No()%></td>
 						<td><%=stock.getItem_Cd()%></td>
-						<td><%=stock.getItem_Nm()%></td>
-						<td><%=stock.getSpec()%></td>
-						<td><%=stock.getItem_Gubun()%></td>
-						<td><%=stock.getManufacturer()%></td>
-						<td><%=stock.getQty()%></td>
+						<td style = "text-align: left; padding-left: 5px"><%=stock.getItem_Nm()%></td>
+						<td style = "text-align: right; padding-right: 5px"><%=stock.getQty()%></td>
 						<td><%=stock.getWare_Cd()%></td>
-						<td><%=stock.getWare_Nm()%></td>
+						<td style = "text-align: left; padding-left: 5px"><%=stock.getWare_Nm()%></td>
 						<td><%=stock.getReg_Ymd()%></td>
+						<td style = "text-align: left; padding-left: 5px"><%=stock.getDescr()%></td>
 					</tr>
 					<%
 						}
@@ -67,7 +65,7 @@
 <script>
 	// 더블클릭 시 해당 품목 코드로 수정 페이지 이동
   	function rowClicked(row) {
-		var stockNo = row.cells[0].innerText; // 첫 번째 셀: stockNo
+		var stockNo = row.cells[1].innerText; // 첫 번째 셀: stockNo
 		location.href = "update.do?stockNo=" + stockNo;
   	}
 </script>

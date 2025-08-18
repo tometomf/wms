@@ -15,7 +15,7 @@ public class OrderHandler implements CommandHandler {
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		List<Order> orderList = orderService.selectAll();
+		List<Order> orderList = orderService.select();
 		
 		req.setAttribute("orderList", orderList);
 		return "/WEB-INF/view/orderList.jsp";

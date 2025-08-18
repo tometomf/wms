@@ -1,7 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="ship.model.ShipViewModel"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,26 +13,22 @@
     <%@ include file="/nav.jsp"%>
     <div id="main-content">
         <div id="wms-title">出庫現況</div>
-        <div id="search-bar" style="display: flex;">
-            <div>
-                <button id="search-button">조회</button>
-            </div>
-        </div>
+        <div id="search-bar" style="display: flex;"></div>
         <div id="result-table">
             <table>
                 <thead>
                     <tr>
-                        <th>出庫番号</th>
-                        <th>出庫名</th>
-                        <th>出庫部署</th>
-                        <th>担当者</th>
-                        <th>品目コード</th>
-                        <th>出庫単価</th>
-                        <th>出庫数量</th>
-                        <th>備考</th>
-                        <th>登録日</th>
-                        <th>修正日</th>
-                        <th>出庫可否</th>
+                        <th width = "4%">No.</th>
+                        <th width = "6%">出庫番号</th>
+                        <th width = "12%">出庫名</th>
+						<th width = "8%">出庫品目</th>
+						<th width = "12%">出庫品目名</th>
+						<th width = "5%">수량</th>
+                        <th width = "6%">出庫価格</th>
+                        <th width = "6%">出庫部署</th>
+						<th width = "6%">出庫社員</th>
+                        <th width = "9%">출고완료유무</th>
+                        <th>비고</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,17 +38,17 @@
                         for (ShipViewModel ship : shipList) {
                     %>
                         <tr ondblclick="rowClicked(this)">
+                            <td><%=ship.getNo()%></td>
                             <td><%=ship.getShipNo()%></td>
-                            <td><%=ship.getShipNm()%></td>
+                            <td style = "text-align: left; padding-left: 5px"><%=ship.getShipNm()%></td>
+                            <td><%=ship.getItemCd()%></td>
+                            <td style = "text-align: left; padding-left: 5px"><%=ship.getItemNm()%></td>
+                            <td  style = "text-align: right; padding-right: 5px"><%=ship.getShipQty()%></td>
+                            <td  style = "text-align: right; padding-right: 5px"><%=ship.getShipPrice()%></td>
                             <td><%=ship.getShipDept()%></td>
                             <td><%=ship.getShipUser()%></td>
-                            <td><%=ship.getItemCd()%></td>
-                            <td><%=ship.getShipPrice()%></td>
-                            <td><%=ship.getShipQty()%></td>
-                            <td><%=ship.getDescr()%></td>
-                            <td><%=ship.getRegYmd()%></td>
-                            <td><%=ship.getUpdYmd()%></td>
                             <td><%=ship.getShipYn()%></td>
+                            <td style = "text-align: left; padding-left: 5px"><%=ship.getDescr()%></td>
                         </tr>
                     <%
                         }
@@ -68,7 +63,7 @@
 
 <script>
     function rowClicked(row) {
-        var shipNo = row.cells[0].innerText;
+        var shipNo = row.cells[1].innerText;
         location.href = "update.do?shipNo=" + shipNo;
     }
 </script>

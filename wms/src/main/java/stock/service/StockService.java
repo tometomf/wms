@@ -30,7 +30,7 @@ public class StockService {
 	}
 	
 	// 다음에 등록될 재고번호 조회 / 次に登録される在庫番号の照会
-	public Stock getstockNo() {
+	public String getStockNo() {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
@@ -55,7 +55,8 @@ public class StockService {
 	            stock.getItem_Cd(),
 	            stock.getQty(),
 	            stock.getWare_Cd(),
-	            stock.getReg_Ymd()
+	            stock.getReg_Ymd(),
+	            stock.getDescr()
 	        ));
 	        conn.commit();
 	    } catch (SQLException e) {
@@ -66,7 +67,7 @@ public class StockService {
 	    }
 	}
 	// 재고번호로 데이터 조회 / 在庫番号でデータ照会
-	public Stock getStockByNo(int stockNo) {
+	public Stock getStockByNo(String stockNo) {
 	    Connection conn = null;
 	    try {
 	        conn = ConnectionProvider.getConnection();

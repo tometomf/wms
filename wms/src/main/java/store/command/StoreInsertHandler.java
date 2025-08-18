@@ -7,11 +7,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import item.model.Item;
+import item.service.ItemListService;
 import mvc.command.CommandHandler;
 import store.model.Store;
 import store.service.StoreListService;
@@ -21,6 +24,7 @@ public class StoreInsertHandler implements CommandHandler {
 	//入庫登録画面のファイル経路。
 	private static final String FORM_VIEW = "/WEB-INF/view/storeInsert.jsp";
 	private StoreListService storeListService = new StoreListService();
+	private ItemListService itemService = new ItemListService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -37,43 +41,50 @@ public class StoreInsertHandler implements CommandHandler {
 	}
 	
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		int nextStoreNo = storeListService.getNewStoreNo();
+		String nextStoreNo = storeListService.getNewStoreNo();
+		List<Item> itemList = itemService.getItemList();
+
 		//新しいstore_noを獲得するメソッドを呼び出す。
 		req.setAttribute("store_no", nextStoreNo);
+		req.setAttribute("itemList", itemList);
+		
 		return FORM_VIEW;
 	}
 	
 	//Post要請を処理するメソッド
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
-		Store store = new Store(null, null, null, null, null, null, null, null);
+		Store store = new Store();
 		
-		store.setStore_no(Integer.parseInt(req.getParameter("store_no")));
+		store.setStore_no(req.getParameter("store_no"));
 		store.setStore_nm(req.getParameter("store_nm"));
 		store.setItem_cd(req.getParameter("item_cd"));		
-		store.setItem_qty(Integer.parseInt(req.getParameter("item_qty")));
+		store.setQty(Integer.parseInt(req.getParameter("item_qty")));
+		store.setStore_price(Integer.parseInt(req.getParameter("store_price")));
 		store.setStore_dept(req.getParameter("store_dept"));
 		store.setStore_user(req.getParameter("store_user"));
 		store.setDescr(req.getParameter("descr"));
+		store.setReg_ymd(req.getParameter("reg_ymd"));
 		
 		String regYmdStr = req.getParameter("reg_ymd");
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 		
-		if (regYmdStr == null || regYmdStr.isEmpty()) {
-			errors.put("regYmd", Boolean.TRUE);
-		} else {
-			try {
-				//文字列の日付をDateに変換。
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date regYmdUtilDate = dateFormat.parse(regYmdStr);
-				
-				store.setReg_ymd(new java.sql.Date(regYmdUtilDate.getTime()));
-			} catch (ParseException e) {
-				errors.put("regYmdFormat", Boolean.TRUE);
-			}
-		}
+//		if (regYmdStr == null || regYmdStr.isEmpty()) {
+//			errors.put("regYmd", Boolean.TRUE);
+//		} else {
+//			try {
+//				//文字列の日付をDateに変換。
+//				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//				Date regYmdUtilDate = dateFormat.parse(regYmdStr);
+//				
+//				store.setReg_ymd(new java.sql.Date(regYmdUtilDate.getTime()));
+//			} catch (ParseException e) {
+//				errors.put("regYmdFormat", Boolean.TRUE);
+//			}
+//		}
+		
 		//エラー発生時フォーム画面へ戻る。
 		if (!errors.isEmpty()) {
 			return FORM_VIEW;

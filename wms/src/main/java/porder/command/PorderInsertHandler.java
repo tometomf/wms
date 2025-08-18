@@ -1,4 +1,4 @@
-package order.command;
+package porder.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,19 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import item.model.Item;
 import item.service.ItemListService;
 import mvc.command.CommandHandler;
-import order.model.Order;
-import order.service.OrderService;
-import ware.model.Ware;
-import ware.service.WareListService;
+import porder.model.Porder;
+import porder.service.PorderService;
 
-public class OrderInsertHandler implements CommandHandler {
+public class PorderInsertHandler implements CommandHandler {
 	
-	private static final String FORM_VIEW = "/WEB-INF/view/wareInsert.jsp";
-	private OrderService orderService = new OrderService();
+	private static final String FORM_VIEW = "/WEB-INF/view/pOrderInsert.jsp";
+	private PorderService pOrderService = new PorderService();
 	private ItemListService itemService = new ItemListService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
@@ -36,33 +35,33 @@ public class OrderInsertHandler implements CommandHandler {
 		}
 	}
 	
-	// 등록 전 창고 pk 조회
+	// 등록 전 발주 pk 조회
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		String orderNo = orderService.selectOrderNo();
+		Porder purchaseNo = pOrderService.getPurchaseNo();
 		List<Item> itemList = itemService.getItemList();
 		
-		req.setAttribute("orderNo", orderNo);
+		req.setAttribute("purchaseNo", purchaseNo);
 		req.setAttribute("itemList", itemList);
 		
-		return "/WEB-INF/view/orderInsert.jsp";
+		return FORM_VIEW;
 	}
 	
 	// 등록 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
-		Order order = new Order();
+		Porder pOrder = new Porder();
 		
-		order.setOrder_No(req.getParameter("order_no"));
-		order.setOrder_Nm(req.getParameter("order_nm"));
-		order.setItem_Cd(req.getParameter("item_cd"));
-		order.setQty(req.getParameter("qty"));
-		order.setOrder_Price(req.getParameter("order_price"));
-		order.setOrder_Dept(req.getParameter("order_dept"));
-		order.setOrder_User(req.getParameter("order_user"));
-		order.setDescr(req.getParameter("descr"));
-		
+		pOrder.setPurchase_No(req.getParameter("purchase_no"));
+		pOrder.setPurchase_Nm(req.getParameter("purchase_nm"));
+		pOrder.setItem_Cd(req.getParameter("item_cd"));
+		pOrder.setQty(req.getParameter("qty"));
+		pOrder.setPurchase_Dept(req.getParameter("purchase_dept"));
+		pOrder.setPurchase_User(req.getParameter("purchase_user"));
+		pOrder.setDescr(req.getParameter("descr"));
+		pOrder.setReg_Ymd(req.getParameter("reg_ymd"));
+			
 		try {
-			orderService.insert(order);
+			pOrderService.insert(pOrder);
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");

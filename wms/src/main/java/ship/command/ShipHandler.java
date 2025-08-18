@@ -15,10 +15,10 @@ public class ShipHandler implements CommandHandler {
     public String process(HttpServletRequest request, HttpServletResponse response) {
         // サービス呼び出し
         List<ShipViewModel> shipList = new ShipService().getShipList();
-
+        
         // request scopeに保存
         request.setAttribute("shipList", shipList);
-
+        
         // ビュー·リターン
         return "/WEB-INF/view/ship_list.jsp";
     }
