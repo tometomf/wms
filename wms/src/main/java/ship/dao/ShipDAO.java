@@ -19,7 +19,7 @@ public class ShipDAO {
         try {
             pstmt = conn.prepareStatement(
                 "SELECT rownum no, ship_no, ship_nm, a.item_cd, b.item_nm, ship_qty, ship_price, ship_dept, ship_user\r\n"
-                + "     , case when ship_yn = 'Y' then '出庫完了' else '未出庫' end as ship_yn, descr\r\n"
+                + "     , case when ship_yn = 'Y' then '出庫完了' else '未出庫' end as ship_yn, descr, reg_ymd\r\n"
                 + "FROM wms_ship a join wms_item b on a.item_cd = b.item_cd\r\n"
                 + "ORDER BY ship_no"
             );
@@ -53,6 +53,7 @@ public class ShipDAO {
         dto.setShipUser(rs.getString("ship_user"));
         dto.setShipYn(rs.getString("ship_yn"));
         dto.setDescr(rs.getString("descr"));
+        dto.setRegYmd(rs.getTimestamp("reg_ymd"));
         
         return dto;
     }
