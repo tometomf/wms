@@ -58,7 +58,7 @@
 					<div id="regist-value">
 						<input type="text" name="store_user">
 					</div>
-					<div id="regist-text">入庫登録日</div>
+					<div id="regist-text">入庫日</div>
 					<div id="regist-value">
 						<input type="date" name="reg_ymd" value="<%= todayStr %>">
 					</div>

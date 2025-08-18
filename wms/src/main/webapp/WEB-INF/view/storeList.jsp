@@ -24,14 +24,14 @@
 		<thead>
 			<tr>
 				<th width = "4%">No.</th>
-				<th width = "6%">入庫番号</th>
-				<th width = "14%">入庫名</th>
-				<th width = "6%">入庫品目</th>
-				<th width = "5%">入庫数量</th>
-				<th width = "6%">入庫単価</th>
-				<th width = "6%">入庫担当部署</th>
-				<th width = "5%">入庫担当者</th>
-				<th width = "6%">入庫日</th>
+				<th width = "8%">入庫番号</th>
+				<th width = "16%">入庫名</th>
+				<th width = "8%">入庫品目</th>
+				<th width = "8%">入庫数量</th>
+				<th width = "8%">入庫単価</th>
+				<th width = "10%">入庫担当部署</th>
+				<th width = "10%">入庫担当者</th>
+				<th width = "10%">入庫日</th>
 				<th>備考</th>
 			</tr>
 		</thead>

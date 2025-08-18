@@ -20,7 +20,7 @@
 			<table>
 				<thead>
 					<tr>
-						<th width = "4%">No</th>
+						<th width = "4%">No.</th>
 						<th width = "8%">倉庫コード</th>
 						<th width = "18%">倉庫名</th>
 						<th width = "12%">倉庫区分</th>
@@ -58,7 +58,7 @@
 <script>
 	// OnRowDblClick Event
   	function rowClicked(row) {
-		var cellValue = row.cells[0].innerText; // 첫 번째 셀 값
+		var cellValue = row.cells[1].innerText; // 첫 번째 셀 값
 		location.href = "update.do?wareCd=" + cellValue;
     	// alert("더블클릭한 행의 첫 번째 셀: " + cellValue);
   	}
