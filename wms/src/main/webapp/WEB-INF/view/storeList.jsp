@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>入庫現況</title>
+<title>入庫現況一覧</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/wms.css">
 
@@ -27,13 +27,12 @@
 				<th width = "6%">入庫番号</th>
 				<th width = "14%">入庫名</th>
 				<th width = "6%">入庫品目</th>
-				<th width = "14%">入庫品目명</th>
-				<th width = "5%">수량</th>
-				<th width = "6%">입고금액</th>
-				<th width = "6%">担当部署</th>
-				<th width = "5%">担当者</th>
-				<th width = "6%">수주등록일</th>
-				<th>비고</th>
+				<th width = "5%">入庫数量</th>
+				<th width = "6%">入庫単価</th>
+				<th width = "6%">入庫担当部署</th>
+				<th width = "5%">入庫担当者</th>
+				<th width = "6%">入庫日</th>
+				<th>備考</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,7 +47,6 @@
 				<td><%=store.getNo()%></td>
 				<td><%=store.getStore_no()%></td>
 				<td style = "text-align: left; padding-left: 5px"><%=store.getStore_nm()%></td>
-				<td><%=store.getItem_cd()%></td>
 				<td style = "text-align: left; padding-left: 5px"><%=store.getItem_nm()%></td>
 				<td style = "text-align: right; padding-right: 5px"><%=store.getQty()%></td>
 				<td style = "text-align: right; padding-right: 5px"><%=store.getStore_price()%></td>

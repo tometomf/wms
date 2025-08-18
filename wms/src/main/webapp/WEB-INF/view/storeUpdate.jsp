@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>入庫登録</title>
+<title>データ修正</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/wms.css">
 </head>
@@ -23,18 +23,17 @@
 					</div>
 					<div id="regist-text">入庫名</div>
 					<div id="regist-value">
-						<input type="text" name="store_nm" value="${store.store_nm}"
-							required>
+						<input type="text" name="store_nm" value="${store.store_nm}">
 					</div>
-					<div id="regist-text">입고품목</div>
+					<div id="regist-text">入庫品目</div>
 					<div id="regist-value">
 						<input readonly type="text" name="item_cd" value="${store.item_cd}">
 					</div>
-					<div id="regist-text">입고수량</div>
+					<div id="regist-text">入庫数量</div>
 					<div id="regist-value">
 						<input type="number" name="qty" min="0" value="${store.qty}">
 					</div>
-					<div id="regist-text">입고금액</div>
+					<div id="regist-text">入庫単価</div>
 					<div id="regist-value">
 						<input type="number" name="store_price" min="0" value="${store.store_price}">
 					</div>
@@ -59,8 +58,8 @@
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="수정"> 
-						<a href="delete.do?store_no=${store.store_no}" id="button-link">삭제</a>
+						<input type="submit" value="修正"> 
+						<a href="delete.do?store_no=${store.store_no}" id="button-link">削除</a>
 					</div>
 				</div>
 			</div>
@@ -74,11 +73,12 @@
 		
 	    var requiredFields = [
 	        { name: "store_nm", label: "入庫名" },
-	        { name: "shipDept", label: "出庫部署" },
-	        { name: "shipUser", label: "担当者" },
-	        { name: "itemCd", label: "品目コード" },
-	        { name: "shipPrice", label: "出庫単価" },
-	        { name: "shipQty", label: "出庫数量" }
+	        { name: "item_cd", label: "入庫品目" },
+	        { name: "qty", label: "入庫数量" },
+	        { name: "store_price", label: "入庫単価" },
+	        { name: "store_dept", label: "入庫担当部署" },
+	        { name: "store_user", label: "入庫担当者" }
+	        { name: "reg_ymd", label: "入庫日" }
 	    ];
 	
 	    for (let field of requiredFields) {

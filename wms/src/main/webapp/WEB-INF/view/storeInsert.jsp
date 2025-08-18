@@ -33,7 +33,7 @@
 					<div id="regist-value">
 						<input type="text" name="store_nm">
 					</div>
-					<div id="regist-text">입고품목</div>
+					<div id="regist-text">入庫品目</div>
 					<div id="regist-value">
 						<select name = "item_cd">
 							<option value = ""></option>
@@ -42,11 +42,11 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div id="regist-text">입고수량</div>
+					<div id="regist-text">入庫数量</div>
 					<div id="regist-value">
 						<input type="number" name="item_qty" min="0">
 					</div>
-					<div id="regist-text">입고금액</div>
+					<div id="regist-text">入庫単価</div>
 					<div id="regist-value">
 						<input type="number" name="store_price" min="0">
 					</div>
@@ -62,14 +62,14 @@
 					<div id="regist-value">
 						<textarea name="descr" rows="4" cols="56"></textarea>
 					</div>
-					<div id="regist-text">수주등록일</div>
+					<div id="regist-text">入庫登録日</div>
 					<div id="regist-value">
 						<input type="date" name="reg_ymd" value="<%= todayStr %>">
 					</div>
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="저장">
+						<input type="submit" value="セーブ">
 					</div>
 				</div>
 			</div>
@@ -81,14 +81,14 @@
 <script>
 	function validateForm() {
 		
-	    var requiredFields = [
+		var requiredFields = [
 	        { name: "store_nm", label: "入庫名" },
-	        { name: "shipDept", label: "出庫部署" },
-	        { name: "shipUser", label: "担当者" },
-	        { name: "itemCd", label: "品目コード" },
-	        { name: "shipPrice", label: "出庫単価" },
-	        { name: "shipQty", label: "出庫数量" }
-	    ];
+	        { name: "item_cd", label: "入庫品目" },
+	        { name: "qty", label: "入庫数量入庫単価" },
+	        { name: "store_price", label: "入庫単価" },
+	        { name: "store_dept", label: "入庫担当部署" },
+	        { name: "store_user", label: "入庫担当者" }
+	        { name: "reg_ymd", label: "入庫日" }
 	
 	    for (let field of requiredFields) {
 	        let value = document.getElementsByName(field.name)[0].value.trim();
