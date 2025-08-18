@@ -23,12 +23,12 @@
                         <th width = "12%">出庫名</th>
 						<th width = "8%">出庫品目</th>
 						<th width = "12%">出庫品目名</th>
-						<th width = "5%">수량</th>
+						<th width = "5%">数量</th>
                         <th width = "6%">出庫価格</th>
                         <th width = "6%">出庫部署</th>
 						<th width = "6%">出庫社員</th>
-                        <th width = "9%">출고완료유무</th>
-                        <th>비고</th>
+                        <th width = "9%">出庫完了有無</th>
+                        <th>備考</th>
                     </tr>
                 </thead>
                 <tbody>
