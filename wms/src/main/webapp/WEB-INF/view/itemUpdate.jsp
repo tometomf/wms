@@ -16,50 +16,50 @@
 		<form action="update.do" method="post">
 			<div id="regist">
 				<div id="regist-menu">
-					<div id="regist-text">품목코드</div>
+					<div id="regist-text">品目コード</div>
 					<div id="regist-value">
 						<input readonly type="text" name="itemCd" value="${item.itemCd}">
 					</div>
-					<div id="regist-text">품목명</div>
+					<div id="regist-text">品目名</div>
 					<div id="regist-value">
 						<input type="text" name="itemNm" value="${item.itemNm}">
 					</div>
-					<div id="regist-text">규격</div>
+					<div id="regist-text">規格</div>
 					<div id="regist-value">
 						<input type="text" name="spec" value="${item.spec}">
 					</div>
-					<div id="regist-text">품목구분</div>
+					<div id="regist-text">分類</div>
 					<div id="regist-value">
 						<input type="text" name="itemGubun" value="${item.itemGubun}">
 					</div>
-					<div id="regist-text">단위</div>
+					<div id="regist-text">単位</div>
 					<div id="regist-value">
 						<input type="text" name="unit" value="${item.unit}">
 					</div>
-					<div id="regist-text">사용여부</div>
+					<div id="regist-text">使用有無</div>
 					<div id="regist-value">
 						<select name="useYn">
 							<option value="Y" ${item.useYn == 'Y' ? 'selected' : ''}>利用あり</option>
 							<option value="N" ${item.useYn == 'N' ? 'selected' : ''}>利用なし</option>
 						</select>
 					</div>
-					<div id="regist-text">제조사</div>
+					<div id="regist-text">メーカー</div>
 					<div id="regist-value">
 						<input type="text" name="manufacturer" value="${item.manufacturer}">
 					</div>
-					<div id="regist-text">수주기준단가</div>
+					<div id="regist-text">受注基準単価</div>
 					<div id="regist-value">
 						<input type="text" name="storePrice" value="${item.storePrice}">
 					</div>
-					<div id="regist-text">출고기준단가</div>
+					<div id="regist-text">出庫基準単価</div>
 					<div id="regist-value">
 						<input type="text" name="shipmentPrice" value="${item.shipmentPrice}">
 					</div>
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="수정"> <a
-							href="delete.do?itemCd=${item.itemCd}" id="button-link">삭제</a>
+						<input type="submit" value="修正"> <a
+							href="delete.do?itemCd=${item.itemCd}" id="button-link">削除</a>
 					</div>
 				</div>
 			</div>
