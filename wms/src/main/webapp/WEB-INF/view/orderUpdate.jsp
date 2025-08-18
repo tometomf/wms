@@ -36,13 +36,17 @@
 					<div id = "regist-value">
 						<input type = "number" name = "order_price" value = "${order.order_Price}">
 					</div>
-					<div id = "regist-text">担当部署</div>
+					<div id = "regist-text">受注担当部署</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_dept" value = "${order.order_Dept}">
 					</div>
-					<div id = "regist-text">担当社員</div>
+					<div id = "regist-text">受注担当者</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_user" value = "${order.order_User}">
+					</div>
+					<div id="regist-text">受注日</div>
+					<div id="regist-value">
+						<input type="date" name="reg_ymd" value="${pOrder.reg_Ymd}">
 					</div>
 					<div id = "regist-text">備考</div>
 					<div id = "regist-value">

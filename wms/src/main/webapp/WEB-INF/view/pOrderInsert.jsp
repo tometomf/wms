@@ -54,7 +54,7 @@
 					<div id = "regist-value">
 						<input type = "text" name = "purchase_user">
 					</div>
-					<div id="regist-text">発注登録日</div>
+					<div id="regist-text">発注日</div>
 					<div id="regist-value">
 						<input type="date" name="reg_ymd" value="<%= todayStr %>">
 					</div>

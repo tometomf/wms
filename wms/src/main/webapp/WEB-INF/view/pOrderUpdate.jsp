@@ -42,7 +42,7 @@
 					<div id = "regist-value">
 						<input type = "text" name = "purchase_user" value = "${pOrder.purchase_User}">
 					</div>
-					<div id="regist-text">発注登録日</div>
+					<div id="regist-text">発注日</div>
 					<div id="regist-value">
 						<input type="date" name="reg_ymd" value="${pOrder.reg_Ymd}">
 					</div>

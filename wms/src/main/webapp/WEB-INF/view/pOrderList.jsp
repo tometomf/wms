@@ -19,15 +19,16 @@
 			<table>
 				<thead>
 					<tr>
-						<th width = "4%">No</th>
+						<th width = "4%">No.</th>
 						<th width = "6%">発注番号</th>
-						<th width = "18%">発注名</th>
+						<th width = "13%">発注名</th>
 						<th width = "6%">発注品目</th>
 						<th width = "16%">発注品目名</th>
 						<th width = "5%">数量</th>
-						<th width = "">担当部署</th>
-						<th width = "">担当部署</th>
-						<th width = "8%">登録日</th>
+						<th width = "8%">発注担当部署</th>
+						<th width = "7%">発注担当者</th>
+						<th width = "6%">発注日</th>
+						<th>備考</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,6 +43,7 @@
 					        <td>${pOrder.purchase_Dept}</td>
 					        <td>${pOrder.purchase_User}</td>
 					        <td>${pOrder.reg_Ymd}</td>
+					            <td style = "text-align: left; padding-left: 5px">${pOrder.descr}</td>
 					    </tr>
 					</c:forEach>
 				</tbody>

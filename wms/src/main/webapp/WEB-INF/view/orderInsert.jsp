@@ -1,6 +1,13 @@
+<%@ page import="java.util.Date, java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    Date today = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String todayStr = sdf.format(today);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -43,13 +50,17 @@
 					<div id = "regist-value">
 						<input type = "number" name = "order_price">
 					</div>
-					<div id = "regist-text">担当部署</div>
+					<div id = "regist-text">受注担当部署</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_dept">
 					</div>
-					<div id = "regist-text">担当社員</div>
+					<div id = "regist-text">受注担当者</div>
 					<div id = "regist-value">
 						<input type = "text" name = "order_user">
+					</div>
+						<div id="regist-text">受注日</div>
+					<div id="regist-value">
+						<input type="date" name="reg_ymd" value="<%= todayStr %>">
 					</div>
 					<div id = "regist-text">備考</div>
 					<div id = "regist-value">

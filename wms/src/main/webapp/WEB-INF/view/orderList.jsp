@@ -22,15 +22,16 @@
 				<thead>
 					<tr>
 						<th width = "4%">No.</th>
-						<th width = "8%">受注番号</th>
-						<th width = "18%">受注名</th>
-						<th width = "8%">受注品目</th>
+						<th width = "6%">受注番号</th>
+						<th width = "10%">受注名</th>
+						<th width = "6%">受注品目</th>
 						<th width = "16%">受注品目名</th>
-						<th width = "5%">수량</th>
-						<th>受注価格</th>
-						<th width = "">担当部署</th>
-						<th width = "">担当社員</th>
-						<th>登録日</th>
+						<th width = "5%">数量</th>
+						<th width = "6%">受注価格</th>
+						<th width = "8%">受注担当部署</th>
+						<th width = "7%">受注担当者</th>
+						<th width = "6%">受注日</th>
+						<th>備考</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,6 +47,7 @@
 					        <td>${order.order_Dept}</td>
 					        <td>${order.order_User}</td>
 					        <td>${order.reg_Ymd}</td>
+					        <td style = "text-align: left; padding-left: 5px">${order.descr}</td>
 					    </tr>
 					</c:forEach>
 				</tbody>
