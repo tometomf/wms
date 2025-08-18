@@ -13,7 +13,7 @@
 		<div id="wms-title">倉庫登録</div>
 		<div id="search-bar" style="display: flex;">
 		</div>
-		<form action = "update.do" method = "post">
+		<form action = "update.do" method = "post" onsubmit="return validateForm();">
 			<div id = "regist">
 				<div id = "regist-menu">
 					<div id = "regist-text">倉庫コード</div>
@@ -51,3 +51,23 @@
 	</div>
 </body>
 </html>
+
+<script>
+
+	function validateForm() {
+	    var requiredFields = [
+	        { name: "warenm", label: "倉庫名" },
+	        { name: "waregb", label: "倉庫区分" }
+	    ];
+	
+	    for (let field of requiredFields) {
+	        let value = document.getElementsByName(field.name)[0].value.trim();
+	        if (!value) {
+	            alert(field.label + "を入力してください");
+	            document.getElementsByName(field.name)[0].focus();
+	            return false; 
+	        }
+	    }
+	    return true; 
+	}
+</script>
