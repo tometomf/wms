@@ -30,6 +30,4 @@ public class StockDeleteHandler implements CommandHandler {
 		out.close();
 		return null;  // 뷰(JSP)로 이동하지 않음 / JSPビューには移動しない
 	}
-
-
 }

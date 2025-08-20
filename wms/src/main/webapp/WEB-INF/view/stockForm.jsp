@@ -61,7 +61,7 @@
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="貯蔵">
+						<input type="submit" value="保存">
 					</div>
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 	function validateForm() {
 	    var requiredFields = [
 	        { name: "itemCd", label: "品目" },
-	        { name: "qty", label: "在庫数量" },
+	        { name: "qty", label: "数量" },
 	        { name: "wareCd", label: "倉庫" },
 	        { name: "regYmd", label: "登録日" }
 	    ];

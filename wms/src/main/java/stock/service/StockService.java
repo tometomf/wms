@@ -102,7 +102,7 @@ public class StockService {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-        	stockDao.delete(conn, Integer.parseInt(stockNo));
+        	stockDao.delete(conn, stockNo);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

@@ -130,12 +130,12 @@ public class StockDao {
 	}
 	
 	// 재고 삭제 / 在庫削除
-	public int delete(Connection conn, int stockNo) throws SQLException {
+	public int delete(Connection conn, String stockNo) throws SQLException {
 		
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("delete wms_stock where stock_no=?");
-			pstmt.setInt(1, stockNo);
+			pstmt.setString(1, stockNo);
 			return pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);

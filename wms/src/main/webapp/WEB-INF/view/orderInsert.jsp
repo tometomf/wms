@@ -69,7 +69,7 @@
 				</div>
 				<div id = "regist-button">
 					<div>
-						<input type = "submit" value = "貯蔵">
+						<input type = "submit" value = "保存">
 					</div>
 				</div>
 			</div>
