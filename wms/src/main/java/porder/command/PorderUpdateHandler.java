@@ -23,30 +23,32 @@ public class PorderUpdateHandler implements CommandHandler {
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// GET → 수정フォーム表示 / POST → 更新処理
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			return processForm(req, res);
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
 			return processSubmit(req, res);
 		} else {
-			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED); // 不正メソッド
 			return null;
 		}
 	}
 
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 		
-		String purchaseNo = req.getParameter("purchase_No");  // 여기서 파라미터 읽음
-		Porder pOrder = pOrderService.selectByPurchaseNo(purchaseNo);
+		String purchaseNo = req.getParameter("purchase_No");  // パラメータから発注番号取得
+		Porder pOrder = pOrderService.selectByPurchaseNo(purchaseNo); // 該当発注を検索
 		
-		req.setAttribute("pOrder", pOrder);
+		req.setAttribute("pOrder", pOrder); // JSPに渡す
 		
-		return "/WEB-INF/view/pOrderUpdate.jsp";
+		return "/WEB-INF/view/pOrderUpdate.jsp"; // 更新フォームへ
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
 		Porder pOrder = new Porder();
 		
+		// フォームから受け取った値をモデルに設定
 		pOrder.setPurchase_No(req.getParameter("purchase_no"));
 		pOrder.setPurchase_Nm(req.getParameter("purchase_nm"));
 		pOrder.setQty(req.getParameter("qty"));
@@ -56,17 +58,17 @@ public class PorderUpdateHandler implements CommandHandler {
 		pOrder.setReg_Ymd(req.getParameter("reg_ymd"));
 		
 		try {
-			pOrderService.update(pOrder);
+			pOrderService.update(pOrder); // 更新実行
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('수정이 완료되었습니다.');");
-			out.println("location.href='list.do';");
+			out.println("alert('修正が完了しました。');"); // 成功メッセージ
+			out.println("location.href='list.do';");      // 一覧へ戻る
 			out.println("</script>");
 			out.close();
 			return null;
 		} catch (DuplicateFormatFlagsException e) {
-			return FORM_VIEW;
+			return FORM_VIEW; // 失敗時はフォーム再表示
 		}
 	}
 }
