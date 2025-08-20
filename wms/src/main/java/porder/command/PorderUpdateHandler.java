@@ -62,7 +62,7 @@ public class PorderUpdateHandler implements CommandHandler {
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('修正が完了しました。');"); // 成功メッセージ
+			out.println("alert('修正できました。');"); // 成功メッセージ
 			out.println("location.href='list.do';");      // 一覧へ戻る
 			out.println("</script>");
 			out.close();

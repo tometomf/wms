@@ -85,7 +85,7 @@
 	        { name: "order_nm", label: "受注名" },
 	        { name: "item_cd", label: "受注品目" },
 	        { name: "qty", label: "数量" },
-	        { name: "order_price", label: "발주담당부서" },
+	        { name: "order_price", label: "受注価格" },
 	        { name: "order_dept", label: "担当部署" },
 	        { name: "order_user", label: "担当社員" }
 	    ];

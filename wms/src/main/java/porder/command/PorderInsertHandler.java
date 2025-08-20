@@ -63,7 +63,7 @@ public class PorderInsertHandler implements CommandHandler {
 			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 			out.println("<script>");
-			out.println("alert('登録が完了しました。');"); // 成功メッセージ
+			out.println("alert('登録できました。');"); // 成功メッセージ
 			out.println("location.href='list.do';");       // 一覧へ遷移
 			out.println("</script>");
 			out.close();

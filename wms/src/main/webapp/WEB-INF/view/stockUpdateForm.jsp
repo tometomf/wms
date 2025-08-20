@@ -20,7 +20,7 @@
                 <div id="regist-value">
                     <input readonly type="text" name="stockNo" value="${stock.stock_No}">
                 </div>
-                <div id="regist-text">品目コード</div>
+                <div id="regist-text">品目</div>
                 <div id="regist-value">
                     <input readonly type="text" name="itemCd" value="${stock.item_Cd}">
                 </div>
@@ -28,7 +28,7 @@
                 <div id="regist-value">
                     <input type="number" name="qty" value="${stock.qty}">
                 </div>
-                <div id="regist-text">倉庫コード</div>
+                <div id="regist-text">倉庫</div>
                 <div id="regist-value">
                     <input readonly type="text" name="wareCd" value="${stock.ware_Cd}">
                 </div>

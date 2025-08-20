@@ -123,7 +123,7 @@ public class StockInsertHandler implements CommandHandler {
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
             out.println("<script>");
-            out.println("alert('登録が完了しました。');"); // 등록 완료 알림 / 登録完了メッセージ
+            out.println("alert('登録できました。');"); // 등록 완료 알림 / 登録完了メッセージ
             out.println("location.href='list.do';"); // 목록으로 이동 / 一覧へ移動
             out.println("</script>");
             out.close();

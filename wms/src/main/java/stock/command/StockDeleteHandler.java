@@ -24,7 +24,7 @@ public class StockDeleteHandler implements CommandHandler {
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		out.println("<script>");
-		out.println("alert('삭제되었습니다.');");  //삭제완료 알림 / 削除完了のお知らせ
+		out.println("alert('削除できました。');");  //삭제완료 알림 / 削除完了のお知らせ
 		out.println("location.href='list.do';");  // 목록 페이지로 이동 / リストページへ移動
 		out.println("</script>");
 		out.close();

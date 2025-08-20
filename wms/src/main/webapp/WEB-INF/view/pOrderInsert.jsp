@@ -78,12 +78,12 @@
 
 	function validateForm() {
 	    var requiredFields = [
-	        { name: "purchase_nm", label: "발주명" },
-	        { name: "item_cd", label: "발주품목" },
-	        { name: "qty", label: "수량" },
-	        { name: "purchase_dept", label: "발주담당부서" },
-	        { name: "purchase_user", label: "발주담당자" },
-	        { name: "reg_ymd", label: "발주등록일" },
+	        { name: "purchase_nm", label: "発注名" },
+	        { name: "item_cd", label: "発注品目" },
+	        { name: "qty", label: "数量" },
+	        { name: "purchase_dept", label: "発注担当部署" },
+	        { name: "purchase_user", label: "発注担当者" },
+	        { name: "reg_ymd", label: "発注日" },
 	    ];
 	
 	    for (let field of requiredFields) {

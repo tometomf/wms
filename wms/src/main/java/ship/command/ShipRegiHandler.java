@@ -60,7 +60,7 @@ public class ShipRegiHandler implements CommandHandler {
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
             out.println("<script>");
-            out.println("alert('登録が完了しました。');");
+            out.println("alert('登録できました。');");
             out.println("location.href='list.do';");
             out.println("</script>");
             out.close();

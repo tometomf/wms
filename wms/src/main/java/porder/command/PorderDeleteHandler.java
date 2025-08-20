@@ -21,7 +21,7 @@ public class PorderDeleteHandler implements CommandHandler {
         res.setContentType("text/html; charset=UTF-8");
         PrintWriter out = res.getWriter();
         out.println("<script>");
-        out.println("alert('削除しました。');"); // 削除完了メッセージ
+        out.println("alert('削除できました。');"); // 削除完了メッセージ
         out.println("location.href='list.do';"); // 一覧へ戻る
         out.println("</script>");
         out.close();

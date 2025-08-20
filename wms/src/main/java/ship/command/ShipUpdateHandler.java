@@ -82,7 +82,7 @@ public class ShipUpdateHandler implements CommandHandler {
             shipService.update(ship);
             res.setContentType("text/html; charset=UTF-8");
             try (PrintWriter out = res.getWriter()) {
-                out.println("<script>alert('修正が完了しました'); location.href='list.do';</script>");
+                out.println("<script>alert('修正できました。'); location.href='list.do';</script>");
             }
             return null;
         } catch (RuntimeException e) { 

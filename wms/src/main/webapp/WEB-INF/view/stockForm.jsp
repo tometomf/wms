@@ -28,7 +28,7 @@
 					<div id="regist-value">
 						<input readonly type="text" name="stockNo" value="${stockNo}">
 					</div>
-					<div id="regist-text">品目コード</div>
+					<div id="regist-text">品目</div>
 					<div id="regist-value">
 						<select name = "itemCd">
 							<option value = ""></option>
@@ -37,11 +37,11 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div id="regist-text">在庫数量</div>
+					<div id="regist-text">数量</div>
 					<div id="regist-value">
 						<input type="number" name="qty">
 					</div>
-					<div id="regist-text">倉庫コード</div>
+					<div id="regist-text">倉庫</div>
 					<div id="regist-value">
 						<select name = "wareCd">
 							<option value = ""></option>
@@ -75,9 +75,9 @@
 	<!-- 	에러 메세지 알림창 / エラーメッセージ通知ウィンドウ -->
 	function validateForm() {
 	    var requiredFields = [
-	        { name: "itemCd", label: "品目コード" },
+	        { name: "itemCd", label: "品目" },
 	        { name: "qty", label: "在庫数量" },
-	        { name: "wareCd", label: "倉庫コード" },
+	        { name: "wareCd", label: "倉庫" },
 	        { name: "regYmd", label: "登録日" }
 	    ];
 	
