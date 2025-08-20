@@ -11,6 +11,8 @@ public class Store {
 	private String item_nm;
 	private Integer qty;
 	private Integer store_price;
+	private String ware_cd;
+	private String ware_nm;
 	private String store_dept;
 	private String store_user;
 	private String descr;
@@ -22,7 +24,8 @@ public class Store {
 	}
 
 	public Store(String no, String store_no, String store_nm, String item_cd, String item_nm, Integer qty,
-			Integer store_price, String store_dept, String store_user, String descr, String reg_ymd) {
+			Integer store_price, String ware_cd, String ware_nm, String store_dept, String store_user, String descr,
+			String reg_ymd) {
 		super();
 		this.no = no;
 		this.store_no = store_no;
@@ -31,6 +34,8 @@ public class Store {
 		this.item_nm = item_nm;
 		this.qty = qty;
 		this.store_price = store_price;
+		this.ware_cd = ware_cd;
+		this.ware_nm = ware_nm;
 		this.store_dept = store_dept;
 		this.store_user = store_user;
 		this.descr = descr;
@@ -91,6 +96,22 @@ public class Store {
 
 	public void setStore_price(Integer store_price) {
 		this.store_price = store_price;
+	}
+
+	public String getWare_cd() {
+		return ware_cd;
+	}
+
+	public void setWare_cd(String ware_cd) {
+		this.ware_cd = ware_cd;
+	}
+
+	public String getWare_nm() {
+		return ware_nm;
+	}
+
+	public void setWare_nm(String ware_nm) {
+		this.ware_nm = ware_nm;
 	}
 
 	public String getStore_dept() {

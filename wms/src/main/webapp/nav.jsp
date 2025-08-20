@@ -119,10 +119,17 @@
 			</ul>
 		</div>
 		<div id="menu-section">
+			<div id="menu-title">&nbsp;在庫</div> <!-- 재고 -->
+			<ul>
+				<li><a href="${ctxPath}/stock/insert.do">在庫登録</a></li> <!-- 재고 등록 -->
+				<li><a href="${ctxPath}/stock/list.do">在庫現況</a></li> <!-- 재고 현황 -->
+			</ul>
+		</div>
+		<div id="menu-section">
 			<div id="menu-title">&nbsp;発注</div> <!-- 발주 -->
 			<ul>
-				<li><a href="${ctxPath}/porder/insert.do">発注登録</a></li> <!-- 창고 등록 -->
-				<li><a href="${ctxPath}/porder/list.do">発注現況</a></li> <!-- 창고 현황 -->
+				<li><a href="${ctxPath}/porder/insert.do">発注登録</a></li> <!-- 발주 등록 -->
+				<li><a href="${ctxPath}/porder/list.do">発注現況</a></li> <!-- 발주 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">
@@ -130,13 +137,6 @@
 			<ul>
 				<li><a href="${ctxPath}/store/insert.do">入庫登録</a></li> <!-- 입고 등록 -->
 				<li><a href="${ctxPath}/store/list.do">入庫現況</a></li> <!-- 입고 현황 -->
-			</ul>
-		</div>
-		<div id="menu-section">
-			<div id="menu-title">&nbsp;在庫</div> <!-- 재고 -->
-			<ul>
-				<li><a href="${ctxPath}/stock/insert.do">在庫登録</a></li> <!-- 재고 등록 -->
-				<li><a href="${ctxPath}/stock/list.do">在庫現況</a></li> <!-- 재고 현황 -->
 			</ul>
 		</div>
 		<div id="menu-section">

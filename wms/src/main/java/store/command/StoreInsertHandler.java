@@ -18,6 +18,8 @@ import item.service.ItemListService;
 import mvc.command.CommandHandler;
 import store.model.Store;
 import store.service.StoreListService;
+import ware.model.Ware;
+import ware.service.WareListService;
 
 public class StoreInsertHandler implements CommandHandler {
 
@@ -25,6 +27,7 @@ public class StoreInsertHandler implements CommandHandler {
 	private static final String FORM_VIEW = "/WEB-INF/view/storeInsert.jsp";
 	private StoreListService storeListService = new StoreListService();
 	private ItemListService itemService = new ItemListService();
+	 private WareListService wareService = new WareListService();
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -43,10 +46,12 @@ public class StoreInsertHandler implements CommandHandler {
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
 		String nextStoreNo = storeListService.getNewStoreNo();
 		List<Item> itemList = itemService.getItemList();
+		List<Ware> wareList = wareService.select();
 
 		//新しいstore_noを獲得するメソッドを呼び出す。
 		req.setAttribute("store_no", nextStoreNo);
 		req.setAttribute("itemList", itemList);
+		req.setAttribute("wareList", wareList);
 		
 		return FORM_VIEW;
 	}
@@ -61,12 +66,11 @@ public class StoreInsertHandler implements CommandHandler {
 		store.setItem_cd(req.getParameter("item_cd"));		
 		store.setQty(Integer.parseInt(req.getParameter("item_qty")));
 		store.setStore_price(Integer.parseInt(req.getParameter("store_price")));
+		store.setWare_cd(req.getParameter("ware_cd"));
 		store.setStore_dept(req.getParameter("store_dept"));
 		store.setStore_user(req.getParameter("store_user"));
 		store.setDescr(req.getParameter("descr"));
 		store.setReg_ymd(req.getParameter("reg_ymd"));
-		
-		String regYmdStr = req.getParameter("reg_ymd");
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);

@@ -50,6 +50,15 @@
 					<div id="regist-value">
 						<input type="number" name="store_price" min="0">
 					</div>
+					<div id="regist-text">入庫倉庫</div>
+					<div id="regist-value">
+						<select name = "ware_cd">
+							<option value = ""></option>
+							<c:forEach var = "wareList" items = "${wareList}">
+						   		<option value = "${wareList.wareCd}">${wareList.wareNm}</option>
+							</c:forEach>
+						</select>
+					</div>
 					<div id="regist-text">入庫担当部署</div>
 					<div id="regist-value">
 						<input type="text" name="store_dept">
@@ -69,7 +78,7 @@
 				</div>
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="セーブ">
+						<input type="submit" value="保存">
 					</div>
 				</div>
 			</div>

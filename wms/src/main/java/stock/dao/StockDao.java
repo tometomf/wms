@@ -24,7 +24,7 @@ public class StockDao {
 			pstmt = conn.prepareStatement(
 					"select rownum no, stock_no, a.item_cd, b.item_nm\r\n"
 					+ "     , qty, a.ware_cd, c.ware_nm\r\n"
-					+ "     , to_char(a.reg_ymd, 'yyyy-MM-dd') as reg_ymd, a.descr\r\n"
+					+ "     , to_char(a.reg_ymd, 'yyyy-MM-dd') as reg_ymd, nvl(a.descr, ' ') as descr\r\n"
 					+ "from wms_stock a join wms_item b on a.item_cd = b.item_cd join wms_ware c on a.ware_cd = c.ware_cd" );
 			rs = pstmt.executeQuery();
 			List<StockPlus> result = new ArrayList<>();

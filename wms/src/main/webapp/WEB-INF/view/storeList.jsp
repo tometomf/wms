@@ -24,14 +24,15 @@
 		<thead>
 			<tr>
 				<th width = "4%">No.</th>
-				<th width = "8%">入庫番号</th>
-				<th width = "16%">入庫名</th>
+				<th width = "6%">入庫番号</th>
+				<th width = "8%">入庫名</th>
 				<th width = "8%">入庫品目</th>
-				<th width = "8%">入庫数量</th>
-				<th width = "8%">入庫単価</th>
+				<th width = "8%">入庫品目名</th>
+				<th width = "7%">入庫数量</th>
+				<th width = "7%">入庫単価</th>
 				<th width = "10%">入庫担当部署</th>
-				<th width = "10%">入庫担当者</th>
-				<th width = "10%">入庫日</th>
+				<th width = "9%">入庫担当者</th>
+				<th width = "6%">入庫日</th>
 				<th>備考</th>
 			</tr>
 		</thead>
@@ -47,6 +48,7 @@
 				<td><%=store.getNo()%></td>
 				<td><%=store.getStore_no()%></td>
 				<td style = "text-align: left; padding-left: 5px"><%=store.getStore_nm()%></td>
+				<td><%=store.getItem_cd()%></td>
 				<td style = "text-align: left; padding-left: 5px"><%=store.getItem_nm()%></td>
 				<td style = "text-align: right; padding-right: 5px"><%=store.getQty()%></td>
 				<td style = "text-align: right; padding-right: 5px"><%=store.getStore_price()%></td>

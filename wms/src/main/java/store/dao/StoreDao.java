@@ -21,7 +21,7 @@ public class StoreDao {
 		// ResultSet,Pre... インスタンス初期化
 		try {
 			pstmt = conn.prepareStatement("select rownum no, store_no, store_nm, a.item_cd, b.item_nm\r\n"
-					+ "     , qty, a.store_price, store_dept, store_user, descr, to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
+					+ "     , qty, a.store_price, ware_cd, ware_cd as ware_nm, store_dept, store_user, nvl(descr, ' ') as descr, to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
 					+ "from wms_store a join wms_item b on a.item_cd = b.item_cd");
 			// wms_store_masterに存在するコラムを全て紹介するQueryを用意
 
@@ -46,7 +46,7 @@ public class StoreDao {
 	    ResultSet rs = null;
 	    try {
 	        pstmt = conn.prepareStatement(
-	        		"select store_no, store_nm, b.item_nm as item_cd, qty, a.store_price, store_dept, store_user, descr, to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
+	        		"select store_no, store_nm, b.item_nm as item_cd, qty, a.store_price, (select ware_nm from wms_ware where ware_cd = a.ware_cd) as ware_cd, store_dept, store_user, descr, to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
 	        		+ "from wms_store a join wms_item b on a.item_cd = b.item_cd\r\n"
 	        		+ "where store_no = ?");
 	        pstmt.setString(1, storeNo);
@@ -61,6 +61,8 @@ public class StoreDao {
 						  , null
 						  , rs.getInt("qty")
 						  , rs.getInt("store_price")
+						  , rs.getString("ware_cd")
+						  , null
 						  , rs.getString("store_dept")
 						  , rs.getString("store_user")
 						  , rs.getString("descr")
@@ -91,17 +93,37 @@ public class StoreDao {
 	}
 
 	public static void insert(Connection conn, Store store) throws SQLException {
-		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_store values(?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+		
+		try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_store values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 			pstmt.setString(1, store.getStore_no());
 			pstmt.setString(2, store.getStore_nm());
 			pstmt.setString(3, store.getItem_cd());
 			pstmt.setInt(4, store.getQty());
 			pstmt.setInt(5, store.getStore_price());
-			pstmt.setString(6, store.getStore_dept());
-			pstmt.setString(7, store.getStore_user());
-			pstmt.setString(8, store.getDescr());
-			pstmt.setString(9, store.getReg_ymd());
+			pstmt.setString(6, store.getWare_cd());
+			pstmt.setString(7, store.getStore_dept());
+			pstmt.setString(8, store.getStore_user());
+			pstmt.setString(9, store.getDescr());
+			pstmt.setString(10, store.getReg_ymd());
 			pstmt.executeUpdate();
+		}
+		
+		// 재고등록 PK 조회
+		PreparedStatement pstmt1 = conn.prepareStatement("select NVL('K' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(stock_no, 2))), 0) + 1), 3, '0'), 'K001') AS stock_no from wms_stock");
+		ResultSet rs = null;
+		
+		rs = pstmt1.executeQuery();
+		
+		// 입고 등록 시 재고 자동 등록
+		if (rs.next()) {
+			try (PreparedStatement pstmt = conn.prepareStatement("insert into wms_stock values(?, ?, ?, ?, ?, sysdate)")) {
+				pstmt.setString(1, rs.getString("stock_no"));
+				pstmt.setString(2, store.getItem_cd());
+				pstmt.setInt(3, store.getQty());
+				pstmt.setString(4, store.getWare_cd());
+				pstmt.setString(5, "");
+				pstmt.executeUpdate();
+			}
 		}
 	}
 
@@ -149,6 +171,8 @@ public class StoreDao {
 	        rs.getString("ITEM_NM"),             // item_cd
 	        rs.getInt("QTY"),            		 // item_cd
 	        rs.getInt("STORE_PRICE"),            // item_cd
+	        rs.getString("WARE_CD"),            // item_cd
+	        rs.getString("WARE_NM"),            // item_cd
 	        rs.getString("STORE_DEPT"),          // store_dept
 	        rs.getString("STORE_USER"),          // store_user
 	        rs.getString("DESCR"),               // descr

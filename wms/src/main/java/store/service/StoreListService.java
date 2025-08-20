@@ -86,6 +86,8 @@ public class StoreListService {
 					  , store.getItem_nm()
 					  , store.getQty()
 					  ,	store.getStore_price()
+					  ,	store.getWare_cd()
+					  , null
 					  ,	store.getStore_dept()
 					  ,	store.getStore_user()
 					  ,	store.getDescr()
