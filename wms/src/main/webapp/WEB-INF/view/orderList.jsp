@@ -59,10 +59,10 @@
 
 <script>
 
-	// OnRowDblClick Event
+	// 行ダブルクリックイベント
   	function rowClicked(row) {
-		var cellValue = row.cells[1].innerText; // 첫 번째 셀 값
+		var cellValue = row.cells[1].innerText; // 最初のセルの値
 		location.href = "update.do?OrderNo=" + cellValue;
-    	// alert("더블클릭한 행의 첫 번째 셀: " + cellValue);
+    	// alert("ダブルクリックした行の最初のセル: " + cellValue);
   	}
 </script>

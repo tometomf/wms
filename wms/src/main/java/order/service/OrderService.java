@@ -13,12 +13,11 @@ import ware.model.Ware;
 
 public class OrderService {
 
-	private OrderDao orderDao = new OrderDao();
+	private OrderDao orderDao = new OrderDao(); // DAO
 
+	// 全件取得
 	public List<Order> select() {
-
 		Connection conn = null;
-
 		try {
 			conn = ConnectionProvider.getConnection();
 			return orderDao.select(conn);
@@ -29,11 +28,11 @@ public class OrderService {
 		}
 	}
 	
+	// 注文番号取得
 	public String selectOrderNo() {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-            
             return orderDao.selectOrderNo(conn);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -42,11 +41,11 @@ public class OrderService {
         }
 	}
 	
+	// 注文番号で検索
 	public Order selectByOrderNo(String orderNo) {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-            
             return orderDao.selectByOrderNo(conn, orderNo);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -55,6 +54,7 @@ public class OrderService {
         }
 	}
 	
+	// 登録
 	public void insert(Order order) {
 		Connection conn = null;
 		try {
@@ -83,6 +83,7 @@ public class OrderService {
 		}
 	}
 	
+	// 更新
 	public void update(Order order) {
 		Connection conn = null;
 		try {
@@ -111,6 +112,7 @@ public class OrderService {
 		}
 	}
 	
+	// 削除
 	public void delete(String orderNo) {
 		Connection conn = null;
         try {
