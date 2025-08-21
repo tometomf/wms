@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +120,12 @@ public class wareDao {
 			pstmt = conn.prepareStatement("delete wms_ware where ware_cd=?");
 			pstmt.setString(1, wareCd);
 			return pstmt.executeUpdate();
-		} finally {
+		} catch (SQLIntegrityConstraintViolationException  e) {
+            // 예외 발생 시 처리 로직
+            // 예: 사용자에게 메시지 표시, 로깅 등
+            // throw new RuntimeException("데이터 삭제 중 오류가 발생했습니다.", e); // 예외를 다시 던져서 상위 서비스에서 처리
+            return 0;
+        } finally {
 			JdbcUtil.close(pstmt);
 		}
 	}

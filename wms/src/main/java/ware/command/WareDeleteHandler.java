@@ -17,15 +17,27 @@ public class WareDeleteHandler implements CommandHandler {
 		
 		String ware = req.getParameter("wareCd");
 		
-		wareListService.delete(ware);
-		res.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = res.getWriter();
-		out.println("<script>");
-		out.println("alert('削除できました。');");
-		out.println("location.href='list.do';");
-		out.println("</script>");
-		out.close();
-		return null;
+		int fkCheck = wareListService.delete(ware);
+		
+		// 외래키 예외처리, 外来キーの例外処理
+		if (fkCheck == 0) {
+			res.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = res.getWriter();
+			out.println("<script>");
+			out.println("alert('使用中の倉庫は削除できません。');");
+			out.println("location.href='update.do?wareCd=" + ware + "';");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			res.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = res.getWriter();
+			out.println("<script>");
+			out.println("alert('削除できました。');");
+			out.println("location.href='list.do';");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
 	}
-
 }

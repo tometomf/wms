@@ -102,11 +102,11 @@ public class WareListService {
 	}
 	
 	// 창고 마스터 삭제
-	public void delete(String wareCd) {
+	public int delete(String wareCd) {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-        	wareDao.delete(conn, wareCd);
+        	return wareDao.delete(conn, wareCd);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
