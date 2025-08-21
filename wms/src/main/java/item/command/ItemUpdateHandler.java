@@ -55,6 +55,38 @@ public class ItemUpdateHandler implements CommandHandler {
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
+		
+//		if (itemCd == null || itemCd.trim().isEmpty()) {
+//      errors.put("itemCd", true); //品目コード未入力
+//	}
+//	if (itemNm == null || itemNm.trim().isEmpty()) {
+//  errors.put("itemNm", true); //品目名未入力
+//}
+//	if (spec == null || spec.trim().isEmpty()) {
+//  errors.put("spec", true); //規格未入力
+//}
+//	if (itemGubun == null || itemGubun.trim().isEmpty()) {
+//  errors.put("itemGubun", true); // 品目コード未入力
+//}
+//	if (unit == null || unit.trim().isEmpty()) {
+//  errors.put("unit", true); // 品目コード未入力
+//}
+//	if (useYn == null || useYn.trim().isEmpty()) {
+//  errors.put("useYn", true); // 品目コード未入力
+//}
+//	if (manufacturer == null || manufacturer.trim().isEmpty()) {
+//  errors.put("manufacturer", true); // 品目コード未入力
+//}
+//	if (storePrice == null || storePrice.trim().isEmpty()) {
+//  errors.put("storePrice", true); // 品目コード未入力
+//}
+//	if (shipmentPrice == null || shipmentPrice.trim().isEmpty()) {
+//  errors.put("shipmentPrice", true); // 品目コード未入力
+//}
+//  if (!errors.isEmpty()) {
+//  req.setAttribute("itemCd", insertService.getItemCd());
+//  return FORM_VIEW;
+//}
 
 		try {
 			itemListService.update(item);

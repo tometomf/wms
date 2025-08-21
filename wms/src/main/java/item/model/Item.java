@@ -3,6 +3,7 @@ package item.model;
 //품목 VO
 //品目　VO
 public class Item {
+	private String no;
 	private String itemCd;
 	private String itemNm;
 	private String spec;
@@ -42,6 +43,39 @@ public class Item {
 		this.manufacturer = manufacturer;
 		this.storePrice = storePrice;
 		this.shipmentPrice = shipmentPrice;
+	}
+	
+	/**
+	 * @param no
+	 * @param itemCd
+	 * @param itemNm
+	 * @param spec
+	 * @param itemGubun
+	 * @param unit
+	 * @param useYn
+	 * @param manufacturer
+	 * @param storePrice
+	 * @param shipmentPrice
+	 */
+	public Item(String no, String itemCd, String itemNm, String spec, String itemGubun, String unit, String useYn,
+			String manufacturer, int storePrice, int shipmentPrice) {
+		super();
+		this.no = no;
+		this.itemCd = itemCd;
+		this.itemNm = itemNm;
+		this.spec = spec;
+		this.itemGubun = itemGubun;
+		this.unit = unit;
+		this.useYn = useYn;
+		this.manufacturer = manufacturer;
+		this.storePrice = storePrice;
+		this.shipmentPrice = shipmentPrice;
+	}
+	public String getNo() {
+		return no;
+	}
+	public void setNo(String no) {
+		this.no = no;
 	}
 	public String getItemCd() {
 		return itemCd;

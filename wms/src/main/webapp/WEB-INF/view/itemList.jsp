@@ -15,24 +15,21 @@
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
 		<div id="wms-title">品目現況</div>
-		<div id="search-bar" style="display: flex;">
-			<div>
-				<button id="search-button">조회</button>
-			</div>
-		</div>
+		<div id="search-bar" style="display: flex;"></div>
 		<div id="result-table">
 			<table>
 				<thead>
 					<tr>
-						<th>品目コード</th>
-						<th>品目名</th>
-						<th>規格</th>
-						<th>分類</th>
-						<th>単位</th>
-						<th>使用有無</th>
-						<th>メーカー</th>
-						<th>受注基準単価</th>
-						<th>出庫基準単価</th>
+						<th width = "4%">No.</th>
+						<th width = "8%">品目コード</th>
+						<th width = "14%">品目名</th>
+						<th width = "12%">規格</th>
+						<th width = "12%">分類</th>
+						<th width = "8%">単位</th>
+						<th width = "8%">使用有無</th>
+						<th width = "14%">メーカー</th>
+						<th width = "10%">受注基準単価</th>
+						<th width = "10%">出庫基準単価</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,6 +39,7 @@
 						for (Item item: itemList) {
 					%>
 					<tr ondblclick="rowClicked(this)">　<!-- ダブルクリックのイベント -->
+						<td><%=item.getNo() %></td>
 						<td><%=item.getItemCd()%></td>
 						<td><%=item.getItemNm()%></td>
 						<td><%=item.getSpec()%></td>
