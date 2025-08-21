@@ -41,7 +41,7 @@ public class ItemDao {
 		try {
 			pstmt = conn.prepareStatement(
 					"select rownum no, item_cd, item_nm, spec, item_gubun, unit, use_yn, manufacturer, store_price, shipment_price from wms_item");
-			rs = pstmt.executeQuery();// クエリを実行
+			rs = pstmt.executeQuery();//쿼리 실행하는 부분 クエリを実行
 			List<Item> itemList = new ArrayList<>();
 			while (rs.next()) {
 				itemList.add(makeItemFromResultSet(rs));
@@ -53,8 +53,10 @@ public class ItemDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-
-	public Item selectItemCd(Connection conn) throws SQLException {// PKを取得する
+	
+	//PK를 가져오는 메서드
+	//PKを取得する
+	public Item selectItemCd(Connection conn) throws SQLException {//PK PKを取得する
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -73,7 +75,9 @@ public class ItemDao {
 		}
 	}
 
-	public Item selectByItemCd(Connection conn, String itemCd) throws SQLException {// PKで Item取得
+	//PK를 받아 Item을 출력하는 메서드
+	// PKで Item取得
+	public Item selectByItemCd(Connection conn, String itemCd) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -122,15 +126,14 @@ public class ItemDao {
 			pstmt.setString(1, itemCd);
 			return pstmt.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException  e) {
-            // 예외 발생 시 처리 로직
-            // 예: 사용자에게 메시지 표시, 로깅 등
-            // throw new RuntimeException("데이터 삭제 중 오류가 발생했습니다.", e); // 예외를 다시 던져서 상위 서비스에서 처리
-            return 0;
+            throw new RuntimeException("データを削除できません。", e); 
         } finally {
 			JdbcUtil.close(pstmt);
 		}
 	}
 
+	//Resultset형태를 Item으로 변환하는 메서드
+	//Resultset形のデータをItemインスタンスに変換
 	private Item makeItemFromResultSet(ResultSet rs) throws SQLException {
 		return new Item(rs.getString("no"),rs.getString("item_cd"), rs.getString("item_nm"), rs.getString("spec"),
 				rs.getString("item_gubun"), rs.getString("unit"), rs.getString("use_yn"), rs.getString("manufacturer"),

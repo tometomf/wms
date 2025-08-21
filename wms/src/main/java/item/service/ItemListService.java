@@ -14,7 +14,9 @@ public class ItemListService {
 	
 	private ItemDao itemDao = new ItemDao();
 	
-	public List<Item> getItemList() {//itemテーブルのデータがListとして返される
+	//SelectAll로 가져온 DB의 item테이블의 데이터를 List로 변환
+	//SelectAllで取得したitemテーブルのデータをListとして変換
+	public List<Item> getItemList() {
 		 Connection conn = null;
 	        try {
 	            conn = ConnectionProvider.getConnection();
@@ -26,7 +28,9 @@ public class ItemListService {
 	        }
 	}
 	
-	public Item getItemCd() {//PKを取得
+	//PK를 가져옴
+	//PKを取得
+	public Item getItemCd() {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
@@ -39,7 +43,9 @@ public class ItemListService {
         }
 	}
 	
-	public Item selectByItemCd(String itemCd) {//PKで Item取得
+	//PK로 Item을 가져옴
+	//PKで Item取得
+	public Item selectByItemCd(String itemCd) {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
