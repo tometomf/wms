@@ -15,7 +15,7 @@ import ship.service.ShipRegiService; // ← 서비스 클래스 이름 맞춤
 public class ShipUpdateHandler implements CommandHandler {
 
     private static final String FORM_VIEW = "/WEB-INF/view/ship_update.jsp";
-    private final ShipRegiService shipService = new ShipRegiService(); // ← サービスタイプ/名前一致
+    private final ShipRegiService shipService = new ShipRegiService(); // ← サービスタイプ/名前一致(서비스유형/이름일치)
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -29,7 +29,7 @@ public class ShipUpdateHandler implements CommandHandler {
         }
     }
 
-    // 修正フォーム表示
+    // 修正フォーム表示(수정 양식 표시)
     private String processForm(HttpServletRequest req, HttpServletResponse res) throws Exception {
         
     	String shipNoParam = req.getParameter("shipNo");
@@ -43,7 +43,7 @@ public class ShipUpdateHandler implements CommandHandler {
             return null;
         }
 
-        // String으로 바꿔서 필요 X
+       
 //        int shipNo;
 //        try {
 //            shipNo = Integer.parseInt(shipNoParam); 
@@ -60,7 +60,7 @@ public class ShipUpdateHandler implements CommandHandler {
         return FORM_VIEW;
     }
 
-    // 修正処理
+    // 修正処理(수정 처리)
     private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception {
         req.setCharacterEncoding("UTF-8");
 

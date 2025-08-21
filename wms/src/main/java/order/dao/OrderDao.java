@@ -27,7 +27,7 @@ public class OrderDao {
 			pstmt = conn.prepareStatement("select rownum no, order_no, order_nm, a.item_cd, b.item_nm, qty, order_price\r\n"
 					+ "     , order_dept, order_user, to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
 					+ "from wms_order a join wms_item b on a.item_cd = b.item_cd");
-			rs = pstmt.executeQuery();//クエリを実行
+			rs = pstmt.executeQuery(); // クエリを実行 (쿼리 실행)
 			List<Order> orderList = new ArrayList<>();
 			while (rs.next()) {
 				orderList.add(orderListConvert(rs)); 
@@ -102,7 +102,7 @@ public class OrderDao {
 			pstmt.setString(6, order.getOrder_Dept());
 			pstmt.setString(7, order.getOrder_User());
 			pstmt.setString(8, order.getDescr());
-			pstmt.executeUpdate();
+			pstmt.executeUpdate(); // データ登録実行 (데이터 등록 실행)
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class OrderDao {
 			pstmt.setString(5, order.getOrder_User());
 			pstmt.setString(6, order.getDescr());
 			pstmt.setString(7, order.getOrder_No());
-			pstmt.executeUpdate();
+			pstmt.executeUpdate(); // データ更新実行 (데이터 갱신 실행)
 		}
 	}
 	
@@ -132,7 +132,7 @@ public class OrderDao {
 		try {
 			pstmt = conn.prepareStatement("delete wms_order where order_no = ?");
 			pstmt.setString(1, orderNo);
-			return pstmt.executeUpdate();
+			return pstmt.executeUpdate(); // データ削除実行 (데이터 삭제 실행)
 		} finally {
 			JdbcUtil.close(pstmt);
 		}

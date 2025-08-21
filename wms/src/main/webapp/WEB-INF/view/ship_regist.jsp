@@ -5,7 +5,7 @@
 <%
     Date today = new Date();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    String todayStr = sdf.format(today);  // ▶ yyyy-MM-dd 形式の今日の日付
+    String todayStr = sdf.format(today);  // ▶ yyyy-MM-dd 形式の今日の日付(형식의 오늘 날짜)
 %>
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@
                         <input type="text" name="shipUser">
                     </div>
 
-                    <!-- ▼ 今日の日付の自動表示 -->
+                    <!-- ▼ 今日の日付の自動表示(오늘 날짜 자동 표시) -->
                     <div id="regist-text">出庫日</div>
                     <div id="regist-value">
                         <input type="date" name="regYmd" value="<%= todayStr %>">

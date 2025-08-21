@@ -15,7 +15,7 @@ public class ShipDeleteHandler implements CommandHandler {
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-        // パラメータ抽出
+        // パラメータ抽出(매개 변수 추출)
         String shipNoParam = req.getParameter("shipNo");
         
         if (shipNoParam == null || shipNoParam.isEmpty()) {
@@ -44,7 +44,7 @@ public class ShipDeleteHandler implements CommandHandler {
 //            return null;
 //        }
 
-        // 削除実行
+        // 削除実行(삭제 실행)
         shipService.delete(shipNoParam);
         res.setContentType("text/html; charset=UTF-8");
         PrintWriter out = res.getWriter();

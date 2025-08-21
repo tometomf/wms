@@ -21,7 +21,7 @@ public class ShipRegiService {
             int newShipNo = shipDao.insert(conn, ship);
             
             if (newShipNo == 0) {
-                // throw new RuntimeException("출고 등록 실패");
+                // throw new RuntimeException("出庫登録失敗 (출고 등록 실패)");
             }
 
             conn.commit();
@@ -44,7 +44,7 @@ public class ShipRegiService {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-            return shipDao.selectShipNo(conn);
+            return shipDao.selectShipNo(conn); // 出庫番号取得 (출고 번호 조회)
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -57,7 +57,7 @@ public class ShipRegiService {
         try {
             conn = ConnectionProvider.getConnection();
             conn.setAutoCommit(false);
-            shipDao.update(conn, ship);  
+            shipDao.update(conn, ship);  // 出庫更新 (출고 수정)
             conn.commit();
         } catch (SQLException e) {
             JdbcUtil.rollback(conn);
@@ -71,7 +71,7 @@ public class ShipRegiService {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-            shipDao.delete(conn, shipNo); // DAO에 delete 메서드 호출
+            shipDao.delete(conn, shipNo); // DAOにdeleteメソッド呼び出し (DAO의 delete 메서드 호출)
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -79,12 +79,11 @@ public class ShipRegiService {
         }
     }
 
-
     public ShipViewModel selectOne(String shipNo) {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-            return shipDao.selectOne(conn, shipNo);
+            return shipDao.selectOne(conn, shipNo); // 出庫詳細照会 (출고 상세 조회)
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

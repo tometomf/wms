@@ -33,31 +33,31 @@ public class ShipRegiHandler implements CommandHandler {
         }
     }
 
-    // GET: 등록 화면 요청
+    // GET: 登録画面リクエスト(등록 화면 요청)
     private String processForm(HttpServletRequest req, HttpServletResponse res) {
-        ShipViewModel ship = shipRegiService.getShipNo(); // 次の出庫番号を受け取る
+        ShipViewModel ship = shipRegiService.getShipNo(); // 次の出庫番号を受け取る(다음 출고 번호를 받는다)
         List<Item> itemList = itemService.getItemList();
         
-        req.setAttribute("shipNo", ship); // JSPに渡して「input」valueとして使用
+        req.setAttribute("shipNo", ship); // JSPに渡して「input」valueとして使用(JSP에 전달하여 "input" value로 사용)
         req.setAttribute("itemList", itemList);
         
         return FORM_VIEW;
     }
 
-    // POST:登録処理
+    // POST:登録処理(등록 처리)
     private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
         Map<String, Boolean> errors = new HashMap<>();
         req.setAttribute("errors", errors);
 
-        // ユーザー入力値をモデルに変換
+        // ユーザー入力値をモデルに変換(사용자 입력 값을 모델로 변환)
         ShipViewModel ship = createShipFromRequest(req);
 
         try {
-            // 登録サービス実行
+            // 登録サービス実行(등록 서비스 실행)
             int i = shipRegiService.register(ship);
             
             if (i == 1) {
-            	// 登録成功後、alertを表示してlist.do に移動
+            	// 登録成功後、alertを表示してlist.do に移動(등록 성공 후 alert 표시하여 list.do 이동)
                 res.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = res.getWriter();
                 out.println("<script>");
@@ -67,7 +67,7 @@ public class ShipRegiHandler implements CommandHandler {
                 out.close();
                 return null;
             } else {
-            	// 등록실패 시 alertを表示してinsert.do に移動
+            	// 登録失敗時alertを表示してinsert.do に移動(등록실패시 alert표시하여 insert.do 으로 이동)
                 res.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = res.getWriter();
                 out.println("<script>");
@@ -83,7 +83,7 @@ public class ShipRegiHandler implements CommandHandler {
         }
     }
 
-    // ユーザー入力→DTO変換
+    // ユーザー入力→DTO変換(사용자입력→DTO변환)
     private ShipViewModel createShipFromRequest(HttpServletRequest req) {
         ShipViewModel ship = new ShipViewModel();
 

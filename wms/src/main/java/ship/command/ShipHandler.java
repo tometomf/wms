@@ -13,13 +13,13 @@ public class ShipHandler implements CommandHandler {
 
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) {
-        // サービス呼び出し
+        // サービス呼び出し(서비스 호출)
         List<ShipViewModel> shipList = new ShipService().getShipList();
         
-        // request scopeに保存
+        // request scopeに保存(에 보존)
         request.setAttribute("shipList", shipList);
         
-        // ビュー·リターン
+        // ビュー·リターン(뷰 리턴)
         return "/WEB-INF/view/ship_list.jsp";
     }
 }

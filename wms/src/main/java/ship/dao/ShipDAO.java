@@ -12,7 +12,7 @@ import ship.model.ShipViewModel;
 
 public class ShipDAO {
 
-    // 全リスト照会
+    // 全リスト照会 (전체 리스트 조회)
     public List<ShipViewModel> selectAll(Connection conn) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -37,7 +37,7 @@ public class ShipDAO {
         }
     }
 
-    // 照会結果をDTOに変換
+    // 照会結果をDTOに変換 (조회 결과를 DTO로 변환)
     private ShipViewModel makeShipFromResultSet(ResultSet rs) throws SQLException {
         
     	ShipViewModel dto = new ShipViewModel();
@@ -58,7 +58,7 @@ public class ShipDAO {
         return dto;
     }
 
-    // 次の出荷番号を取得
+    // 次の出庫番号を取得 (다음 출고 번호를 조회)
     public ShipViewModel selectShipNo(Connection conn) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -83,7 +83,7 @@ public class ShipDAO {
         }
     }
 
-    // 出庫登録
+    // 出庫登録 (출고 등록)
     public int insert(Connection conn, ShipViewModel ship) throws SQLException {
     	PreparedStatement pstmt1 = null;
         ResultSet rs1 = null;
@@ -100,12 +100,12 @@ public class ShipDAO {
         	pstmt1.setString(1, ship.getItemCd());
         	rs1 = pstmt1.executeQuery();
         	
-        	// 쿼리결과 호출
+        	// クエリ結果呼び出し (쿼리 결과 호출)
         	if(rs1.next()) {
-        		// 출하수량보다 재고수량이 적을 경우 실행
+        		// 出荷数量より在庫数量が少ない場合に実行 (출하 수량보다 재고 수량이 적을 경우 실행)
         		if (ship.getShipQty() < rs1.getInt(2)) {
         			try {
-        	        	// 出庫番号を生成
+        	        	// 出庫番号を生成 (출고 번호 생성)
         				String seqSql2 = "select 'D' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ship_no, 2))), 0) + 1), 3, '0') AS ship_no from wms_ship";
 		              	pstmt2 = conn.prepareStatement(seqSql2);
 		              	rs2 = pstmt2.executeQuery();
@@ -113,7 +113,7 @@ public class ShipDAO {
 		              	if (rs2.next()) {
 		              	    newShipNo = rs2.getString("ship_no"); 
 		              	} else {
-		              	    throw new SQLException("出庫番号シーケンス作成失敗");
+		              	    throw new SQLException("出庫番号シーケンス作成失敗 (출고 번호 시퀀스 생성 실패)");
 		              	}
 		              	JdbcUtil.close(rs2);
 			            JdbcUtil.close(pstmt2);
@@ -135,7 +135,7 @@ public class ShipDAO {
 			            int result = pstmt2.executeUpdate();
 			  
 			            if (result == 0) {
-		            		throw new SQLException("出庫登録失敗");
+		            		throw new SQLException("出庫登録失敗 (출고 등록 실패)");
 			            }
 			            
 			            rtnCheck = 1;
@@ -155,6 +155,7 @@ public class ShipDAO {
         return rtnCheck;
     }
     
+    // 出庫詳細照会 (출고 상세 조회)
     public ShipViewModel selectOne(Connection conn, String shipNo) throws SQLException {
         PreparedStatement ps = null; ResultSet rs = null;
         try {
@@ -185,7 +186,7 @@ public class ShipDAO {
         }
     }
     
-    
+    // 出庫更新 (출고 수정)
     public int update(Connection conn, ShipViewModel ship) throws SQLException {
         PreparedStatement pstmt = null;
         try {
@@ -204,7 +205,7 @@ public class ShipDAO {
         }
     }
     
-    
+    // 出庫削除 (출고 삭제)
     public int delete(Connection conn, String shipNo) throws SQLException {
         PreparedStatement pstmt = null;
         try {
