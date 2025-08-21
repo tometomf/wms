@@ -22,7 +22,7 @@ public class StoreDeleteHandler implements CommandHandler{
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		out.println("<script>");
-		out.println("alert(''削除できました。');");
+		out.println("alert('削除できました。');");
 		out.println("location.href='list.do';");
 		out.println("</script>");
 		return null;

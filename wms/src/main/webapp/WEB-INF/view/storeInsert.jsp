@@ -44,7 +44,7 @@
 					</div>
 					<div id="regist-text">入庫数量</div>
 					<div id="regist-value">
-						<input type="number" name="item_qty" min="0">
+						<input type="number" name="qty" min="0">
 					</div>
 					<div id="regist-text">入庫単価</div>
 					<div id="regist-value">
@@ -88,16 +88,18 @@
 </html>
 
 <script>
-	function validateForm() {
-		
-		var requiredFields = [
-	        { name: "store_nm", label: "入庫名" },
-	        { name: "item_cd", label: "入庫品目" },
-	        { name: "qty", label: "入庫数量入庫単価" },
-	        { name: "store_price", label: "入庫単価" },
-	        { name: "store_dept", label: "入庫担当部署" },
-	        { name: "store_user", label: "入庫担当者" }
-	        { name: "reg_ymd", label: "入庫日" }
+function validateForm() {
+	
+	var requiredFields = [
+        { name: "store_nm", label: "入庫名" },
+        { name: "item_cd", label: "入庫品目" },
+        { name: "qty", label: "入庫数量" },
+        { name: "store_price", label: "入庫単価" },
+        { name: "ware_cd", label: "入庫倉庫" },
+        { name: "store_dept", label: "入庫担当部署" },
+        { name: "store_user", label: "入庫担当者" },
+        { name: "reg_ymd", label: "入庫日" }
+    ]; 
 	
 	    for (let field of requiredFields) {
 	        let value = document.getElementsByName(field.name)[0].value.trim();
