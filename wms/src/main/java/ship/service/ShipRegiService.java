@@ -12,16 +12,16 @@ public class ShipRegiService {
 
     private ShipDAO shipDao = new ShipDAO();
 
-    public String register(ShipViewModel ship) {
+    public int register(ShipViewModel ship) {
         Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
             conn.setAutoCommit(false);
 
-            String newShipNo = shipDao.insert(conn, ship);
+            int newShipNo = shipDao.insert(conn, ship);
             
-            if (newShipNo == "") {
-                throw new RuntimeException("출고 등록 실패");
+            if (newShipNo == 0) {
+                // throw new RuntimeException("출고 등록 실패");
             }
 
             conn.commit();

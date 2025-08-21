@@ -84,50 +84,75 @@ public class ShipDAO {
     }
 
     // 出庫登録
-    public String insert(Connection conn, ShipViewModel ship) throws SQLException {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+    public int insert(Connection conn, ShipViewModel ship) throws SQLException {
+    	PreparedStatement pstmt1 = null;
+        ResultSet rs1 = null;
+        
+        PreparedStatement pstmt2 = null;
+        ResultSet rs2 = null;
+        
+        String newShipNo = "";
+        int rtnCheck = 0;
 
         try {
-            // 出庫番号を生成
-        	String seqSql = "select 'D' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ship_no, 2))), 0) + 1), 3, '0') AS ship_no from wms_ship";
-        	pstmt = conn.prepareStatement(seqSql);
-        	rs = pstmt.executeQuery();
-        	String newShipNo = "";
-        	if (rs.next()) {
-        	    newShipNo = rs.getString("ship_no"); 
-        	} else {
-        	    throw new SQLException("出庫番号シーケンス作成失敗");
+        	String seqSql1 = "select item_cd, sum(qty) as qty from wms_stock where item_cd = ? group by item_cd";
+        	pstmt1 = conn.prepareStatement(seqSql1);
+        	pstmt1.setString(1, ship.getItemCd());
+        	rs1 = pstmt1.executeQuery();
+        	
+        	// 쿼리결과 호출
+        	if(rs1.next()) {
+        		// 출하수량보다 재고수량이 적을 경우 실행
+        		if (ship.getShipQty() < rs1.getInt(2)) {
+        			try {
+        	        	// 出庫番号を生成
+        				String seqSql2 = "select 'D' || LPAD(TO_CHAR(NVL(MAX(TO_NUMBER(SUBSTR(ship_no, 2))), 0) + 1), 3, '0') AS ship_no from wms_ship";
+		              	pstmt2 = conn.prepareStatement(seqSql2);
+		              	rs2 = pstmt2.executeQuery();
+		              	
+		              	if (rs2.next()) {
+		              	    newShipNo = rs2.getString("ship_no"); 
+		              	} else {
+		              	    throw new SQLException("出庫番号シーケンス作成失敗");
+		              	}
+		              	JdbcUtil.close(rs2);
+			            JdbcUtil.close(pstmt2);
+			  
+			            String insertSql = "INSERT INTO wms_ship " +
+										   "(ship_no, ship_nm, item_cd, ship_price, ship_qty, ship_dept, ship_user, descr, reg_ymd, upd_ymd, ship_yn) " +
+										   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE, ?)";
+		                pstmt2 = conn.prepareStatement(insertSql);
+		                pstmt2.setString(1, newShipNo);
+		                pstmt2.setString(2, ship.getShipNm());
+		                pstmt2.setString(3, ship.getItemCd());
+		                pstmt2.setInt(4, ship.getShipPrice());
+		                pstmt2.setInt(5, ship.getShipQty());
+		                pstmt2.setString(6, ship.getShipDept());
+		                pstmt2.setString(7, ship.getShipUser());
+		                pstmt2.setString(8, ship.getDescr());
+		                pstmt2.setString(9, ship.getShipYn());
+			  
+			            int result = pstmt2.executeUpdate();
+			  
+			            if (result == 0) {
+		            		throw new SQLException("出庫登録失敗");
+			            }
+			            
+			            rtnCheck = 1;
+			  
+			            return rtnCheck;
+		      
+        			} finally {
+    					JdbcUtil.close(rs2);
+		                JdbcUtil.close(pstmt2);
+		            }
+        		}
         	}
-            JdbcUtil.close(rs);
-            JdbcUtil.close(pstmt);
-
-            String insertSql = "INSERT INTO wms_ship " +
-                "(ship_no, ship_nm, item_cd, ship_price, ship_qty, ship_dept, ship_user, descr, reg_ymd, upd_ymd, ship_yn) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE, ?)";
-            pstmt = conn.prepareStatement(insertSql);
-            pstmt.setString(1, newShipNo);
-            pstmt.setString(2, ship.getShipNm());
-            pstmt.setString(3, ship.getItemCd());
-            pstmt.setInt(4, ship.getShipPrice());
-            pstmt.setInt(5, ship.getShipQty());
-            pstmt.setString(6, ship.getShipDept());
-            pstmt.setString(7, ship.getShipUser());
-            pstmt.setString(8, ship.getDescr());
-            pstmt.setString(9, ship.getShipYn());
-
-            int result = pstmt.executeUpdate();
-
-            if (result == 0) {
-                throw new SQLException("出庫登録失敗");
-            }
-
-            return newShipNo;
-
         } finally {
-            JdbcUtil.close(rs);
-            JdbcUtil.close(pstmt);
+            JdbcUtil.close(rs1);
+            JdbcUtil.close(pstmt1);
         }
+        return rtnCheck;
     }
     
     public ShipViewModel selectOne(Connection conn, String shipNo) throws SQLException {

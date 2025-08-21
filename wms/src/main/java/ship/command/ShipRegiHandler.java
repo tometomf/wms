@@ -54,18 +54,29 @@ public class ShipRegiHandler implements CommandHandler {
 
         try {
             // 登録サービス実行
-            shipRegiService.register(ship);
-
-            // 登録成功後、alertを表示してlist.do に移動
-            res.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = res.getWriter();
-            out.println("<script>");
-            out.println("alert('登録できました。');");
-            out.println("location.href='list.do';");
-            out.println("</script>");
-            out.close();
-            return null;
-
+            int i = shipRegiService.register(ship);
+            
+            if (i == 1) {
+            	// 登録成功後、alertを表示してlist.do に移動
+                res.setContentType("text/html; charset=UTF-8");
+                PrintWriter out = res.getWriter();
+                out.println("<script>");
+                out.println("alert('登録できました。');");
+                out.println("location.href='list.do';");
+                out.println("</script>");
+                out.close();
+                return null;
+            } else {
+            	// 등록실패 시 alertを表示してinsert.do に移動
+                res.setContentType("text/html; charset=UTF-8");
+                PrintWriter out = res.getWriter();
+                out.println("<script>");
+                out.println("alert('出荷量が在庫量より多いです。');");
+                out.println("location.href='insert.do';");
+                out.println("</script>");
+                out.close();
+                return null;
+            }
         } catch (Exception e) {
             errors.put("registerFailed", Boolean.TRUE);
             return FORM_VIEW;
