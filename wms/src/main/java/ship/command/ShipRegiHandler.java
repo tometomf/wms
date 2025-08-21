@@ -71,7 +71,7 @@ public class ShipRegiHandler implements CommandHandler {
                 res.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = res.getWriter();
                 out.println("<script>");
-                out.println("alert('出荷量が在庫量より多いです。');");
+                out.println("alert('出庫量が在庫量より多いです。');");
                 out.println("location.href='insert.do';");
                 out.println("</script>");
                 out.close();
