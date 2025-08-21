@@ -44,7 +44,7 @@ public class IndexDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select a.item_cd, b.item_nm, a.item_qty, b.manufacturer, b.store_price, to_char(a.reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
+			pstmt = conn.prepareStatement("select a.item_cd, b.item_nm, a.qty as item_qty, b.manufacturer, b.store_price, to_char(a.reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
 					+ "from wms_store a, wms_item b\r\n"
 					+ "where a.item_cd = b.item_cd");
 			rs = pstmt.executeQuery();//クエリを実行
