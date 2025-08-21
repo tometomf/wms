@@ -30,6 +30,7 @@
 				<th width = "8%">入庫品目名</th>
 				<th width = "7%">入庫数量</th>
 				<th width = "7%">入庫単価</th>
+				<th width = "7%">入庫倉庫</th>				
 				<th width = "10%">入庫担当部署</th>
 				<th width = "9%">入庫担当者</th>
 				<th width = "6%">入庫日</th>
@@ -52,6 +53,7 @@
 				<td style = "text-align: left; padding-left: 5px"><%=store.getItem_nm()%></td>
 				<td style = "text-align: right; padding-right: 5px"><%=store.getQty()%></td>
 				<td style = "text-align: right; padding-right: 5px"><%=store.getStore_price()%></td>
+				<td style = "text-align: left; padding-left: 5px"><%=store.getWare_cd()%></td> 
 				<td><%=store.getStore_dept()%></td>
 				<td><%=store.getStore_user()%></td>
 				<td><%=store.getReg_ymd()%></td>
