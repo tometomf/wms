@@ -47,8 +47,8 @@
 						<td><%=item.getUnit()%></td>
 						<td><%=item.getUseYn()%></td>
 						<td><%=item.getManufacturer()%></td>
-						<td><%=item.getStorePrice()%></td>
-						<td><%=item.getShipmentPrice()%></td>
+						<td style = "text-align: right; padding-left: 5px"><%=item.getStorePrice()%></td>
+						<td style = "text-align: right; padding-left: 5px"><%=item.getShipmentPrice()%></td>
 					</tr>
 					<%
 					}
@@ -70,7 +70,7 @@
 <script>
 	// OnRowDblClick Event
   	function rowClicked(row) {
-		var cellValue = row.cells[0].innerText; 
+		var cellValue = row.cells[1].innerText; 
 		location.href = "update.do?itemCd=" + cellValue;　//最初のセルの値(コード)をセットしてupdateに移動 
   	}
 </script>

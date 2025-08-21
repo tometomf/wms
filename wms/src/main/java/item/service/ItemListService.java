@@ -104,11 +104,11 @@ public class ItemListService {
 		}
 	}
 	
-	public void delete(String itemCd) {
+	public int delete(String itemCd) {
 		Connection conn = null;
         try {
             conn = ConnectionProvider.getConnection();
-        	itemDao.delete(conn, itemCd);
+        	return itemDao.delete(conn, itemCd);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
