@@ -1,7 +1,8 @@
-<%@ page import = "item.model.Item" %>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,55 +13,56 @@
 </head>
 
 <body>
+	${ctxPath = pageContext.request.contextPath; ''}
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
 		<div id="wms-title">品目現況</div>
-		<div id="search-bar" style="display: flex;"></div>
-		<div id="result-table">
+			<form action="${ctxPath}/item/list.do">
+				<div id="search-bar" style="display: flex;">
+					<div>
+						<label for="start-date">品目コード</label> 
+						<input type="text" id="itemCd" name = "itemCd" value = "${itemCd}">  
+					</div>
+					<div>
+						<button id = "search-button" type = "submit">照会</button>
+					</div>
+				</div>
+			</form>
+		<div id="result-table" style= "height: 780px; overflow-y: auto">
 			<table>
 				<thead>
 					<tr>
-						<th width = "4%">No.</th>
-						<th width = "8%">品目コード</th>
-						<th width = "14%">品目名</th>
-						<th width = "12%">規格</th>
-						<th width = "12%">分類</th>
-						<th width = "8%">単位</th>
-						<th width = "8%">使用有無</th>
-						<th width = "14%">メーカー</th>
-						<th width = "10%">受注基準単価</th>
-						<th width = "10%">出庫基準単価</th>
+						<th width = "4%" style = "position: sticky; top: 0; z-index: 2">No.</th>
+						<th width = "8%" style = "position: sticky; top: 0; z-index: 2">品目コード</th>
+						<th width = "14%" style = "position: sticky; top: 0; z-index: 2">品目名</th>
+						<th width = "12%" style = "position: sticky; top: 0; z-index: 2">規格</th>
+						<th width = "12%" style = "position: sticky; top: 0; z-index: 2">分類</th>
+						<th width = "8%" style = "position: sticky; top: 0; z-index: 2">単位</th>
+						<th width = "8%" style = "position: sticky; top: 0; z-index: 2">使用有無</th>
+						<th width = "14%" style = "position: sticky; top: 0; z-index: 2">メーカー</th>
+						<th width = "10%" style = "position: sticky; top: 0; z-index: 2">受注基準単価</th>
+						<th width = "10%" style = "position: sticky; top: 0; z-index: 2">出庫基準単価</th>
 					</tr>
 				</thead>
 				<tbody>
-					<%
-					List<Item> itemList = (List<Item>) request.getAttribute("itemList"); //”itemList”名前で探す。string形式ので型変換してList<item>として扱う。
-					if (itemList != null && !itemList.isEmpty()) {
-						for (Item item: itemList) {
-					%>
-					<!-- 한 행 더블클릭 시 이벤트 -->
-					<tr ondblclick="rowClicked(this)">　<!-- ダブルクリックのイベント -->
-						<td><%=item.getNo() %></td>
-						<td><%=item.getItemCd()%></td>
-						<td><%=item.getItemNm()%></td>
-						<td><%=item.getSpec()%></td>
-						<td><%=item.getItemGubun()%></td>
-						<td><%=item.getUnit()%></td>
-						<td><%=item.getUseYn()%></td>
-						<td><%=item.getManufacturer()%></td>
-						<td style = "text-align: right; padding-left: 5px"><%=item.getStorePrice()%></td>
-						<td style = "text-align: right; padding-left: 5px"><%=item.getShipmentPrice()%></td>
-					</tr>
-						<%
-						}
-						%>	
-					<%
-					}
-					%>
+					<c:forEach var="item" items="${itemList}">
+					    <tr ondblclick="rowClicked(this)">
+					        <td>${item.no}</td>
+					        <td>${item.itemCd}</td>
+					        <td>${item.itemNm}</td>
+					        <td>${item.spec}</td>
+					        <td>${item.itemGubun}</td>
+					        <td>${item.unit}</td>
+					        <td>${item.useYn}</td>
+					        <td>${item.manufacturer}</td>
+					        <td>${item.storePrice}</td>
+				            <td>${item.shipmentPrice}</td>
+					    </tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		</div>
+	</div>
 </body>
 </html>
 

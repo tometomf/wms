@@ -28,6 +28,18 @@ public class ItemListService {
 	        }
 	}
 	
+	public List<Item> getItemListByItemCd(String itemCd) {
+		 Connection conn = null;
+	        try {
+	            conn = ConnectionProvider.getConnection();
+	            return itemDao.selectAllByItemCd(conn, itemCd); 
+	        } catch (SQLException e) {
+	            throw new RuntimeException(e);
+	        } finally {
+	            JdbcUtil.close(conn);
+	        }
+	}
+	
 	//PK를 가져옴
 	//PKを取得
 	public Item getItemCd() {

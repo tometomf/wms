@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import item.model.Item;
 import jdbc.JdbcUtil;
@@ -35,6 +36,30 @@ public class ItemDao {
 	//全体取得
 	// item테이블 안의 데이터를 List에 넣어서 모두 반환함.
 	// itemテーブルの全データをListとして返します
+	public List<Item> selectAllByItemCd(Connection conn, String itemCd) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		// null 공백 치환
+		String value = Objects.toString(itemCd, "");
+		
+		try {
+			pstmt = conn.prepareStatement(
+					"select rownum no, item_cd, item_nm, spec, item_gubun, unit, use_yn, manufacturer, store_price, shipment_price from wms_item where item_nm like ?");
+			pstmt.setString(1, "%" + value + "%"); // Java에서 % 붙이기
+			rs = pstmt.executeQuery();//쿼리 실행하는 부분 クエリを実行
+			List<Item> itemList = new ArrayList<>();
+			while (rs.next()) {
+				itemList.add(makeItemFromResultSet(rs));
+			}	
+			return itemList;
+
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 	public List<Item> selectAll(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -45,7 +70,7 @@ public class ItemDao {
 			List<Item> itemList = new ArrayList<>();
 			while (rs.next()) {
 				itemList.add(makeItemFromResultSet(rs));
-			}
+			}	
 			return itemList;
 
 		} finally {
