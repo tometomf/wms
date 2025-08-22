@@ -28,11 +28,11 @@ public class ItemListService {
 	        }
 	}
 	
-	public List<Item> getItemListByItemCd(String itemCd) {
+	public List<Item> getItemListByItemNm(String itemNm) {
 		 Connection conn = null;
 	        try {
 	            conn = ConnectionProvider.getConnection();
-	            return itemDao.selectAllByItemCd(conn, itemCd); 
+	            return itemDao.selectAllByItemNm(conn, itemNm); 
 	        } catch (SQLException e) {
 	            throw new RuntimeException(e);
 	        } finally {

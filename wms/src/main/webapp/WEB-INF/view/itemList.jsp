@@ -20,8 +20,8 @@
 			<form action="${ctxPath}/item/list.do">
 				<div id="search-bar" style="display: flex;">
 					<div>
-						<label for="start-date">品目コード</label> 
-						<input type="text" id="itemCd" name = "itemCd" value = "${itemCd}">  
+						<label for="start-date">品目名</label> 
+						<input type="text" id="itemNm" name = "itemNm" value = "${itemNm}">  
 					</div>
 					<div>
 						<button id = "search-button" type = "submit">検索</button>

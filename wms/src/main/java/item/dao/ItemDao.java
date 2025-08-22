@@ -36,7 +36,7 @@ public class ItemDao {
 	//全体取得
 	// item테이블 안의 데이터를 List에 넣어서 모두 반환함.
 	// itemテーブルの全データをListとして返します
-	public List<Item> selectAllByItemCd(Connection conn, String itemCd) throws SQLException {
+	public List<Item> selectAllByItemNm(Connection conn, String itemCd) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
