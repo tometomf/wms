@@ -90,7 +90,7 @@
 				</div>
 			</div>
 			<div style = "flex: 0 0 calc(50% - 5px);">
-				<div id="wms-title">출고예정목록</div>
+				<div id="wms-title">出庫予定目録</div>
 				<div id="result-table" style = "height: 375px; overflow-y:auto; border: solid 1px #d3d3d3;">
 					<table style = "margin-top: 0px;">
 						<thead>
