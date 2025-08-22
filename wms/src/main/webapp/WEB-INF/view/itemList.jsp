@@ -24,7 +24,7 @@
 						<input type="text" id="itemCd" name = "itemCd" value = "${itemCd}">  
 					</div>
 					<div>
-						<button id = "search-button" type = "submit">照会</button>
+						<button id = "search-button" type = "submit">検索</button>
 					</div>
 				</div>
 			</form>
