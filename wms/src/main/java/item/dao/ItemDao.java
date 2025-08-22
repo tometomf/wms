@@ -151,7 +151,8 @@ public class ItemDao {
 			pstmt.setString(1, itemCd);
 			return pstmt.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException  e) {
-            throw new RuntimeException("データを削除できません。", e); 
+            // throw new RuntimeException("データを削除できません。", e); 
+            return 0;
         } finally {
 			JdbcUtil.close(pstmt);
 		}
