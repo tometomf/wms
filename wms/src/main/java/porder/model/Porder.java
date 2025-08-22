@@ -1,22 +1,27 @@
 package porder.model;
 
+// 발주정보를 담는 클래스 (DB 한 행 = 객체 1개)
+// 発注情報を持つクラス (DBの1行 = オブジェクト1つ)
 public class Porder {
 
-	public String no;
-	public String purchase_No;
-	public String purchase_Nm;
-	public String item_Cd;
-	public String item_Nm;
-	public String qty;
-	public String purchase_Dept;
-	public String purchase_User;
-	public String descr;
-	public String reg_Ymd;
-	
+	// 필드(멤버 변수) / フィールド（メンバ変数）
+	public String no; // 행 번호 / 行番号
+	public String purchase_No; // 발주 번호 / 発注番号
+	public String purchase_Nm; // 발주 명 / 発注名
+	public String item_Cd; // 품목 코드 / 品目コード
+	public String item_Nm; // 품목 명 / 品目名
+	public String qty; // 수량 / 数量
+	public String purchase_Dept; // 발주 부서 / 発注部署
+	public String purchase_User; // 발주 담당자 / 発注担当者
+	public String descr; // 비고 / 備考
+	public String reg_Ymd; // 등록일 / 登録日
+
+	// 기본 생성자 / デフォルトコンストラクタ
 	public Porder() {
 		super();
 	}
 
+	// 전체 필드를 채우는 생성자 / 全フィールドを埋めるコンストラクタ
 	public Porder(String no, String purchase_No, String purchase_Nm, String item_Cd, String item_Nm, String qty,
 			String purchase_Dept, String purchase_User, String descr, String reg_Ymd) {
 		this.no = no;
@@ -31,6 +36,7 @@ public class Porder {
 		this.reg_Ymd = reg_Ymd;
 	}
 
+	// getter & setter 메서드 / getter & setter メソッド
 	public String getNo() {
 		return no;
 	}

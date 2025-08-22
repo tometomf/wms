@@ -67,30 +67,12 @@ public class StockInsertHandler implements CommandHandler {
         stock.setWare_Cd(req.getParameter("wareCd"));
         stock.setDescr(req.getParameter("descr"));
         
-        // ===== 필수값 유효성 체크 / 必須項目のバリデーション =====
+        //  필수값 유효성 체크 / 必須項目のバリデーション 
         String qtyStr = req.getParameter("qty");
         String regYmdStr = req.getParameter("regYmd");
 
-//        if (itemCd == null || itemCd.trim().isEmpty()) {
-//            errors.put("itemCd", true); // 품목코드 누락 / 品目コード未入力
-//        }
-//        if (qtyStr == null || qtyStr.trim().isEmpty()) {
-//            errors.put("qty", true); // 재고수량 누락 / 在庫数量未入力
-//        }
-//        if (wareCd == null || wareCd.trim().isEmpty()) {
-//            errors.put("wareCd", true); // 창고코드 누락 / 倉庫コード未入力
-//        }
-//        if (regYmdStr == null || regYmdStr.trim().isEmpty()) {
-//            errors.put("regYmd", true); // 등록일 누락 / 登録日未入力
-//        }
-//
-//        // 필수값 누락 시 다시 폼으로 이동 + 재고번호 세팅 / 必須項目が欠けている場合、フォームへ戻る＋在庫番号再設定
-//        if (!errors.isEmpty()) {
-//            req.setAttribute("stockNo", insertService.getStockNo());
-//            return FORM_VIEW;
-//        }
 
-        // ===== 숫자 변환 + 음수 방지 / 数値変換＋マイナス防止 =====
+        //  숫자 변환 + 음수 방지 / 数値変換＋マイナス防止 
         try {
             int qty = Integer.parseInt(qtyStr.trim());
             if (qty < 0) {
@@ -107,7 +89,7 @@ public class StockInsertHandler implements CommandHandler {
             return FORM_VIEW;
         }
         
-        // ===== 날짜 형식 변환 / 日付形式変換 =====
+        //날짜 형식 변환 / 日付形式変換
         try {
             stock.setReg_Ymd(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(regYmdStr));
         } catch (ParseException e) {
@@ -118,7 +100,7 @@ public class StockInsertHandler implements CommandHandler {
         }
         
         try {
-            // ===== 등록 완료 처리 / 登録完了処理 =====
+            // 등록 완료 처리 / 登録完了処理 
             insertService.insert(stock);
             res.setContentType("text/html; charset=UTF-8");
             PrintWriter out = res.getWriter();
