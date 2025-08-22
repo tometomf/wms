@@ -16,13 +16,13 @@
 	<div id="main-content">
 		<div style = "display: flex; gap: 10px; flex-wrap: wrap;">
 			<div style = "flex: 0 0 calc(50% - 5px);">
-				<div id="wms-title">공지사항</div>
+				<div id="wms-title">お知らせ</div>
 				<div id="result-table" style = "height: 375px; overflow-y:auto; border: solid 1px #d3d3d3">
 					<table style = "margin-top: 0px;">
 						<thead>
 							<tr>
-								<th style = "width:30%;">제목</th>
-								<th style = "width:70%;">내용</th>
+								<th style = "width:30%;">タイトル</th>
+								<th style = "width:70%;">内容</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -34,16 +34,16 @@
 				</div>
 			</div>
 			<div style = "flex: 0 0 calc(50% - 5px);">
-				<div id="wms-title">창고별재고현황</div>
+				<div id="wms-title">倉庫別在庫現況</div>
 				<div id="result-table" style = "height: 375px; overflow-y:auto; border: solid 1px #d3d3d3">
 					<table style = "margin-top: 0px;">
 						<thead>
 							<tr>
-								<th style = "width: 13%; position: sticky; top: 0; z-index: 2">품목코드</th>
-								<th style = "position: sticky; top: 0; z-index: 2">품목명</th>
-								<th style = "width: 13%; position: sticky; top: 0; z-index: 2">창고코드</th>
-								<th style = "position: sticky; top: 0; z-index: 2">창고명</th>
-								<th style = "position: sticky; top: 0; z-index: 2">수량</th>
+								<th style = "width: 13%; position: sticky; top: 0; z-index: 2">品目コード</th>
+								<th style = "position: sticky; top: 0; z-index: 2">品目名</th>
+								<th style = "width: 13%; position: sticky; top: 0; z-index: 2">倉庫コード</th>
+								<th style = "position: sticky; top: 0; z-index: 2">倉庫名</th>
+								<th style = "position: sticky; top: 0; z-index: 2">数量</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,17 +61,17 @@
 				</div>
 			</div>
 			<div style = "flex: 0 0 calc(50% - 5px);">
-				<div id="wms-title">입고예정목록</div>
+				<div id="wms-title">入庫予定目録</div>
 				<div id="result-table" style = "height: 375px; overflow-y:auto; border: solid 1px #d3d3d3;">
 					<table style = "margin-top: 0px;">
 						<thead>
 							<tr>
-								<th style = "position: sticky; top: 0; z-index: 2">품목코드</th>
-								<th style = "position: sticky; top: 0; z-index: 2">품목명</th>
-								<th style = "position: sticky; top: 0; z-index: 2">입고수량</th>
-								<th style = "position: sticky; top: 0; z-index: 2">제조사</th>
-								<th style = "position: sticky; top: 0; z-index: 2">입고금액</th>
-								<th style = "position: sticky; top: 0; z-index: 2">입고예정일</th>
+								<th style = "position: sticky; top: 0; z-index: 2">品目コード</th>
+								<th style = "position: sticky; top: 0; z-index: 2">品目名</th>
+								<th style = "position: sticky; top: 0; z-index: 2">入庫数量</th>
+								<th style = "position: sticky; top: 0; z-index: 2">メーカー</th>
+								<th style = "position: sticky; top: 0; z-index: 2">入庫単액</th>
+								<th style = "position: sticky; top: 0; z-index: 2">入庫日</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -95,12 +95,12 @@
 					<table style = "margin-top: 0px;">
 						<thead>
 							<tr>
-								<th style = "position: sticky; top: 0; z-index: 2">품목코드</th>
-								<th style = "position: sticky; top: 0; z-index: 2">품목명</th>
-								<th style = "position: sticky; top: 0; z-index: 2">출고수량</th>
-								<th style = "position: sticky; top: 0; z-index: 2">제조사</th>
-								<th style = "position: sticky; top: 0; z-index: 2">출고가격</th>
-								<th style = "position: sticky; top: 0; z-index: 2">출고예정일</th>
+								<th style = "position: sticky; top: 0; z-index: 2">品目コード</th>
+								<th style = "position: sticky; top: 0; z-index: 2">品目名</th>
+								<th style = "position: sticky; top: 0; z-index: 2">出庫数量</th>
+								<th style = "position: sticky; top: 0; z-index: 2">メーカー</th>
+								<th style = "position: sticky; top: 0; z-index: 2">出庫単価</th>
+								<th style = "position: sticky; top: 0; z-index: 2">出庫日</th>
 							</tr>
 						</thead>
 						<tbody>

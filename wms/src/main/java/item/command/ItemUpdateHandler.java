@@ -21,7 +21,7 @@ public class ItemUpdateHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("GET")) {
-			return processForm(req, res);//GETリクエストの場合、FORM画面を表示
+			return processForm(req, res);//GET요청의 경우 Form화면을 표시. GETリクエストの場合、FORM画面を表示
 		} else if (req.getMethod().equalsIgnoreCase("POST")) {
 			return processSubmit(req, res);
 		} else {
@@ -57,31 +57,31 @@ public class ItemUpdateHandler implements CommandHandler {
 		req.setAttribute("errors", errors);
 		
 //		if (itemCd == null || itemCd.trim().isEmpty()) {
-//      errors.put("itemCd", true); //品目コード未入力
+//      errors.put("itemCd", true); //품목코드 미입력. 品目コード未入力
 //	}
 //	if (itemNm == null || itemNm.trim().isEmpty()) {
-//  errors.put("itemNm", true); //品目名未入力
+//  errors.put("itemNm", true); //품목명 미입력. 品目名未入力
 //}
 //	if (spec == null || spec.trim().isEmpty()) {
-//  errors.put("spec", true); //規格未入力
+//  errors.put("spec", true); //규격 미입력. 規格未入力
 //}
 //	if (itemGubun == null || itemGubun.trim().isEmpty()) {
-//  errors.put("itemGubun", true); // 品目コード未入力
+//  errors.put("itemGubun", true); //분류 미입력. 分類未入力
 //}
 //	if (unit == null || unit.trim().isEmpty()) {
-//  errors.put("unit", true); // 品目コード未入力
+//  errors.put("unit", true); //단위 미입력. 単位未入力
 //}
 //	if (useYn == null || useYn.trim().isEmpty()) {
-//  errors.put("useYn", true); // 品目コード未入力
+//  errors.put("useYn", true); //사용유무 미입력. 使用有無未入力
 //}
 //	if (manufacturer == null || manufacturer.trim().isEmpty()) {
-//  errors.put("manufacturer", true); // 品目コード未入力
+//  errors.put("manufacturer", true); //제조사 미입력. メーカー未入力
 //}
 //	if (storePrice == null || storePrice.trim().isEmpty()) {
-//  errors.put("storePrice", true); // 品目コード未入力
+//  errors.put("storePrice", true); //수주기준단가 미입력. 受注基準単価未入力
 //}
 //	if (shipmentPrice == null || shipmentPrice.trim().isEmpty()) {
-//  errors.put("shipmentPrice", true); // 品目コード未入力
+//  errors.put("shipmentPrice", true); //출고기준단가 미입력. 出庫基準単価未入力
 //}
 //  if (!errors.isEmpty()) {
 //  req.setAttribute("itemCd", insertService.getItemCd());

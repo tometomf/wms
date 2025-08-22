@@ -38,6 +38,7 @@
 					if (itemList != null && !itemList.isEmpty()) {
 						for (Item item: itemList) {
 					%>
+					<!-- 한 행 더블클릭 시 이벤트 -->
 					<tr ondblclick="rowClicked(this)">　<!-- ダブルクリックのイベント -->
 						<td><%=item.getNo() %></td>
 						<td><%=item.getItemCd()%></td>
@@ -50,13 +51,9 @@
 						<td style = "text-align: right; padding-left: 5px"><%=item.getStorePrice()%></td>
 						<td style = "text-align: right; padding-left: 5px"><%=item.getShipmentPrice()%></td>
 					</tr>
-					<%
-					}
-					} else {
-					%>
-					<tr>
-						<td colspan="7">조회된 데이터가 없습니다.</td>
-					</tr>
+						<%
+						}
+						%>	
 					<%
 					}
 					%>
@@ -71,6 +68,6 @@
 	// OnRowDblClick Event
   	function rowClicked(row) {
 		var cellValue = row.cells[1].innerText; 
-		location.href = "update.do?itemCd=" + cellValue;　//最初のセルの値(コード)をセットしてupdateに移動 
+		location.href = "update.do?itemCd=" + cellValue;　//맨앞 셀의 값을 가져와 update로 이동. 最初のセルの値(コード)をセットしてupdateに移動 
   	}
 </script>

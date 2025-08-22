@@ -40,6 +40,11 @@
 					<div id="regist-value">
 						<input type="number" name="store_price" min="0"
 							value="${store.store_price}">
+					</div>		
+					<div id="regist-text">入庫倉庫</div>
+					<div id="regist-value">
+						<input readonly type="text" name="ware_cd"
+							value="${store.ware_cd}">
 					</div>
 					<div id="regist-text">入庫担当部署</div>
 					<div id="regist-value">
@@ -55,7 +60,7 @@
 					</div>
 					<div id="regist-text">備考</div>
 					<div id="regist-value">
-						<input type="text" name="descr" value="${store.descr}">
+						<textarea name="descr" rows="4" cols="56">${store.descr}</textarea>
 					</div>
 				</div>
 				<div id="regist-button">
