@@ -15,7 +15,15 @@
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
 		<div id="wms-title">倉庫現況</div>
-		<div id="search-bar" style="display: flex;"></div>
+		<div id="search-bar" style="display: flex;">
+			<div>
+				<label for="start-date">倉庫名</label> 
+				<input type="text" id="itemNm" name = "itemNm" value = "${itemNm}">  
+			</div>
+			<div>
+				<button id = "search-button" type = "submit">検索</button>
+			</div>
+		</div>
 		<div id="result-table">
 			<table>
 				<thead>

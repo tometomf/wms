@@ -70,7 +70,7 @@
 								<th style = "position: sticky; top: 0; z-index: 2">品目名</th>
 								<th style = "position: sticky; top: 0; z-index: 2">入庫数量</th>
 								<th style = "position: sticky; top: 0; z-index: 2">メーカー</th>
-								<th style = "position: sticky; top: 0; z-index: 2">入庫単액</th>
+								<th style = "position: sticky; top: 0; z-index: 2">入庫単価</th>
 								<th style = "position: sticky; top: 0; z-index: 2">入庫日</th>
 							</tr>
 						</thead>

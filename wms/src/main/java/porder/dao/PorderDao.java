@@ -21,14 +21,14 @@ public class PorderDao {
 		try {
 			// wms_porder(발주테이블)과 wms_item(품목테이블)을 조인하여 전체 발주 목록 조회
 			// wms_porder(発注テーブル)とwms_item(品目テーブル)を結合し、全発注一覧を取得
+			// 결과에 행번호 붙임 / 結果に行番号を付与
+			// 비고가 null이면 공백으로 대체 / 備考がnullなら空白に置き換える
+			// 등록일을 yyyy-MM-dd 문자열로 변환 / 登録日をyyyy-MM-dd文字列に変換
+			// 품목코드 기준으로 매칭 / 品目コードで結合
 			pstmt = conn.prepareStatement(
-				"select rownum no, " // 결과에 행번호 붙임 / 結果に行番号を付与
-			  + "purchase_no, purchase_nm, a.item_cd, b.item_nm, qty, "
-			  + "purchase_dept, purchase_user, "
-			  + "nvl(descr, ' ') as descr, " // 비고가 null이면 공백으로 대체 / 備考がnullなら空白に置き換える
-			  + "to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd " // 등록일을 yyyy-MM-dd 문자열로 변환 / 登録日をyyyy-MM-dd文字列に変換
-			  + "from wms_porder a, wms_item b "
-			  + "where a.item_cd = b.item_cd" // 품목코드 기준으로 매칭 / 品目コードで結合
+			  "select rownum no, purchase_no, purchase_nm, a.item_cd, b.item_nm, qty, purchase_dept, purchase_user, nvl(descr, ' ') as descr\r\n"
+			  + "     , to_char(reg_ymd, 'yyyy-MM-dd') as reg_ymd\r\n"
+			  + "from wms_porder a join wms_item b on a.item_cd = b.item_cd order by purchase_no desc"
 			);
 			
 			rs = pstmt.executeQuery();

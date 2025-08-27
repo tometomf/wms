@@ -16,9 +16,7 @@
 	<div id="main-content">
 		<div id="wms-title">在庫現況</div>
 		<div id="search-bar" style="display: flex;">
-	
 		</div>
-
 		<div id="result-table">
 			<table>
 				<thead>
