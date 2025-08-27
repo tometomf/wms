@@ -1,23 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>出庫修正</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/wms.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/wms.css">
 </head>
 <body>
 	<%@ include file="/nav.jsp"%>
 	<div id="main-content">
 		<div id="wms-title">出庫修正</div>
 
-        
-        <fmt:formatDate value="${ship.regYmd}" pattern="yyyy-MM-dd" var="regYmdStr"/>
 
-		<form action="update.do" method="post" onsubmit="return validateForm();">
+		<fmt:formatDate value="${ship.regYmd}" pattern="yyyy-MM-dd"
+			var="regYmdStr" />
+
+		<form action="update.do" method="post"
+			onsubmit="return validateForm();">
 			<div id="regist">
 				<div id="regist-menu">
 
@@ -56,19 +60,11 @@
 						<input type="text" name="shipUser" value="${ship.shipUser}">
 					</div>
 
-					<div id="regist-text">出庫可否</div>
-					<div id="regist-value">
-						<select name="shipYn">
-							<option value="Y" <c:if test="${ship.shipYn == 'Y'}">selected</c:if>>出庫完了</option>
-							<option value="N" <c:if test="${ship.shipYn == 'N'}">selected</c:if>>未出庫</option>
-						</select>
-					</div>
 
-                    
-                    <div id="regist-text">出庫日</div>
-                    <div id="regist-value">
-                        <input type="date" name="regYmd" value="${regYmdStr}">
-                    </div>
+					<div id="regist-text">出庫日</div>
+					<div id="regist-value">
+						<input type="date" name="regYmd" value="${regYmdStr}">
+					</div>
 
 					<div id="regist-text">備考</div>
 					<div id="regist-value">
@@ -78,8 +74,8 @@
 
 				<div id="regist-button">
 					<div>
-						<input type="submit" value="修正">
-						<a href="delete.do?shipNo=${ship.shipNo}" id="button-link">削除</a>
+						<input type="submit" value="修正"> <a
+							href="delete.do?shipNo=${ship.shipNo}" id="button-link">削除</a>
 					</div>
 				</div>
 			</div>

@@ -60,7 +60,7 @@ public class StockDao {
 		}
 	}
 
-	// 재고번호로 조회 / 在庫番号で照会
+	// 재고번호로 검색해서 재고 정보, 품목명, 창고명을 함께 가져오는 기능  / 在庫番号で検索して在庫情報、品目名、倉庫名を一緒に取得する機能
 	public Stock selectByStockNo(Connection conn, String stockNo) throws SQLException {
 		
 		PreparedStatement pstmt = null;
@@ -86,15 +86,6 @@ public class StockDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	// ResultSet 를 Stock 객체로 변환 / ResultSet を Stock に変換
-//	private Stock convertStock(ResultSet rs) throws SQLException {
-//
-//		return new Stock(rs.getInt("stock_no"), 
-//				rs.getString("item_cd"), 
-//				rs.getInt("qty"), 
-//				rs.getString("ware_cd"),
-//				 rs.getDate("reg_ymd"));
-//	}
 
 	// 재고 신규 등록 / 在庫新規登録
 	public void insert(Connection conn, Stock stock) throws SQLException {
